@@ -15,13 +15,13 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 def create_recommendations():
     country_name = request.args.get("country_name")
     
-    chickens = request.args.get("chickens")
-    ducks = request.args.get("ducks")
-    turkeys = request.args.get("turkeys")
-    cattle = request.args.get("cattle")
-    goats = request.args.get("goats")
-    sheep = request.args.get("sheep")
-    swine = request.args.get("swine")
+    chickens = int(request.args.get("chickens"))
+    ducks = int(request.args.get("ducks"))
+    turkeys = int(request.args.get("turkeys"))
+    cattle = int(request.args.get("cattle"))
+    goats = int(request.args.get("goats"))
+    sheep = int(request.args.get("sheep"))
+    swine = int(request.args.get("swine"))
 
     eaten = {'Chickens':chickens, 'Ducks':ducks, 'Turkeys':turkeys,
              'Cattle':cattle, 'Goats':goats, 'Sheep':sheep, 'Swine':swine}
