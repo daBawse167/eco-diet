@@ -264,4 +264,7 @@ def clean_data():
     final_df["Item"] = final_df["Item"].replace("Chickens, broilers", "Chickens")
     return [final_df, stock]
 
+if __name__=="__main__":
+    app.run(debug=True)
+
 print(create_recommendations())
