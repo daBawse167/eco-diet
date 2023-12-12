@@ -1,5 +1,5 @@
-Flask==2.1.2
+Flask==3.0.0
 gunicorn==21.2.0
-heroku3==5.1.4
+heroku3==5.2.1
 numpy==1.26.2
-pandas==1.4.3
+pandas==2.1.4
