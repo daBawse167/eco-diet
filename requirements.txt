@@ -3,3 +3,4 @@ gunicorn==21.2.0
 heroku3==5.2.1
 numpy==1.26.2
 pandas==2.1.4
+Werkzeug==3.0.1
