@@ -56,16 +56,16 @@ def create_recommendations():
     white_meat = [[i, low_carbon[i]] for i in low_carbon if i in white_meat]
     red_meat = [[i, low_carbon[i]] for i in low_carbon if i in red_meat]
 
-
-
+    recommend_list = {'emitted':round(total_emitted),
+         'target':0,
+         'Chickens': 0,
+         'Ducks': 0,
+         'Turkeys': 0,
+         'Cattle': 0,
+         'Goats': 0,
+         'Sheep': 0,
+         'Swine': 0}
     idx = 0
-    recommend_list = {'Chickens': 0,
-                     'Ducks': 0,
-                     'Turkeys': 0,
-                     'Cattle': 0,
-                     'Goats': 0,
-                     'Sheep': 0,
-                     'Swine': 0}
     emissions_counter = 0
     white_meat_counter = 0
     red_meat_counter = 0
@@ -108,9 +108,9 @@ def create_recommendations():
                 break
         else:
             break
-    
+
+    recommend_list["target"] = round(emissions_counter)
     return jsonify(recommend_list)
-    #return [total_emitted, emissions_counter, recommend_list]
 
 
 
