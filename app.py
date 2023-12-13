@@ -114,7 +114,7 @@ def create_recommendations():
 
 
 
-def find_stock(country_name="Afghanistan", eaten={'Chickens':3, 'Ducks':2, 'Turkeys':1, 'Cattle':4, 'Goats':3, 'Sheep':2, 'Swine':2}):
+def find_stock(country_name, eaten):
     #finds stocks for cattle and swine
     cleaned_data = clean_data()
     final_df, stock = cleaned_data[0], cleaned_data[1]
