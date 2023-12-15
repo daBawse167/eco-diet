@@ -13,7 +13,7 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
 @app.route("/recommend", methods=["GET"])
 def create_recommendations():
-    country_name = request.args.get("country_name")
+    country_name = str(request.args.get("country_name"))
     print(country_name)
     
     chickens = int(request.args.get("chickens"))
