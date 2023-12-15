@@ -14,6 +14,7 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 @app.route("/recommend", methods=["GET"])
 def create_recommendations():
     country_name = request.args.get("country_name")
+    print(country_name)
     
     chickens = int(request.args.get("chickens"))
     ducks = int(request.args.get("ducks"))
@@ -41,74 +42,73 @@ def create_recommendations():
         if option <= target:
             low_carbon.append([animals_eaten["Item"][i], option])
         i += 1
-
-    if len(low_carbon)==0:
-        lowest_carbon = min(animals_eaten["per capita (* 10^6)"])
-        idx = list(animals_eaten["per capita (* 10^6)"]).index(lowest_carbon)
-        low_GHG_animal = animals_eaten["Item"][idx]
-        low_carbon = [[low_GHG_animal, lowest_carbon]]
-
-    low_carbon = dict(low_carbon)
-
-    #splits animals into white meat and red meat
+        
+    #split white and red meats
     white_meat = ['Chickens', 'Ducks', 'Turkeys']
     red_meat = ['Cattle', 'Goats', 'Sheep', 'Swine']
-    white_meat = [[i, low_carbon[i]] for i in low_carbon if i in white_meat]
-    red_meat = [[i, low_carbon[i]] for i in low_carbon if i in red_meat]
-
-    recommend_list = {'emitted':round(total_emitted),
-         'target':0,
-         'Chickens': 0,
-         'Ducks': 0,
-         'Turkeys': 0,
-         'Cattle': 0,
-         'Goats': 0,
-         'Sheep': 0,
-         'Swine': 0}
+    
+    white_meat_options = [i for i in low_carbon if i[0] in white_meat]
+    red_meat_options = [i for i in low_carbon if i[0] in red_meat]
+        
     idx = 0
+    recommend_list = {"emitted":round(total_emitted),
+                      "target":0,
+                     'Chickens': 0,
+                     'Ducks': 0,
+                     'Turkeys': 0,
+                     'Cattle': 0,
+                     'Goats': 0,
+                     'Sheep': 0,
+                     'Swine': 0}
     emissions_counter = 0
     white_meat_counter = 0
     red_meat_counter = 0
+    
+    #check if we have any options
+    if len(white_meat_options) > 0 or len(red_meat_options) > 0:
+        
+        while emissions_counter < target:
+            #don't add too much white meat
+            if white_meat_counter < 4:
+                
+                #add two white meat
+                j = 0
+                for i in white_meat_options:
+                    if j < 2 and white_meat_counter<4:
+                        #make sure we're not adding on too many emissions
+                        if (emissions_counter+i[1]) < target:
+                            #i[0] = name of animal
+                            recommend_list[i[0]]+=1
+                            white_meat_counter += 1
+                            emissions_counter += i[1]
+                            j += 1
+                        else:
+                            break
+                    else:
+                        break
+            else:
+                break
 
-    while emissions_counter < target:
-        #don't add too much white meat
-        if white_meat_counter < 4:
-            #add two white meat 
-            j = 0
-            for i in white_meat:
-                if j < 2 and white_meat_counter<4:
+            #check if there's any red meat with a low enough emissions
+            if len(red_meat_options) > 0:
+                #don't add too much red meat
+                if red_meat_counter < 2:
+                    #add one red meat
+                    if idx==3:
+                        idx=0
+
                     #make sure we're not adding on too many emissions
-                    if (emissions_counter+i[1]) < target:
-                        #i[0] = name of animal
-                        recommend_list[i[0]]+=1
-                        white_meat_counter += 1
-                        emissions_counter += i[1]
-                        j += 1
+                    if (emissions_counter+red_meat_options[idx][1])<target:
+                        #red_meat_options[idx][0] = name of animal
+                        recommend_list[red_meat_options[idx][0]] += 1
+                        emissions_counter += red_meat_options[idx][1]
+                        red_meat_counter += 1
+                        idx += 1
                     else:
                         break
                 else:
                     break
-        else:
-            break
-
-        #don't add too much red meat
-        if red_meat_counter < 2:
-            #add one red meat
-            if idx==3:
-                idx=0
-
-            #make sure we're not adding on too many emissions
-            if (emissions_counter+red_meat[idx][1])<target:
-                #red_meat[idx][0] = name of animal
-                recommend_list[red_meat[idx][0]] += 1
-                emissions_counter += red_meat[idx][1]
-                red_meat_counter += 1
-                idx += 1
-            else:
-                break
-        else:
-            break
-
+    
     recommend_list["target"] = round(emissions_counter)
     return jsonify(recommend_list)
 
