@@ -66,8 +66,13 @@ def create_recommendations():
     
     #check if we have any options
     if len(white_meat_options) > 0 or len(red_meat_options) > 0:
+        break_outer_loop = False
         
         while emissions_counter < target:
+
+            if break_outer_loop:
+                break
+            
             #don't add too much white meat
             if white_meat_counter < 4:
                 
@@ -83,6 +88,7 @@ def create_recommendations():
                             emissions_counter += i[1]
                             j += 1
                         else:
+                            break_outer_loop = True
                             break
                     else:
                         break
