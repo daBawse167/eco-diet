@@ -124,7 +124,7 @@ def create_recommendations():
     #fills in animals not listed in country
     for idx in white_meat+red_meat:
         if idx not in animals_eaten.index:
-            animals_eaten = pd.concat([animals_eaten, pd.Series(["None"], index=[idx])])
+            animals_eaten = pd.concat([animals_eaten, pd.Series(["No data available"], index=[idx])])
     
     #adds emissions to output dictionary
     recommend_list["cattle_e"] = animals_eaten.loc["Cattle"]
