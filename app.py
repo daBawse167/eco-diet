@@ -123,17 +123,10 @@ def create_recommendations():
     
     #fills in animals not listed in country
     for idx in white_meat+red_meat:
-        if idx not in animals_eaten.index:
-            animals_eaten = pd.concat([animals_eaten, pd.Series(["No data available"], index=[idx])])
-    
-    #adds emissions to output dictionary
-    recommend_list["cattle_e"] = round(animals_eaten.loc["Cattle"], 2)
-    recommend_list["chickens_e"] = round(animals_eaten.loc["Chickens"], 2)
-    recommend_list["ducks_e"] = round(animals_eaten.loc["Ducks"], 2)
-    recommend_list["goats_e"] = round(animals_eaten.loc["Goats"], 2)
-    recommend_list["sheep_e"] = round(animals_eaten.loc["Sheep"], 2)
-    recommend_list["swine_e"] = round(animals_eaten.loc["Swine"], 2)
-    recommend_list["turkeys_e"] = round(animals_eaten.loc["Turkeys"], 2)
+        if idx in animals_eaten.index:
+            recommend_list[idx+"_e"] = round(animals_eaten.loc[idx], 2)
+        else:
+            recommend_list[idx+"_e"] = "No data available"
     
     return jsonify(recommend_list)
 
