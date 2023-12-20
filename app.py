@@ -127,13 +127,13 @@ def create_recommendations():
             animals_eaten = pd.concat([animals_eaten, pd.Series(["No data available"], index=[idx])])
     
     #adds emissions to output dictionary
-    recommend_list["cattle_e"] = animals_eaten.loc["Cattle"]
-    recommend_list["chickens_e"] = animals_eaten.loc["Chickens"]
-    recommend_list["ducks_e"] = animals_eaten.loc["Ducks"]
-    recommend_list["goats_e"] = animals_eaten.loc["Goats"]
-    recommend_list["sheep_e"] = animals_eaten.loc["Sheep"]
-    recommend_list["swine_e"] = animals_eaten.loc["Swine"]
-    recommend_list["turkeys_e"] = animals_eaten.loc["Turkeys"]
+    recommend_list["cattle_e"] = round(animals_eaten.loc["Cattle"], 2)
+    recommend_list["chickens_e"] = round(animals_eaten.loc["Chickens"], 2)
+    recommend_list["ducks_e"] = round(animals_eaten.loc["Ducks"], 2)
+    recommend_list["goats_e"] = round(animals_eaten.loc["Goats"], 2)
+    recommend_list["sheep_e"] = round(animals_eaten.loc["Sheep"], 2)
+    recommend_list["swine_e"] = round(animals_eaten.loc["Swine"], 2)
+    recommend_list["turkeys_e"] = round(animals_eaten.loc["Turkeys"], 2)
     
     return jsonify(recommend_list)
 
