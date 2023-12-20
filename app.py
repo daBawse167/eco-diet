@@ -116,6 +116,25 @@ def create_recommendations():
                     break
     
     recommend_list["target"] = round(emissions_counter)
+    
+    #show the emissions of ALL animals
+    animals_eaten.index=animals_eaten["Item"]
+    animals_eaten = animals_eaten["per capita (* 10^6)"]
+    
+    #fills in animals not listed in country
+    for idx in white_meat+red_meat:
+        if idx not in animals_eaten.index:
+            animals_eaten = pd.concat([animals_eaten, pd.Series(["None"], index=[idx])])
+    
+    #adds emissions to output dictionary
+    recommend_list["cattle_e"] = animals_eaten.loc["Cattle"]
+    recommend_list["chickens_e"] = animals_eaten.loc["Chickens"]
+    recommend_list["ducks_e"] = animals_eaten.loc["Ducks"]
+    recommend_list["goats_e"] = animals_eaten.loc["Goats"]
+    recommend_list["sheep_e"] = animals_eaten.loc["Sheep"]
+    recommend_list["swine_e"] = animals_eaten.loc["Swine"]
+    recommend_list["turkeys_e"] = animals_eaten.loc["Turkeys"]
+    
     return jsonify(recommend_list)
 
 
