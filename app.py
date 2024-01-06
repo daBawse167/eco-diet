@@ -152,19 +152,25 @@ def create_recommendations():
     animals_eaten.index=animals_eaten["Item"]
     animals_eaten = animals_eaten["emissions (per kg)"]
     
+    #present each animal's recommended emissions
+    animals_e = {"Cattle":0, "Chickens":0, "Ducks":0, "Goats":0, "Sheep":0, "Swine":0, "Turkeys":0}
+    
+    for i in animals_eaten.index:
+        animals_e[i] = round(animals_eaten.loc[i]*(recommend_list[i]/1000), 3)
+        
     #fills in animals not listed in country
     for idx in white_meat+red_meat:
-        if idx not in animals_eaten.index:
-            animals_eaten = pd.concat([animals_eaten, pd.Series(["None"], index=[idx])])
+        if idx not in list(animals_e.keys()):
+            animals_e[idx] = 0
     
     #adds emissions to output dictionary
-    recommend_list["cattle_e"] = round(animals_eaten.loc["Cattle"], 1)
-    recommend_list["chickens_e"] = round(animals_eaten.loc["Chickens"], 1)
-    recommend_list["ducks_e"] = round(animals_eaten.loc["Ducks"], 1)
-    recommend_list["goats_e"] = round(animals_eaten.loc["Goats"], 1)
-    recommend_list["sheep_e"] = round(animals_eaten.loc["Sheep"], 1)
-    recommend_list["swine_e"] = round(animals_eaten.loc["Swine"], 1)
-    recommend_list["turkeys_e"] = round(animals_eaten.loc["Turkeys"], 1)
+    recommend_list["cattle_e"] = animals_e["Cattle"]
+    recommend_list["chickens_e"] = animals_e["Chickens"]
+    recommend_list["ducks_e"] = animals_e["Ducks"]
+    recommend_list["goats_e"] = animals_e["Goats"]
+    recommend_list["sheep_e"] = animals_e["Sheep"]
+    recommend_list["swine_e"] = animals_e["Swine"]
+    recommend_list["turkeys_e"] = animals_e["Turkeys"]
     
     return recommend_list
 
