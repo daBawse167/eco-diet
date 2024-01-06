@@ -16,13 +16,13 @@ def create_recommendations():
     country_name = str(request.args.get("country_name"))
     print(country_name)
     
-    chickens = int(request.args.get("chickens"))
-    ducks = int(request.args.get("ducks"))
-    turkeys = int(request.args.get("turkeys"))
-    cattle = int(request.args.get("cattle"))
-    goats = int(request.args.get("goats"))
-    sheep = int(request.args.get("sheep"))
-    swine = int(request.args.get("swine"))
+    chickens = int(request.args.get("chickens")[:-1])
+    ducks = int(request.args.get("ducks")[:-1])
+    turkeys = int(request.args.get("turkeys")[:-1])
+    cattle = int(request.args.get("cattle")[:-1])
+    goats = int(request.args.get("goats")[:-1])
+    sheep = int(request.args.get("sheep")[:-1])
+    swine = int(request.args.get("swine")[:-1])
 
     eaten = {'Chickens':chickens, 'Ducks':ducks, 'Turkeys':turkeys,
              'Cattle':cattle, 'Goats':goats, 'Sheep':sheep, 'Swine':swine}
@@ -32,7 +32,7 @@ def create_recommendations():
     animals_eaten, options = return_animals[0], return_animals[1]
     
     #find the target emissions
-    total_emitted = sum(animals_eaten["weekly_emitted (* 10^6)"])
+    total_emitted = sum(animals_eaten["weekly_emitted (kg/animal)"])
     target = (1-percent_reduction)*total_emitted
     
     low_carbon = []
@@ -43,7 +43,7 @@ def create_recommendations():
             low_carbon.append([animals_eaten["Item"][i], option])
         i += 1
         
-    #split white and red meats
+    #in case no choice is made, get the min red and white meat animals
     white_meat = ['Chickens', 'Ducks', 'Turkeys']
     red_meat = ['Cattle', 'Goats', 'Sheep', 'Swine']
     
@@ -51,8 +51,8 @@ def create_recommendations():
     red_meat_options = [i for i in low_carbon if i[0] in red_meat]
         
     idx = 0
-    recommend_list = {"emitted":round(total_emitted),
-                      "target":0,
+    recommend_list = {"emitted (kg)":round(total_emitted, 3),
+                      "target (kg)":0,
                      'Chickens': 0,
                      'Ducks': 0,
                      'Turkeys': 0,
@@ -64,22 +64,26 @@ def create_recommendations():
     white_meat_counter = 0
     red_meat_counter = 0
     
+    white_meat_max = 340
+    red_meat_max = 500
+    
     #check if we have any options
     if len(white_meat_options) > 0 or len(red_meat_options) > 0:
         break_outer_loop = False
         
         while emissions_counter < target:
-
+            
             if break_outer_loop:
                 break
             
             #don't add too much white meat
-            if white_meat_counter < 4:
+            if white_meat_counter < white_meat_max:
                 
-                #add two white meat
+                #add white meats twice
                 j = 0
                 for i in white_meat_options:
-                    if j < 2 and white_meat_counter<4:
+                    if j < 2 and white_meat_counter<white_meat_max:
+                        
                         #make sure we're not adding on too many emissions
                         if (emissions_counter+i[1]) < target:
                             #i[0] = name of animal
@@ -98,7 +102,7 @@ def create_recommendations():
             #check if there's any red meat with a low enough emissions
             if len(red_meat_options) > 0:
                 #don't add too much red meat
-                if red_meat_counter < 2:
+                if red_meat_counter < red_meat_max:
                     #add one red meat
                     if idx==3:
                         idx=0
@@ -115,24 +119,31 @@ def create_recommendations():
                 else:
                     break
     
-    recommend_list["target"] = round(emissions_counter)
+    recommend_list["target (kg)"] = round(emissions_counter, 3)
     
     #show the emissions of ALL animals
     animals_eaten.index=animals_eaten["Item"]
-    animals_eaten = animals_eaten["per capita (* 10^6)"]
+    animals_eaten = animals_eaten["emissions (per kg)"]
     
     #fills in animals not listed in country
     for idx in white_meat+red_meat:
-        if idx in animals_eaten.index:
-            recommend_list[idx+"_e"] = round(animals_eaten.loc[idx], 2)
-        else:
-            recommend_list[idx+"_e"] = "No data available"
+        if idx not in animals_eaten.index:
+            animals_eaten = pd.concat([animals_eaten, pd.Series(["None"], index=[idx])])
     
-    return jsonify(recommend_list)
+    #adds emissions to output dictionary
+    recommend_list["cattle_e"] = animals_eaten.loc["Cattle"]
+    recommend_list["chickens_e"] = animals_eaten.loc["Chickens"]
+    recommend_list["ducks_e"] = animals_eaten.loc["Ducks"]
+    recommend_list["goats_e"] = animals_eaten.loc["Goats"]
+    recommend_list["sheep_e"] = animals_eaten.loc["Sheep"]
+    recommend_list["swine_e"] = animals_eaten.loc["Swine"]
+    recommend_list["turkeys_e"] = animals_eaten.loc["Turkeys"]
+    
+    return recommend_list
 
 
 
-def find_stock(country_name, eaten):
+def find_stock(country_name="", eaten={}):
     #finds stocks for cattle and swine
     cleaned_data = clean_data()
     final_df, stock = cleaned_data[0], cleaned_data[1]
@@ -144,11 +155,10 @@ def find_stock(country_name, eaten):
 
     #database storing impact of eaten meat
     no_eaten = []
-    total_value = []
     value_list = []
     stock_list = []
     per_capita = []
-
+    
     for i in country_df["Item"]:
         idx = list(country_df["Item"]).index(i)
 
@@ -162,17 +172,52 @@ def find_stock(country_name, eaten):
             stock_list.append(cattle_stocks)
 
         no_eaten.append(eaten[i])
-        value_list.append(country_df.iloc[idx]["Value (kt)"])
+        value_list.append(country_df.iloc[idx]["Value (kt)"]*1000000)
 
         #calculates the emissions of animal per person and weekly
-        per_capita.append((value_list[idx]*(10**6))/stock_list[idx])
-        total_value.append(per_capita[idx]*eaten[i])
+        per_capita.append(value_list[idx]/stock_list[idx])
+        #total_value.append(per_capita[idx]*eaten[i])
 
+    country_avg_mass = data[data["country"]==country_name]
+    animals_avg_mass = [list(country_avg_mass[i])[0] for i in list(country_df["Item"])]
+    
+    #calculate how much mass in an animal is usable
+    usable_meats = []
+    emissions_per_kg_list = []
+    emissions_per_gram_list = []
+    weekly_emitted = []
+    
+    for i in list(country_df["Item"]):
+        idx = list(country_df["Item"]).index(i)
+        
+        #get the percentage of usable meat
+        usable = list(usable_meat[i])[0]
+        #get the average mass
+        avg_mass = list(country_avg_mass[i])[0]
+        #calculate out how much mass is used
+        usable_mass = usable*avg_mass
+        usable_meats.append(usable_mass)
+        
+        #find the emissions of one of the animal
+        one_animal_emissions = per_capita[idx]
+        #calculate emissions per kg of the animal
+        emissions_per_kg = one_animal_emissions/usable_mass
+        emissions_per_gram = emissions_per_kg/1000
+        
+        emissions_per_kg_list.append(emissions_per_kg)
+        emissions_per_gram_list.append(emissions_per_gram)
+        
+        #find the weekly emissions per animal, given the user's input in grams
+        weekly_emitted.append(emissions_per_gram*eaten[i])
+    
     #puts it all together in one databse
-    animals_eaten = pd.DataFrame({"Item":list(country_df["Item"]), "no. eaten":no_eaten, "Value (kt)":value_list,
-                                  "stock":stock_list, "per capita (* 10^6)":per_capita, "weekly_emitted (* 10^6)":total_value})
-
-    options = list(animals_eaten["per capita (* 10^6)"])
+    animals_eaten = pd.DataFrame({"Item":list(country_df["Item"]), "no. eaten":no_eaten, "Value (kg)":value_list,
+                                  "stock":stock_list, "per capita (GHG kg/animal)":per_capita,
+                                  "average_mass (kg)":animals_avg_mass, "usable_meat (animal kg)":usable_meats,
+                                  "emissions (per kg)":emissions_per_kg_list, "emissions (per gram)":emissions_per_gram_list,
+                                  "weekly_emitted (kg/animal)":weekly_emitted})
+    
+    options = list(animals_eaten["emissions (per gram)"])
     return [animals_eaten, options]
 
 
