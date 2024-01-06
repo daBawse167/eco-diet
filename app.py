@@ -1,15 +1,42 @@
 import os
 import numpy as np
 import pandas as pd
+import statistics as stats
 from flask import Flask, request, jsonify
-
-total_df = pd.read_csv("livestock.csv")
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
+
+
+total_df = pd.read_csv("livestock.csv")
+
+#get the average mass of each animal
+df = pd.read_csv("average_mass.csv", encoding="latin")
+#structure dataset
+data = pd.DataFrame([i.split(",") for i in df["feature"].iloc], columns=["country", "Cattle", "Swine", "Sheep", "Goats",
+                                                                         "Chickens", "Turkeys", "Ducks"])
+data = data[["country", "Cattle", "Swine", "Sheep", "Goats", "Chickens", "Turkeys", "Ducks"]]
+#remove null
+data["Turkeys"] = data["Turkeys"].replace("N/A", "7-9")
+data["Ducks"] = data["Ducks"].replace("N/A", "3-4")
+
+#find the average of the mean range
+array = []
+for i in data.iloc:
+    subarray = []
+    subarray.append(list(i)[0])
+    for j in list(i)[1:]:
+        subarray.append(stats.mean([float(j.split("-")[0]), float(j.split("-")[1])]))
+    array.append(subarray)
+
+#find the percentage usable mass of each animal
+data = pd.DataFrame(array, columns=["country", "Cattle", "Swine", "Sheep", "Goats", "Chickens", "Turkeys", "Ducks"])
+usable_meat = pd.DataFrame({"Cattle":[0.45], "Swine":[0.575], "Sheep":[0.5], "Goats":[0.5], "Chickens":[0.725],
+                            "Turkeys":[0.725], "Ducks":[0.65]})
+
 
 @app.route("/recommend", methods=["GET"])
 def create_recommendations():
