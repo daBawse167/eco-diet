@@ -93,58 +93,53 @@ def create_recommendations():
     
     white_meat_max = 340
     red_meat_max = 500
+    portion = 85
+
     
-    #check if we have any options
-    if len(white_meat_options) > 0 or len(red_meat_options) > 0:
-        break_outer_loop = False
+    red_idx = 0
+    white_idx = 0
+    while emissions_counter < target:
+
+        #make sure white and red idx don't get out of range
+        if red_idx>=len(red_meat_options):
+            red_idx = 0
+        if white_idx>=len(white_meat_options):
+            white_idx = 0
         
-        while emissions_counter < target:
+        
+        #add 1 portion of red meat & its emissions
+        meat_emission = red_meat_options[red_idx][1]
+        animal = red_meat_options[red_idx][0]
+        
+        
+        if emissions_counter+(meat_emission*portion) < target:
+            emissions_counter += meat_emission*portion
+            recommend_list[animal] += portion
+        else:
+            #round up to 50% less emissions
+            portion = np.floor((target-emissions_counter)/meat_emission)
+            emissions_counter += meat_emission*portion
+            recommend_list[animal] += portion
+            break
             
-            if break_outer_loop:
-                break
-            
-            #don't add too much white meat
-            if white_meat_counter < white_meat_max:
-                
-                #add white meats twice
-                j = 0
-                for i in white_meat_options:
-                    if j < 2 and white_meat_counter<white_meat_max:
-                        
-                        #make sure we're not adding on too many emissions
-                        if (emissions_counter+i[1]) < target:
-                            #i[0] = name of animal
-                            recommend_list[i[0]]+=1
-                            white_meat_counter += 1
-                            emissions_counter += i[1]
-                            j += 1
-                        else:
-                            break_outer_loop = True
-                            break
-                    else:
-                        break
-            else:
-                break
-
-            #check if there's any red meat with a low enough emissions
-            if len(red_meat_options) > 0:
-                #don't add too much red meat
-                if red_meat_counter < red_meat_max:
-                    #add one red meat
-                    if idx==3:
-                        idx=0
-
-                    #make sure we're not adding on too many emissions
-                    if (emissions_counter+red_meat_options[idx][1])<target:
-                        #red_meat_options[idx][0] = name of animal
-                        recommend_list[red_meat_options[idx][0]] += 1
-                        emissions_counter += red_meat_options[idx][1]
-                        red_meat_counter += 1
-                        idx += 1
-                    else:
-                        break
-                else:
-                    break
+        
+        #add 1 portion of white meat & its emissions
+        meat_emission = white_meat_options[white_idx][1]
+        animal = white_meat_options[white_idx][0]
+        
+        if emissions_counter+(meat_emission*portion) < target:
+            emissions_counter += meat_emission*portion
+            recommend_list[animal] += portion
+        else:
+            #round up to 50% less emissions
+            portion = np.floor((target-emissions_counter)/meat_emission)
+            emissions_counter += meat_emission*portion
+            recommend_list[animal] += portion
+            break
+        
+        red_idx += 1
+        white_idx += 1
+      
     
     recommend_list["target (kg)"] = round(emissions_counter, 3)
     
