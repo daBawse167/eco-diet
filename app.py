@@ -244,7 +244,8 @@ def find_stock(country_name="", eaten={}):
                                   "average_mass (kg)":animals_avg_mass, "usable_meat (animal kg)":usable_meats,
                                   "emissions (per kg)":emissions_per_kg_list, "emissions (per gram)":emissions_per_gram_list,
                                   "weekly_emitted (kg/animal)":weekly_emitted})
-    
+    print(animals_eaten)
+  
     options = list(animals_eaten["emissions (per gram)"])
     return [animals_eaten, options]
 
