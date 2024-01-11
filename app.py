@@ -43,13 +43,13 @@ def create_recommendations():
     country_name = str(request.args.get("country_name"))
     print(country_name)
     
-    chickens = int(request.args.get("chickens")[:-1])
-    ducks = int(request.args.get("ducks")[:-1])
-    turkeys = int(request.args.get("turkeys")[:-1])
-    cattle = int(request.args.get("cattle")[:-1])
-    goats = int(request.args.get("goats")[:-1])
-    sheep = int(request.args.get("sheep")[:-1])
-    swine = int(request.args.get("swine")[:-1])
+    chickens = int(request.args.get("chickens"))
+    ducks = int(request.args.get("ducks"))
+    turkeys = int(request.args.get("turkeys"))
+    cattle = int(request.args.get("cattle"))
+    goats = int(request.args.get("goats"))
+    sheep = int(request.args.get("sheep"))
+    swine = int(request.args.get("swine"))
 
     eaten = {'Chickens':chickens, 'Ducks':ducks, 'Turkeys':turkeys,
              'Cattle':cattle, 'Goats':goats, 'Sheep':sheep, 'Swine':swine}
