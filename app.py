@@ -76,6 +76,12 @@ def create_recommendations():
     
     white_meat_options = [i for i in low_carbon if i[0] in white_meat]
     red_meat_options = [i for i in low_carbon if i[0] in red_meat]
+    
+    red_meat_options = {"animal": np.array(red_meat_options).T[0], "emissions": np.array(red_meat_options).T[1]}
+    white_meat_options = {"animal": np.array(white_meat_options).T[0], "emissions": np.array(white_meat_options).T[1]}
+    
+    red_meat_options = pd.DataFrame(red_meat_options).sort_values(ascending=True, by="emissions")
+    white_meat_options = pd.DataFrame(white_meat_options).sort_values(ascending=True, by="emissions")
         
     idx = 0
     recommend_list = {"emitted (kg)":round(total_emitted, 3),
@@ -107,25 +113,9 @@ def create_recommendations():
             white_idx = 0
         
         
-        #add 1 portion of red meat & its emissions
-        meat_emission = red_meat_options[red_idx][1]
-        animal = red_meat_options[red_idx][0]
-        
-        
-        if emissions_counter+(meat_emission*portion) < target:
-            emissions_counter += meat_emission*portion
-            recommend_list[animal] += portion
-        else:
-            #round up to 50% less emissions
-            portion = np.floor((target-emissions_counter)/meat_emission)
-            emissions_counter += meat_emission*portion
-            recommend_list[animal] += portion
-            break
-            
-        
         #add 1 portion of white meat & its emissions
-        meat_emission = white_meat_options[white_idx][1]
-        animal = white_meat_options[white_idx][0]
+        meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
+        animal = white_meat_options.iloc[white_idx]["animal"]
         
         if emissions_counter+(meat_emission*portion) < target:
             emissions_counter += meat_emission*portion
@@ -136,6 +126,21 @@ def create_recommendations():
             emissions_counter += meat_emission*portion
             recommend_list[animal] += portion
             break
+        
+        #add 1 portion of red meat & its emissions
+        meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
+        animal = red_meat_options.iloc[red_idx]["animal"]
+        
+        if emissions_counter+(meat_emission*portion) < target:
+            emissions_counter += meat_emission*portion
+            recommend_list[animal] += portion
+        else:
+            #round up to 50% less emissions
+            portion = np.floor((target-emissions_counter)/meat_emission)
+            emissions_counter += meat_emission*portion
+            recommend_list[animal] += portion
+            break
+        
         
         red_idx += 1
         white_idx += 1
