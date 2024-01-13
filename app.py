@@ -168,7 +168,7 @@ def create_recommendations():
     animals_eaten = animals_eaten["emissions (per kg)"]
     
     #present each animal's recommended emissions
-    animals_e = {"Cattle":0, "Chickens":0, "Ducks":0, "Goats":0, "Sheep":0, "Swine":0, "Turkeys":0}
+    animals_e = {"Cow":0, "Chicken":0, "Buffalo":0, "Goat":0, "Sheep":0, "Pig":0}
     
     for i in animals_eaten.index:
         animals_e[i] = round(animals_eaten.loc[i]*(recommend_list[i]/1000), 3)
@@ -179,13 +179,12 @@ def create_recommendations():
             animals_e[idx] = 0
     
     #adds emissions to output dictionary
-    recommend_list["cattle_e"] = animals_e["Cattle"]
-    recommend_list["chickens_e"] = animals_e["Chickens"]
-    recommend_list["ducks_e"] = animals_e["Ducks"]
-    recommend_list["goats_e"] = animals_e["Goats"]
+    recommend_list["cattle_e"] = animals_e["Cow"]
+    recommend_list["chickens_e"] = animals_e["Chicken"]
+    recommend_list["buffalo_e"] = animals_e["Buffalo"]
+    recommend_list["goats_e"] = animals_e["Goat"]
     recommend_list["sheep_e"] = animals_e["Sheep"]
-    recommend_list["swine_e"] = animals_e["Swine"]
-    recommend_list["turkeys_e"] = animals_e["Turkeys"]
+    recommend_list["swine_e"] = animals_e["Pig"]
     
     return recommend_list
 
