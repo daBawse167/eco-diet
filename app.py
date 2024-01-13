@@ -11,7 +11,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
 
-total_df = pd.read_csv("livestock.csv")
+"""total_df = pd.read_csv("livestock.csv")
 
 #get the average mass of each animal
 df = pd.read_csv("average_mass.csv", encoding="latin")
@@ -35,7 +35,7 @@ for i in data.iloc:
 #find the percentage usable mass of each animal
 data = pd.DataFrame(array, columns=["country", "Cattle", "Swine", "Sheep", "Goats", "Chickens", "Turkeys", "Ducks"])
 usable_meat = pd.DataFrame({"Cattle":[0.45], "Swine":[0.575], "Sheep":[0.5], "Goats":[0.5], "Chickens":[0.725],
-                            "Turkeys":[0.725], "Ducks":[0.65]})
+                            "Turkeys":[0.725], "Ducks":[0.65]})"""
 
 
 @app.route("/recommend", methods=["GET"])
@@ -44,14 +44,13 @@ def create_recommendations():
     print(country_name)
     
     chickens = int(request.args.get("chickens"))
-    ducks = int(request.args.get("ducks"))
-    turkeys = int(request.args.get("turkeys"))
     cattle = int(request.args.get("cattle"))
     goats = int(request.args.get("goats"))
     sheep = int(request.args.get("sheep"))
     swine = int(request.args.get("swine"))
+    buffalo = int(request.args.get("buffalo"))
 
-    eaten = {'Chickens':chickens, 'Ducks':ducks, 'Turkeys':turkeys,
+    eaten = {'Chickens':chickens, 'Buffalo':buffalo,
              'Cattle':cattle, 'Goats':goats, 'Sheep':sheep, 'Swine':swine}
     percent_reduction = 0.5
     
