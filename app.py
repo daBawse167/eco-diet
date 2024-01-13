@@ -50,8 +50,8 @@ def create_recommendations():
     swine = int(request.args.get("swine"))
     buffalo = int(request.args.get("buffalo"))
 
-    eaten = {'Chickens':chickens, 'Buffalo':buffalo,
-             'Cattle':cattle, 'Goats':goats, 'Sheep':sheep, 'Swine':swine}
+    eaten = {'Chicken':chickens, 'Buffalo':buffalo,
+             'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
     percent_reduction = 0.5
     
     return_animals = find_stock(country_name=country_name, eaten=eaten)
