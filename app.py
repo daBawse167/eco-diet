@@ -25,6 +25,8 @@ def create_recommendations():
 
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
+    print(eaten)
+    
     percent_reduction = 0.5
     
     return_animals = find_stock(country_name=country_name, eaten=eaten)
@@ -33,6 +35,8 @@ def create_recommendations():
     #find the target emissions
     total_emitted = sum(animals_eaten["weekly_emitted (kg/animal)"])
     target = (1-percent_reduction)*total_emitted
+
+    print(total_emitted)
     
     low_carbon = []
     i = 0
@@ -180,6 +184,8 @@ def find_stock(country_name="", eaten={}):
     
     #loop over country
     country_df = faostat[faostat["Area"]==country_name]
+
+    print(country_df)
     
     emissions_per_gram_list = []
     weekly_emitted = []
@@ -188,6 +194,7 @@ def find_stock(country_name="", eaten={}):
         #get the emissions per gram and weekly emitted
         idx = list(country_df["Item"]).index(i)
         emissions_per_gram = country_df["emissions (per kg)"].iloc[idx] / 1000
+        print(emissions_per_gram)
         
         emissions_per_gram_list.append(emissions_per_gram)
         weekly_emitted.append(round(emissions_per_gram*eaten[i], 2))
