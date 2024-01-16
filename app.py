@@ -50,14 +50,26 @@ def create_recommendations():
     white_meat = ['Chicken']
     red_meat = ['Cow', 'Goat', 'Sheep', 'Pig', 'Buffalo']
     
-    white_meat_options = [i for i in low_carbon if i[0] in white_meat]
-    red_meat_options = [i for i in low_carbon if i[0] in red_meat]
+    white_meat_options_list = [i for i in low_carbon if i[0] in white_meat]
+    red_meat_options_list = [i for i in low_carbon if i[0] in red_meat]
     
-    red_meat_options = {"animal": np.array(red_meat_options).T[0], "emissions": np.array(red_meat_options).T[1]}
-    white_meat_options = {"animal": np.array(white_meat_options).T[0], "emissions": np.array(white_meat_options).T[1]}
+    if len(white_meat_options_list)==0 and len(red_meat_options_list)==0:
+        return {"emitted (kg)":0, "target (kg)":0,
+                'Chicken': 0, 'Buffalo': 0, 'Cow': 0, 'Goat': 0, 'Sheep': 0, 'Pig': 0,
+                "cattle_e":0, "chickens_e":0, "buffalo_e":0, "goats_e":0, "sheep_e":0, "swine_e":0}
     
-    red_meat_options = pd.DataFrame(red_meat_options).sort_values(ascending=True, by="emissions")
-    white_meat_options = pd.DataFrame(white_meat_options).sort_values(ascending=True, by="emissions")
+    red_meat_options = {"animal":[], "emissions":[]}
+    white_meat_options = {"animal":[], "emissions":[]}
+    
+    if len(red_meat_options) > 0:
+        red_meat_options = {"animal": np.array(red_meat_options_list).T[0], "emissions": np.array(red_meat_options_list).T[1]}
+        red_meat_options = pd.DataFrame(red_meat_options).sort_values(ascending=True, by="emissions")
+    if len(white_meat_options) > 0:
+        white_meat_options = {"animal": np.array(white_meat_options_list).T[0], "emissions": np.array(white_meat_options_list).T[1]}
+        white_meat_options = pd.DataFrame(white_meat_options).sort_values(ascending=True, by="emissions")
+    
+    print(red_meat_options, white_meat_options)
+    
     
     idx = 0
     recommend_list = {"emitted (kg)":round(total_emitted, 3),
@@ -75,6 +87,17 @@ def create_recommendations():
     white_meat_max = 340
     red_meat_max = 500
     portion = 85
+    
+    #want to recommend at least 85g per animal
+    #want to have a variety in the animals
+    #want to include both red and white meat
+    #want to obey the limits of red and white meat
+    
+    #look at first red meat option
+    #add 85g of meat & record emission
+    #look at first white meat option
+    #add 85g of meat & record emission
+    #repeat until emission is low or meat limit reached
     
     red_idx = 0
     white_idx = 0
@@ -96,7 +119,7 @@ def create_recommendations():
             if red_limit:
                 break
         
-        if white_meat_counter < white_meat_max:
+        if white_meat_counter < white_meat_max and len(white_meat_options_list) > 0:
             #add 1 portion of white meat & its emissions
             meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
             animal = white_meat_options.iloc[white_idx]["animal"]
@@ -115,7 +138,7 @@ def create_recommendations():
         else:
             white_limit = True
         
-        if red_meat_counter < red_meat_max:
+        if red_meat_counter < red_meat_max and len(red_meat_options_list) > 0:
             #add 1 portion of red meat & its emissions
             meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
             animal = red_meat_options.iloc[red_idx]["animal"]
