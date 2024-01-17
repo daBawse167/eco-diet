@@ -231,6 +231,7 @@ def find_stock(country_name="", eaten={}):
 @app.route('/present', methods=["GET"])
 def present():
     country = request.args.get("country_name")
+    print(country)
     
     total_df = pd.read_csv("FAOSTAT.csv")
     total_df["Item"] = total_df["Item"].replace("Meat of cattle with the bone, fresh or chilled", "Cow")
@@ -240,8 +241,8 @@ def present():
     total_df["Item"] = total_df["Item"].replace("Meat of chickens, fresh or chilled", "Chicken")
     total_df["Item"] = total_df["Item"].replace("Meat of pig with the bone, fresh or chilled", "Pig")
 
-    countries = list(np.unique(total_df["Area"]))
     animals = list(np.unique(total_df[total_df["Area"]==country]["Item"]))
+    print(animals)
     present = []
 
     for animal in ['Buffalo', 'Chicken', 'Cow', 'Goat', 'Pig', 'Sheep']:
