@@ -229,7 +229,9 @@ def find_stock(country_name="", eaten={}):
     return [country_df, list(country_df["emissions (per gram)"])]
 
 @app.route('/present', methods=["GET"])
-def present(country=""):
+def present():
+    country = request.args.get("country")
+    
     total_df = pd.read_csv("FAOSTAT.csv")
     total_df["Item"] = total_df["Item"].replace("Meat of cattle with the bone, fresh or chilled", "Cow")
     total_df["Item"] = total_df["Item"].replace("Meat of goat, fresh or chilled", "Goat")
