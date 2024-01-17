@@ -247,6 +247,8 @@ def present():
     for animal in ['Buffalo', 'Chicken', 'Cow', 'Goat', 'Pig', 'Sheep']:
         present.append(animal in animals)
 
+    print(present)
+    
     return {'Buffalo':present[0], 'Chicken':present[1], 'Cow':present[2], 'Goat':present[3], 'Pig':present[4], 'Sheep':present[5]}
 
 if __name__=="__main__":
