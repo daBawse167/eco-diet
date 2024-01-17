@@ -230,7 +230,7 @@ def find_stock(country_name="", eaten={}):
 
 @app.route('/present', methods=["GET"])
 def present():
-    country = request.args.get("country")
+    country = request.args.get("country_name")
     
     total_df = pd.read_csv("FAOSTAT.csv")
     total_df["Item"] = total_df["Item"].replace("Meat of cattle with the bone, fresh or chilled", "Cow")
