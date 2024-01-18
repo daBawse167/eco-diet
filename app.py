@@ -56,7 +56,10 @@ def create_recommendations():
     if len(white_meat_options_list)==0 and len(red_meat_options_list)==0:
         return {"emitted (kg)":0, "target (kg)":0,
                 'Chicken': 0, 'Buffalo': 0, 'Cow': 0, 'Goat': 0, 'Sheep': 0, 'Pig': 0,
-                "cattle_e":0, "chickens_e":0, "buffalo_e":0, "goats_e":0, "sheep_e":0, "swine_e":0}
+                "cattle_e":0, "chickens_e":0, "buffalo_e":0, "goats_e":0, "sheep_e":0, "swine_e":0,
+                
+                "cow_eaten":0, "chicken_eaten":0, "buffalo_eaten":0, "goat_eaten":0, "sheep_eaten":0, "pig_eaten":0,
+                "cow_emitted":0, "chicken_emitted":0, "buffalo_emitted":0, "goat_emitted":0, "sheep_emitted":0, "pig_emitted":0}
     
     red_meat_options = {"animal":[], "emissions":[]}
     white_meat_options = {"animal":[], "emissions":[]}
