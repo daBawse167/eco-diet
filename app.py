@@ -250,7 +250,7 @@ def present():
         present.append(animal in animals)
         if animal in animals:
             idx = list(country_df["Item"]).index(animal)
-            emissions.append(list(country_df["Value"])[idx])
+            emissions.append(round(list(country_df["Value"])[idx], 2))
         else:
             emissions.append(0)
     
