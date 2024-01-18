@@ -178,6 +178,16 @@ def create_recommendations():
         if idx not in list(animals_e.keys()):
             animals_e[idx] = 0
     
+    #get animals not in weekly_emitted
+    animals_emissions = return_animals[0]["weekly_emitted (kg/animal)"]
+    array1 = list(animals_emissions)
+    array2 = list(animals_emissions.index)
+    for i in list(animals_e.keys()):
+        if i not in list(animals_emissions.index):
+            array1.append(0)
+            array2.append(i)
+    animals_emissions = dict(np.array([array2, array1]).T)
+    
     #adds emissions to output dictionary
     recommend_list["cattle_e"] = animals_e["Cow"]
     recommend_list["chickens_e"] = animals_e["Chicken"]
@@ -185,6 +195,22 @@ def create_recommendations():
     recommend_list["goats_e"] = animals_e["Goat"]
     recommend_list["sheep_e"] = animals_e["Sheep"]
     recommend_list["swine_e"] = animals_e["Pig"]
+
+    #add how much animal is eaten
+    recommend_list["cow_eaten"] = eaten["Cow"]
+    recommend_list["chicken_eaten"] = eaten["Chicken"]
+    recommend_list["buffalo_eaten"] = eaten["Buffalo"]
+    recommend_list["goat_eaten"] = eaten["Goat"]
+    recommend_list["sheep_eaten"] = eaten["Sheep"]
+    recommend_list["pig_eaten"] = eaten["Pig"]
+    
+    #add each animal's individual emissions
+    recommend_list["cow_emitted"] = animals_emissions["Cow"]
+    recommend_list["chicken_emitted"] = animals_emissions["Chicken"]
+    recommend_list["buffalo_emitted"] = animals_emissions["Buffalo"]
+    recommend_list["goat_emitted"] = animals_emissions["Goat"]
+    recommend_list["sheep_emitted"] = animals_emissions["Sheep"]
+    recommend_list["pig_emitted"] = animals_emissions["Pig"]
     
     return recommend_list
 
