@@ -211,6 +211,8 @@ def create_recommendations():
     recommend_list["goat_emitted"] = animals_emissions["Goat"]
     recommend_list["sheep_emitted"] = animals_emissions["Sheep"]
     recommend_list["pig_emitted"] = animals_emissions["Pig"]
+
+    print(recommend_list)
     
     return recommend_list
 
