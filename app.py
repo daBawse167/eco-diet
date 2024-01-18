@@ -231,26 +231,33 @@ def find_stock(country_name="", eaten={}):
 @app.route('/present', methods=["GET"])
 def present():
     country = request.args.get("country_name")
-    print(country)
     
     total_df = pd.read_csv("FAOSTAT.csv")
-    total_df["Item"] = total_df["Item"].replace("Meat of cattle with the bone, fresh or chilled", "Cow")
-    total_df["Item"] = total_df["Item"].replace("Meat of goat, fresh or chilled", "Goat")
-    total_df["Item"] = total_df["Item"].replace("Meat of buffalo, fresh or chilled", "Buffalo")
-    total_df["Item"] = total_df["Item"].replace("Meat of sheep, fresh or chilled", "Sheep")
-    total_df["Item"] = total_df["Item"].replace("Meat of chickens, fresh or chilled", "Chicken")
-    total_df["Item"] = total_df["Item"].replace("Meat of pig with the bone, fresh or chilled", "Pig")
-
-    animals = list(np.unique(total_df[total_df["Area"]==country]["Item"]))
-    print(animals)
+    country_df = total_df[total_df["Area"]==country]
+    
+    country_df["Item"] = country_df["Item"].replace("Meat of cattle with the bone, fresh or chilled", "Cow")
+    country_df["Item"] = country_df["Item"].replace("Meat of goat, fresh or chilled", "Goat")
+    country_df["Item"] = country_df["Item"].replace("Meat of buffalo, fresh or chilled", "Buffalo")
+    country_df["Item"] = country_df["Item"].replace("Meat of sheep, fresh or chilled", "Sheep")
+    country_df["Item"] = country_df["Item"].replace("Meat of chickens, fresh or chilled", "Chicken")
+    country_df["Item"] = country_df["Item"].replace("Meat of pig with the bone, fresh or chilled", "Pig")
+    
+    animals = list(np.unique(country_df[country_df["Area"]==country]["Item"]))
     present = []
-
+    emissions = []
+    
     for animal in ['Buffalo', 'Chicken', 'Cow', 'Goat', 'Pig', 'Sheep']:
         present.append(animal in animals)
-
-    print(present)
+        if animal in animals:
+            idx = list(country_df["Item"]).index(animal)
+            emissions.append(list(country_df["Value"])[idx])
+        else:
+            emissions.append(0)
     
-    return {'Buffalo':present[0], 'Chicken':present[1], 'Cow':present[2], 'Goat':present[3], 'Pig':present[4], 'Sheep':present[5]}
+    return {'Buffalo':present[0], 'Chicken':present[1], 'Cow':present[2], 'Goat':present[3], 'Pig':present[4], 'Sheep':present[5],
+     
+        "buffalo_e":emissions[0], "chicken_e":emissions[1], "cow_e":emissions[2], "goat_e":emissions[3], "pig_e":emissions[4], 
+     "sheep_e":emissions[5]}
 
 if __name__=="__main__":
     app.run(debug=True)
