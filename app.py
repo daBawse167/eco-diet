@@ -215,8 +215,8 @@ def create_recommendations():
     recommend_list["sheep_emitted"] = animals_emissions["Sheep"]
     recommend_list["pig_emitted"] = animals_emissions["Pig"]
 
-    recommend_list["recommend_grams"] = [recommend_list['Cow']+"g Cow", recommend_list['Chicken']+"g Chicken", recommend_list['Buffalo']+"g Buffalo",
-                                         recommend_list['Goat']+"g Goat", recommend_list['Sheep']+"g Sheep", recommend_list['Pig']+"g Pig"]
+    recommend_list["recommend_grams"] = [str(recommend_list['Cow'])+"g Cow", str(recommend_list['Chicken'])+"g Chicken", str(recommend_list['Buffalo'])+"g Buffalo",
+                                         str(recommend_list['Goat'])+"g Goat", str(recommend_list['Sheep'])+"g Sheep", str(recommend_list['Pig'])+"g Pig"]
     recommend_list["recommend_e"] = [animals_e["Cow"], animals_e["Chicken"], animals_e["Buffalo"], animals_e["Goat"],
                                     animals_e["Sheep"], animals_e["Pig"]]
     recommend_list["eaten"] = [eaten["Cow"], eaten["Chicken"], eaten["Buffalo"], eaten["Goat"], eaten["Sheep"], eaten["Pig"]]
