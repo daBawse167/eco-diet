@@ -59,9 +59,7 @@ def create_recommendations():
                 "cattle_e":0, "chickens_e":0, "buffalo_e":0, "goats_e":0, "sheep_e":0, "swine_e":0,
                 
                 "cow_eaten":0, "chicken_eaten":0, "buffalo_eaten":0, "goat_eaten":0, "sheep_eaten":0, "pig_eaten":0,
-                "cow_emitted":0, "chicken_emitted":0, "buffalo_emitted":0, "goat_emitted":0, "sheep_emitted":0, "pig_emitted":0,
-                
-                "row1_grams" = [0, 0, 0]}
+                "cow_emitted":0, "chicken_emitted":0, "buffalo_emitted":0, "goat_emitted":0, "sheep_emitted":0, "pig_emitted":0}
     
     red_meat_options = {"animal":[], "emissions":[]}
     white_meat_options = {"animal":[], "emissions":[]}
