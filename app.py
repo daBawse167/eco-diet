@@ -215,7 +215,7 @@ def create_recommendations():
     recommend_list["sheep_emitted"] = animals_emissions["Sheep"]
     recommend_list["pig_emitted"] = animals_emissions["Pig"]
 
-    recommend_list["row1_grams"] = [recommend_list["Cow"], recommend_list["Goat"], recommend_list["Pig"]]
+    recommend_list["row1"] = [[recommend_list["Cow"], recommend_list["Goat"], recommend_list["Pig"]], [animals_e["Cow"], animals_e["Goat"], animals_e["Pig"]]]
     
     print(recommend_list)
     
