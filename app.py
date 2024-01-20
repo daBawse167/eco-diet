@@ -222,6 +222,9 @@ def create_recommendations():
     recommend_list["eaten"] = [eaten["Cow"], eaten["Chicken"], eaten["Buffalo"], eaten["Goat"], eaten["Sheep"], eaten["Pig"]]
     recommend_list["emitted"] = [animals_emissions["Cow"], animals_emissions["Chicken"], animals_emissions["Buffalo"],
                                 animals_emissions["Goat"], animals_emissions["Sheep"], animals_emissions["Pig"]]
+    recommend_list["images"] = ["https://i.postimg.cc/cLPKSbPX/cow.png", "https://i.postimg.cc/rw5TDZKh/chicken.png",
+                                "https://i.postimg.cc/QCc94kf0/buffalo.png", "https://i.postimg.cc/50RT78XY/goat.png",
+                                "https://i.postimg.cc/NjGh0Gv0/sheep.png", "https://i.postimg.cc/3xqLH3KV/pig.png"]
     
     print(recommend_list)
     
