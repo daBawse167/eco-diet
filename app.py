@@ -215,20 +215,22 @@ def create_recommendations():
     recommend_list["sheep_emitted"] = animals_emissions["Sheep"]
     recommend_list["pig_emitted"] = animals_emissions["Pig"]
 
-    recommend_list["recommend_grams"] = [str(recommend_list['Cow'])+"g Cow", str(recommend_list['Chicken'])+"g Chicken", str(recommend_list['Buffalo'])+"g Buffalo",
+    return_df = pd.DataFrame({})
+    
+    return_df["recommend_grams"] = [str(recommend_list['Cow'])+"g Cow", str(recommend_list['Chicken'])+"g Chicken", str(recommend_list['Buffalo'])+"g Buffalo",
                                          str(recommend_list['Goat'])+"g Goat", str(recommend_list['Sheep'])+"g Sheep", str(recommend_list['Pig'])+"g Pig"]
-    recommend_list["recommend_e"] = [animals_e["Cow"], animals_e["Chicken"], animals_e["Buffalo"], animals_e["Goat"],
+    return_df["recommend_e"] = [animals_e["Cow"], animals_e["Chicken"], animals_e["Buffalo"], animals_e["Goat"],
                                     animals_e["Sheep"], animals_e["Pig"]]
-    recommend_list["eaten"] = [eaten["Cow"], eaten["Chicken"], eaten["Buffalo"], eaten["Goat"], eaten["Sheep"], eaten["Pig"]]
-    recommend_list["emitted"] = [animals_emissions["Cow"], animals_emissions["Chicken"], animals_emissions["Buffalo"],
+    return_df["eaten"] = [eaten["Cow"], eaten["Chicken"], eaten["Buffalo"], eaten["Goat"], eaten["Sheep"], eaten["Pig"]]
+    return_df["emitted"] = [animals_emissions["Cow"], animals_emissions["Chicken"], animals_emissions["Buffalo"],
                                 animals_emissions["Goat"], animals_emissions["Sheep"], animals_emissions["Pig"]]
-    recommend_list["images"] = ["https://i.postimg.cc/cLPKSbPX/cow.png", "https://i.postimg.cc/rw5TDZKh/chicken.png",
+    return_df["images"] = ["https://i.postimg.cc/cLPKSbPX/cow.png", "https://i.postimg.cc/rw5TDZKh/chicken.png",
                                 "https://i.postimg.cc/QCc94kf0/buffalo.png", "https://i.postimg.cc/50RT78XY/goat.png",
                                 "https://i.postimg.cc/NjGh0Gv0/sheep.png", "https://i.postimg.cc/3xqLH3KV/pig.png"]
     
-    print(recommend_list)
+    print(return_df)
     
-    return recommend_list
+    return return_df
 
 
 
