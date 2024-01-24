@@ -230,8 +230,8 @@ def create_recommendations():
                                 "https://i.postimg.cc/QCc94kf0/buffalo.png", "https://i.postimg.cc/50RT78XY/goat.png",
                                 "https://i.postimg.cc/NjGh0Gv0/sheep.png", "https://i.postimg.cc/3xqLH3KV/pig.png"]
     
-    return_df = {"recommend_grams":return_df["recommend_grams"], "recommend_e":return_df["recommend_e"], "eaten":return_df["eaten"],
-                 "emitted":return_df["emitted"], "images":return_df["images"]}
+    return_df = {"recommend_grams":list(return_df["recommend_grams"]), "recommend_e":list(return_df["recommend_e"]), "eaten":list(return_df["eaten"]),
+                 "emitted":list(return_df["emitted"]), "images":list(return_df["images"])}
     
     return return_df
 
