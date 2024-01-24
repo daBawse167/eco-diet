@@ -55,11 +55,13 @@ def create_recommendations():
     
     if len(white_meat_options_list)==0 and len(red_meat_options_list)==0:
         return {"emitted (kg)":0, "target (kg)":0,
-                'Chicken': 0, 'Buffalo': 0, 'Cow': 0, 'Goat': 0, 'Sheep': 0, 'Pig': 0,
-                "cattle_e":0, "chickens_e":0, "buffalo_e":0, "goats_e":0, "sheep_e":0, "swine_e":0,
-                
-                "cow_eaten":0, "chicken_eaten":0, "buffalo_eaten":0, "goat_eaten":0, "sheep_eaten":0, "pig_eaten":0,
-                "cow_emitted":0, "chicken_emitted":0, "buffalo_emitted":0, "goat_emitted":0, "sheep_emitted":0, "pig_emitted":0}
+               "recommend_grams": ["0g Cow", "0g Chicken", "0g Buffalo", "0g Goat", "0g Sheep", "0g Pig"],
+                "recommend_e": [0, 0, 0, 0, 0, 0],
+                "eaten": [0, 0, 0, 0, 0, 0],
+                "emitted": [0, 0, 0, 0, 0, 0],
+                "images": ["https://i.postimg.cc/cLPKSbPX/cow.png", "https://i.postimg.cc/rw5TDZKh/chicken.png",
+                                "https://i.postimg.cc/QCc94kf0/buffalo.png", "https://i.postimg.cc/50RT78XY/goat.png",
+                                "https://i.postimg.cc/NjGh0Gv0/sheep.png", "https://i.postimg.cc/3xqLH3KV/pig.png"]}
     
     red_meat_options = {"animal":[], "emissions":[]}
     white_meat_options = {"animal":[], "emissions":[]}
