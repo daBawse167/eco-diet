@@ -10,11 +10,32 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
-
-@app.route("/recommend", methods=["GET"])
-def create_recommendations():
+#user enters in dish type
+@app.route("/get_dishes", methods=["GET"])
+def get_dishes(dishes):
+    eaten = {"chickens":0, "cattle":0, "goats":0, "sheep":0, "swine":0, "buffalo":0}
     country_name = str(request.args.get("country_name"))
-    print(country_name)
+    dishes = request.args.get("dishes")
+    
+    #convert meat to animal
+    for dish in dishes:
+        meal = useable[useable["dish"]==dish]
+
+        if list(meal["meat"])[0]=="beef":
+            eaten["cattle"] += float(meal["grams"])
+        elif list(meal["meat"])[0]=="pork":
+            eaten["swine"] += float(meal["grams"])
+        elif list(meal["meat"])[0]=="lamb":
+            eaten["sheep"] += float(meal["grams"])
+        elif list(meal["meat"])[0]=="chicken":
+            eaten["chickens"] += float(meal["grams"])
+
+    return create_recommendations(eaten, country_name)
+
+#user enters in grams
+@app.route("/get_grams", methods=["GET"])
+def get_grams():
+    country_name = str(request.args.get("country_name"))
     
     chickens = int(request.args.get("chickens"))
     cattle = int(request.args.get("cattle"))
@@ -22,10 +43,22 @@ def create_recommendations():
     sheep = int(request.args.get("sheep"))
     swine = int(request.args.get("swine"))
     buffalo = int(request.args.get("buffalo"))
+    
+    eaten = {"chickens":chickens, "cattle":cattle, "goats":goats, "sheep":sheep, "swine":swine, "buffalo":buffalo}
+    return create_recommendations(eaten, country_name)
+
+def create_recommendations(eaten, country_name):
+    print(eaten, country_name)
+    
+    chickens = eaten["chickens"]
+    cattle = eaten["cattle"]
+    goats = eaten["goats"]
+    sheep = eaten["sheep"]
+    swine = eaten["swine"]
+    buffalo = eaten["buffalo"]
 
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
-    print(eaten)
     
     percent_reduction = 0.5
     
