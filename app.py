@@ -13,6 +13,7 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
 def get_dishes(dishes):
+    print(dishes)
     eaten = {"chickens":0, "cattle":0, "goats":0, "sheep":0, "swine":0, "buffalo":0}
     country_name = str(request.args.get("country_name"))
     dishes = request.args.get("dishes")
