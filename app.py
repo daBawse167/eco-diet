@@ -18,9 +18,7 @@ def get_dishes():
     
     country_name = str(request.args.get("country_name"))
     dishes = str(request.args.get("dishes")).split(", ")
-
-    print(dishes)
-    print(useable)
+    favourites = str(request.args.get("favourites")).split(", ")
     
     #convert meat to animal
     for dish in dishes:
