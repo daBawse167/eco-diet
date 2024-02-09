@@ -17,7 +17,7 @@ def get_dishes():
     useable = pd.read_csv("useable_dishes.csv")
     
     country_name = str(request.args.get("country_name"))
-    dishes = request.args.get("dishes")
+    dishes = str(request.args.get("dishes")).split(", ")
 
     print(dishes)
     print(useable)
