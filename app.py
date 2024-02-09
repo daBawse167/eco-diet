@@ -18,11 +18,15 @@ def get_dishes():
     
     country_name = str(request.args.get("country_name"))
     dishes = request.args.get("dishes")
+
+    print(dishes)
+    print(useable)
     
     #convert meat to animal
     for dish in dishes:
         meal = useable[useable["dish"]==dish]
-
+        print(meal)
+        
         if list(meal["meat"])[0]=="beef":
             eaten["cattle"] += float(meal["grams"])
         elif list(meal["meat"])[0]=="pork":
