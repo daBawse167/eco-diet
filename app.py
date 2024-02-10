@@ -180,6 +180,10 @@ def create_recommendations(eaten, country_name, favourites):
     
     #bring in the dishes here
     dishes = pd.read_csv("useable_dishes.csv")
+
+    duplicates = dishes[dishes["dish"].duplicated()]
+    for i in duplicates.index:
+        dishes = dishes.drop(i)
     
     beef_options = []
     pork_options = []
