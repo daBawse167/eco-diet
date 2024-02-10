@@ -16,6 +16,10 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 def get_dishes():
     eaten = {"chickens":0, "cattle":0, "goats":0, "sheep":0, "swine":0, "buffalo":0}
     useable = pd.read_csv("useable_dishes.csv")
+
+    duplicates = useable[useable["dish"].duplicated()]
+    for i in duplicates.index:
+        useable = useable.drop(i)
     
     country_name = str(request.args.get("country_name"))
     dishes = str(request.args.get("dishes")).split(", ")
@@ -180,10 +184,6 @@ def create_recommendations(eaten, country_name, favourites):
     
     #bring in the dishes here
     dishes = pd.read_csv("useable_dishes.csv")
-
-    duplicates = dishes[dishes["dish"].duplicated()]
-    for i in duplicates.index:
-        dishes = dishes.drop(i)
     
     beef_options = []
     pork_options = []
