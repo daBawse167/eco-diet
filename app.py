@@ -222,21 +222,20 @@ def create_recommendations(eaten, country_name, favourites):
                 choice = random.choices(list(selection.iloc), probabilities)[0]
                 
                 #get the index of selection so you can remove the weighting
-                idx = selection[selection["dish"]==choice["dish"]].index[0]
+                idx = selection[selection["Unnamed: 0"]==choice["Unnamed: 0"]].index[0]
                 del probabilities[idx]
+                selection = selection[selection["Unnamed: 0"]!=choice["Unnamed: 0"]]
                 
                 #if we haven't reached the limit yet
                 if goal+choice["grams"] <= recommend_list[food[0]]:
                     #add the dish
                     food[2].append(choice)
                     goal += choice["grams"]
-                    selection = selection[selection["dish"]!=choice["dish"]]
                     
                     dish_names.append(choice["dish"])
                     dish_grams.append(choice["grams"])
                     dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
-                else:
-                    selection = selection[selection["dish"]!=choice["dish"]]
+                    
                 if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                     break
                 
