@@ -34,7 +34,7 @@ def get_dishes():
         elif list(meal["meat"])[0]=="chicken":
             eaten["chickens"] += float(meal["grams"])
 
-    return create_recommendations(eaten, country_name)
+    return create_recommendations(eaten, country_name, favourites)
 
 #user enters in grams
 @app.route("/get_grams", methods=["GET"])
@@ -51,8 +51,8 @@ def get_grams():
     eaten = {"chickens":chickens, "cattle":cattle, "goats":goats, "sheep":sheep, "swine":swine, "buffalo":buffalo}
     return create_recommendations(eaten, country_name)
 
-def create_recommendations(eaten, country_name):
-    print(eaten, country_name)
+def create_recommendations(eaten, country_name, favourites):
+    print(eaten, country_name, favourites)
     
     chickens = eaten["chickens"]
     cattle = eaten["cattle"]
