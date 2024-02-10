@@ -64,7 +64,7 @@ def create_recommendations(eaten, country_name, favourites):
 
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
-    
+
     percent_reduction = 0.5
     
     return_animals = find_stock(country_name=country_name, eaten=eaten)
@@ -101,11 +101,10 @@ def create_recommendations(eaten, country_name, favourites):
     
     if len(red_meat_options) > 0:
         red_meat_options = {"animal": np.array(red_meat_options_list).T[0], "emissions": np.array(red_meat_options_list).T[1]}
-        red_meat_options = pd.DataFrame(red_meat_options).sort_values(ascending=True, by="emissions")
+        red_meat_options = pd.DataFrame(red_meat_options).sample(frac=1)#.sort_values(ascending=True, by="emissions")
     if len(white_meat_options) > 0:
         white_meat_options = {"animal": np.array(white_meat_options_list).T[0], "emissions": np.array(white_meat_options_list).T[1]}
-        white_meat_options = pd.DataFrame(white_meat_options).sort_values(ascending=True, by="emissions")
-    
+        white_meat_options = pd.DataFrame(white_meat_options).sample(frac=1)#.sort_values(ascending=True, by="emissions")
     
     idx = 0
     recommend_list = {"emitted (kg)":round(total_emitted, 3),
@@ -143,8 +142,8 @@ def create_recommendations(eaten, country_name, favourites):
         if white_limit:
             if red_limit:
                 break
-        
-        if white_meat_counter < white_meat_max and len(white_meat_options_list) > 0:
+
+        if white_meat_counter < white_meat_max and len(list(white_meat_options.iloc)) > 0:
             #add 1 portion of white meat & its emissions
             meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
             animal = white_meat_options.iloc[white_idx]["animal"]
@@ -152,13 +151,14 @@ def create_recommendations(eaten, country_name, favourites):
                 emissions_counter += meat_emission*portion
                 white_meat_counter += portion
                 recommend_list[animal] += portion
-                print(white_meat_counter, portion, recommend_list[animal], white_meat_max)
             else:
-                break
+                #this animal cannot be served, so take it out of the options
+                white_meat_options = white_meat_options[white_meat_options["animal"]!=white_meat_options.iloc[white_idx]["animal"]]
+                
         else:
             white_limit = True
         
-        if red_meat_counter < red_meat_max and len(red_meat_options_list) > 0:
+        if red_meat_counter < red_meat_max and len(list(red_meat_options.iloc)) > 0:
             #add 1 portion of red meat & its emissions
             meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
             animal = red_meat_options.iloc[red_idx]["animal"]
@@ -168,7 +168,9 @@ def create_recommendations(eaten, country_name, favourites):
                 red_meat_counter += portion
                 recommend_list[animal] += portion
             else:
-                break
+                #this animal cannot be served, so take it out of the options
+                red_meat_options = red_meat_options[red_meat_options["animal"]!=red_meat_options.iloc[red_idx]["animal"]]
+                
         else:
             red_limit = True
         
@@ -190,8 +192,9 @@ def create_recommendations(eaten, country_name, favourites):
     animals_eaten.index=animals_eaten["Item"]
     animals_eaten = animals_eaten["emissions (per kg)"]
     
-    option_list = [["Chicken", "chicken", chicken_options], ["Buffalo", "buffalo", buffalo_options], ["Cow", "beef", beef_options], 
-     ["Goat", "goat", goat_options], ["Sheep", "lamb", lamb_options], ["Pig", "pork", pork_options]]
+    option_list = [["Buffalo", "buffalo", buffalo_options], ["Cow", "beef", beef_options], 
+     ["Goat", "goat", goat_options], ["Sheep", "lamb", lamb_options], ["Pig", "pork", pork_options],
+                  ["Chicken", "chicken", chicken_options]]
     
     
     dish_names = []
@@ -200,8 +203,8 @@ def create_recommendations(eaten, country_name, favourites):
     
     for food in option_list:
         if recommend_list[food[0]]>=portion:
-            selection = dishes[dishes["meat"]==food[1]]
-            weighting = 10
+            selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
+            weighting = 4
             goal = 0
             
             #make weighted probabilities for favourite foods
@@ -215,16 +218,25 @@ def create_recommendations(eaten, country_name, favourites):
             #loop over all the dishes
             counter = 0
             while goal < recommend_list[food[0]]:
+                selection = selection.reset_index(drop=True)
                 choice = random.choices(list(selection.iloc), probabilities)[0]
+                
+                #get the index of selection so you can remove the weighting
+                idx = selection[selection["dish"]==choice["dish"]].index[0]
+                del probabilities[idx]
                 
                 #if we haven't reached the limit yet
                 if goal+choice["grams"] <= recommend_list[food[0]]:
                     #add the dish
                     food[2].append(choice)
                     goal += choice["grams"]
+                    selection = selection[selection["dish"]!=choice["dish"]]
+                    
                     dish_names.append(choice["dish"])
                     dish_grams.append(choice["grams"])
                     dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
+                else:
+                    selection = selection[selection["dish"]!=choice["dish"]]
                 if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                     break
                 
