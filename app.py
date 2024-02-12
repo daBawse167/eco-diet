@@ -22,22 +22,22 @@ def get_dishes():
         useable = useable.drop(i)
     
     country_name = str(request.args.get("country_name"))
-    dishes = str(request.args.get("dishes")).split(", ")
     favourites = str(request.args.get("favourites")).split(", ")
     
+    grams = str(request.args.get("grams")).split(", ")
+    meat = str(request.args.get("meat")).split(", ")
+    dishes = np.array([grams, meat]).T
+    
     #convert meat to animal
-    for dish in dishes:
-        meal = useable[useable["dish"]==dish]
-        print(meal)
-        
-        if list(meal["meat"])[0]=="beef":
-            eaten["cattle"] += float(meal["grams"])
-        elif list(meal["meat"])[0]=="pork":
-            eaten["swine"] += float(meal["grams"])
-        elif list(meal["meat"])[0]=="lamb":
-            eaten["sheep"] += float(meal["grams"])
-        elif list(meal["meat"])[0]=="chicken":
-            eaten["chickens"] += float(meal["grams"])
+    for meal in dishes:
+        if meal[1]=="beef":
+            eaten["cattle"] += float(meal[0])
+        elif meal[1]=="pork":
+            eaten["swine"] += float(meal[0])
+        elif meal[1]=="lamb":
+            eaten["sheep"] += float(meal[0])
+        elif meal[1]=="chicken":
+            eaten["chickens"] += float(meal[0])
 
     return create_recommendations(eaten, country_name, favourites)
 
