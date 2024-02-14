@@ -1,0 +1,745 @@
+,alternative,meat
+0,Portobello mushroom steak,Steak
+1,Tempeh steak,Steak
+2,Eggplant steak,Steak
+3,Tofu steak,Steak
+4,Black bean burger,Hamburger
+5,Lentil burger,Hamburger
+6,Chickpea burger,Hamburger
+7,Quinoa burger,Hamburger
+8,Eggplant Parmesan,Chicken Parmesan
+9,Tofu Parmesan,Chicken Parmesan
+10,Cauliflower Parmesan,Chicken Parmesan
+11,Zucchini Parmesan,Chicken Parmesan
+12,Jackfruit ribs,Barbecue Ribs
+13,Seitan ribs,Barbecue Ribs
+14,Portobello mushroom ribs,Barbecue Ribs
+15,Eggplant ribs,Barbecue Ribs
+16,Seitan roast,Roast Beef
+17,Portobello mushroom roast,Roast Beef
+18,Tofu roast,Roast Beef
+19,Lentil loaf,Roast Beef
+20,Grilled tofu,Grilled Chicken
+21,Grilled tempeh,Grilled Chicken
+22,Grilled portobello mushrooms,Grilled Chicken
+23,Grilled eggplant,Grilled Chicken
+24,Eggplant chops,Lamb Chops
+25,Seitan chops,Lamb Chops
+26,Tofu chops,Lamb Chops
+27,Portobello mushroom chops,Lamb Chops
+28,Seitan tenderloin,Pork Tenderloin
+29,Jackfruit tenderloin,Pork Tenderloin
+30,Tofu tenderloin,Pork Tenderloin
+31,Eggplant tenderloin,Pork Tenderloin
+32,Lentil meatballs,Meatballs
+33,Chickpea meatballs,Meatballs
+34,Mushroom meatballs,Meatballs
+35,Tofu meatballs,Meatballs
+36,Plant-based sausage,Beef Sausage
+37,Mushroom sausage,Beef Sausage
+38,Lentil sausage,Beef Sausage
+39,Chickpea sausage,Beef Sausage
+40,Plant-based sausage,Pork Sausage
+41,Mushroom sausage,Pork Sausage
+42,Lentil sausage,Pork Sausage
+43,Chickpea sausage,Pork Sausage
+44,Mushroom stroganoff,Beef Stroganoff
+45,Tofu stroganoff,Beef Stroganoff
+46,Seitan stroganoff,Beef Stroganoff
+47,Lentil stroganoff,Beef Stroganoff
+48,Cauliflower Alfredo,Chicken Alfredo
+49,Tofu Alfredo,Chicken Alfredo
+50,Zucchini Alfredo,Chicken Alfredo
+51,Mushroom Alfredo,Chicken Alfredo
+52,Jackfruit pulled pork,Pulled Pork Sandwich
+53,Pulled mushroom sandwich,Pulled Pork Sandwich
+54,Pulled seitan sandwich,Pulled Pork Sandwich
+55,Pulled eggplant sandwich,Pulled Pork Sandwich
+56,Lentil tacos,Beef Tacos
+57,Cauliflower tacos,Beef Tacos
+58,Chickpea tacos,Beef Tacos
+59,Mushroom tacos,Beef Tacos
+60,Tofu satay,Chicken Satay
+61,Tempeh satay,Chicken Satay
+62,Seitan satay,Chicken Satay
+63,Portobello mushroom satay,Chicken Satay
+64,Plant-based sausage,Poultry Sausage
+65,Mushroom sausage,Poultry Sausage
+66,Lentil sausage,Poultry Sausage
+67,Chickpea sausage,Poultry Sausage
+68,Portobello mushroom kebabs,Beef Kebabs
+69,Tofu kebabs,Beef Kebabs
+70,Seitan kebabs,Beef Kebabs
+71,Veggie kebabs,Beef Kebabs
+72,Pineapple and mushroom pizza,Ham and Pineapple Pizza
+73,Pineapple and tofu pizza,Ham and Pineapple Pizza
+74,Pineapple and tempeh pizza,Ham and Pineapple Pizza
+75,Pineapple and veggie pizza,Ham and Pineapple Pizza
+76,Bean and rice burritos,Beef Burritos
+77,Lentil burritos,Beef Burritos
+78,Tofu burritos,Beef Burritos
+79,Mushroom burritos,Beef Burritos
+80,Cauliflower Curry,Chicken Curry
+81,Tofu Curry,Chicken Curry
+82,Chickpea Curry,Chicken Curry
+83,Vegetable Curry,Chicken Curry
+84,Vegetarian Pizza (with mushrooms,Pepperoni Pizza
+85,Tofu Pepperoni Pizza,Pepperoni Pizza
+86,Plant-based Pepperoni Pizza,Pepperoni Pizza
+87,Mushroom Pizza,Pepperoni Pizza
+88,Jackfruit Gyros,Lamb Gyros
+89,Seitan Gyros,Lamb Gyros
+90,Mushroom Gyros,Lamb Gyros
+91,Tofu Gyros,Lamb Gyros
+92,Cabbage Rolls (stuffed with lentils or mushrooms),Corned Beef and Cabbage
+93,Seitan Corned Beef,Corned Beef and Cabbage
+94,Tofu Corned Beef,Corned Beef and Cabbage
+95,Mushroom Corned Beef,Corned Beef and Cabbage
+96,Cauliflower Wings,Buffalo Chicken Wings
+97,Tofu Wings,Buffalo Chicken Wings
+98,Seitan Wings,Buffalo Chicken Wings
+99,Mushroom Wings,Buffalo Chicken Wings
+100,Lentil Bolognese,Spaghetti Bolognese
+101,Chickpea Bolognese,Spaghetti Bolognese
+102,Mushroom Bolognese,Spaghetti Bolognese
+103,Tofu Bolognese,Spaghetti Bolognese
+104,Vegetable Fajitas,Chicken Fajitas
+105,Tofu Fajitas,Chicken Fajitas
+106,Seitan Fajitas,Chicken Fajitas
+107,Portobello Mushroom Fajitas,Chicken Fajitas
+108,Mushroom Wellington,Beef Wellington
+109,Seitan Wellington,Beef Wellington
+110,Tofu Wellington,Beef Wellington
+111,Jackfruit Wellington,Beef Wellington
+112,Tofu Chops,Pork Chops
+113,Seitan Chops,Pork Chops
+114,Jackfruit Chops,Pork Chops
+115,Eggplant Chops,Pork Chops
+116,Tofu Teriyaki,Chicken Teriyaki
+117,Seitan Teriyaki,Chicken Teriyaki
+118,Jackfruit Teriyaki,Chicken Teriyaki
+119,Portobello Mushroom Teriyaki,Chicken Teriyaki
+120,Lentil Goulash,Goulash
+121,Chickpea Goulash,Goulash
+122,Mushroom Goulash,Goulash
+123,Tofu Goulash,Goulash
+124,Seitan Shawarma,Beef Shawarma
+125,Jackfruit Shawarma,Beef Shawarma
+126,Tofu Shawarma,Beef Shawarma
+127,Mushroom Shawarma,Beef Shawarma
+128,Grilled Vegetable Skewers,Churrasco (Brazilian BBQ)
+129,Tofu Churrasco,Churrasco (Brazilian BBQ)
+130,Seitan Churrasco,Churrasco (Brazilian BBQ
+131,Portobello Mushroom Churrasco,Churrasco (Brazilian BBQ)
+132,Tofu Stir-Fry,Beef Stir-Fry
+133,Seitan Stir-Fry,Beef Stir-Fry
+134,Mushroom Stir-Fry,Beef Stir-Fry
+135,Jackfruit Stir-Fry,Beef Stir-Fry
+136,Tofu Piccata,Chicken Piccata
+137,Seitan Piccata,Chicken Piccata
+138,Jackfruit Piccata,Chicken Piccata
+139,Portobello Mushroom Piccata,Chicken Piccata
+140,Vegetable Shank,Lamb Shank
+141,Tofu Shank,Lamb Shank
+142,Seitan Shank,Lamb Shank
+143,Jackfruit Shank,Lamb Shank
+144,Tofu Shawarma,Lamb Shawarma
+145,Seitan Shawarma,Lamb Shawarma
+146,Jackfruit Shawarma,Lamb Shawarma
+147,Mushroom Shawarma,Lamb Shawarma
+148,Lentil Chili,Chili Con Carne
+149,Chickpea Chili,Chili Con Carne
+150,Mushroom Chili,Chili Con Carne
+151,Tofu Chili,Chili Con Carne
+152,Tandoori Tofu,Tandoori Chicken
+153,Tandoori Cauliflower,Tandoori Chicken
+154,Tandoori Jackfruit,Tandoori Chicken
+155,Tandoori Vegetable Skewers,Tandoori Chicken
+156,Vegetable Rack,Rack of Lamb
+157,Tofu Rack,Rack of Lamb
+158,Seitan Rack,Rack of Lamb
+159,Jackfruit Rack,Rack of Lamb
+160,Jerk Tofu,Jerk Chicken
+161,Jerk Seitan,Jerk Chicken
+162,Jerk Jackfruit,Jerk Chicken
+163,Jerk Vegetable Skewers,Jerk Chicken
+164,Tofu Shawarma,Chicken Shawarma
+165,Seitan Shawarma,Chicken Shawarma
+166,Jackfruit Shawarma,Chicken Shawarma
+167,Mushroom Shawarma,Chicken Shawarma
+168,Vegetarian Pho (with tofu and vegetables),Pho (Vietnamese Beef Noodle Soup)
+169,Mushroom Pho,Pho (Vietnamese Beef Noodle Soup)
+170,Seitan Pho,Pho (Vietnamese Beef Noodle Soup)
+171,Jackfruit Pho,Pho (Vietnamese Beef Noodle Soup)
+172,Tofu Adobo,Chicken Adobo
+173,Jackfruit Adobo,Chicken Adobo
+174,Seitan Adobo,Chicken Adobo
+175,Mushroom Adobo,Chicken Adobo
+176,Lentil Sloppy Joes,Sloppy Joes
+177,Chickpea Sloppy Joes,Sloppy Joes
+178,Mushroom Sloppy Joes,Sloppy Joes
+179,Tofu Sloppy Joes,Sloppy Joes
+180,Mushroom Saltado,Lomo Saltado (Peruvian Stir-Fry)
+181,Tofu Saltado,Lomo Saltado (Peruvian Stir-Fry)
+182,Seitan Saltado,Lomo Saltado (Peruvian Stir-Fry)
+183,Jackfruit Saltado,Lomo Saltado (Peruvian Stir-Fry)
+184,Seitan Belly,Pork Belly
+185,Jackfruit Belly,Pork Belly
+186,Tofu Belly,Pork Belly
+187,Mushroom Belly,Pork Belly
+188,Tofu Bulgogi,Beef Bulgogi
+189,Seitan Bulgogi,Beef Bulgogi
+190,Jackfruit Bulgogi,Beef Bulgogi
+191,Mushroom Bulgogi,Beef Bulgogi
+192,Tofu Cordon Bleu,Chicken Cordon Bleu
+193,Seitan Cordon Bleu,Chicken Cordon Bleu
+194,Jackfruit Cordon Bleu,Chicken Cordon Bleu
+195,Mushroom Cordon Bleu,Chicken Cordon Bleu
+196,Lentil Kofta,Kofta (Middle Eastern Meatballs)
+197,Chickpea Kofta,Kofta (Middle Eastern Meatballs)
+198,Mushroom Kofta,Kofta (Middle Eastern Meatballs)
+199,Tofu Kofta,Kofta (Middle Eastern Meatballs)
+200,Jackfruit al Pastor,Taco al Pastor
+201,Seitan al Pastor,Taco al Pastor
+202,Tofu al Pastor,Taco al Pastor
+203,Mushroom al Pastor,Taco al Pastor
+204,Tofu Enchiladas,Beef Enchiladas
+205,Jackfruit Enchiladas,Beef Enchiladas
+206,Seitan Enchiladas,Beef Enchiladas
+207,Mushroom Enchiladas,Beef Enchiladas
+208,Vegetarian Sausage and Peppers (using plant-based sausage),Sausage and Peppers
+209,Tofu Sausage and Peppers,Sausage and Peppers
+210,Seitan Sausage and Peppers,Sausage and Peppers
+211,Mushroom Sausage and Peppers,Sausage and Peppers
+212,Tofu Katsu,Chicken Katsu
+213,Jackfruit Katsu,Chicken Katsu
+214,Seitan Katsu,Chicken Katsu
+215,Mushroom Katsu,Chicken Katsu
+216,Jackfruit Pulled Lamb,Pulled Lamb Sandwich
+217,Seitan Pulled Lamb,Pulled Lamb Sandwich
+218,Tofu Pulled Lamb,Pulled Lamb Sandwich
+219,Mushroom Pulled Lamb,Pulled Lamb Sandwich
+220,Vegetable Lasagna,Italian Meat Lasagna
+221,Tofu Lasagna,Italian Meat Lasagna
+222,Seitan Lasagna,Italian Meat Lasagna
+223,Lentil Lasagna,Italian Meat Lasagna
+224,Tofu Paprikash,Chicken Paprikash
+225,Jackfruit Paprikash,Chicken Paprikash
+226,Seitan Paprikash,Chicken Paprikash
+227,Mushroom Paprikash,Chicken Paprikash
+228,Tofu Szechuan,Szechuan Beef
+229,Seitan Szechuan,Szechuan Beef
+230,Jackfruit Szechuan,Szechuan Beef
+231,Mushroom Szechuan,Szechuan Beef
+232,Tofu Adobo,Pork Adobo
+233,Jackfruit Adobo,Pork Adobo
+234,Seitan Adobo,Pork Adobo
+235,Mushroom Adobo,Pork Adobo
+236,Jackfruit Carnitas,Carnitas (Mexican Pulled Pork)
+237,Seitan Carnitas,Carnitas (Mexican Pulled Pork)
+238,Tofu Carnitas,Carnitas (Mexican Pulled Pork)
+239,Mushroom Carnitas,Carnitas (Mexican Pulled Pork)
+240,Vegetable and Dumplings,Chicken and Dumplings
+241,Tofu and Dumplings,Chicken and Dumplings
+242,Jackfruit and Dumplings,Chicken and Dumplings
+243,Seitan and Dumplings,Chicken and Dumplings
+244,Tofu Marsala,Chicken Marsala
+245,Seitan Marsala,Chicken Marsala
+246,Jackfruit Marsala,Chicken Marsala
+247,Mushroom Marsala,Chicken Marsala
+248,Vegan Loco Moco (with plant-based protein),Hawaiian Loco Moco
+249,Tofu Loco Moco,Hawaiian Loco Moco
+250,Seitan Loco Moco,Hawaiian Loco Moco
+251,Mushroom Loco Moco,Hawaiian Loco Moco
+252,Vegetarian Enchiladas (with beans and veggies),Chicken Enchiladas
+253,Tofu Enchiladas,Chicken Enchiladas
+254,Jackfruit Enchiladas,Chicken Enchiladas
+255,Seitan Enchiladas,Chicken Enchiladas
+256,Tofu BBQ Short Ribs,Korean BBQ Short Ribs (Galbi)
+257,Seitan BBQ Short Ribs,Korean BBQ Short Ribs (Galbi)
+258,Mushroom BBQ Short Ribs,Korean BBQ Short Ribs (Galbi)
+259,Jackfruit BBQ Short Ribs,Korean BBQ Short Ribs (Galbi)
+260,Vegetarian Pasty (with lentils and veggies),Cornish Pasty
+261,Tofu Pasty,Cornish Pasty
+262,Seitan Pasty,Cornish Pasty
+263,Mushroom Pasty,Cornish Pasty
+264,Tofu Mongolian,Mongolian Beef
+265,Seitan Mongolian,Mongolian Beef
+266,Jackfruit Mongolian,Mongolian Beef
+267,Mushroom Mongolian,Mongolian Beef
+268,Vegetable Pot Pie,Chicken Pot Pie
+269,Tofu Pot Pie,Chicken Pot Pie
+270,Seitan Pot Pie,Chicken Pot Pie
+271,Mushroom Pot Pie,Chicken Pot Pie
+272,Tofu Souvlaki,Chicken Souvlaki
+273,Jackfruit Souvlaki,Chicken Souvlaki
+274,Seitan Souvlaki,Chicken Souvlaki
+275,Mushroom Souvlaki,Chicken Souvlaki
+276,Vegetarian Meatballs (made with lentils or mushrooms),Swedish Meatballs
+277,Tofu Meatballs,Swedish Meatballs
+278,Seitan Meatballs,Swedish Meatballs
+279,Jackfruit Meatballs,Swedish Meatballs
+280,Vegetable Tagine,Moroccan Lamb Tagine
+281,Tofu Tagine,Moroccan Lamb Tagine
+282,Seitan Tagine,Moroccan Lamb Tagine
+283,Jackfruit Tagine,Moroccan Lamb Tagine
+284,Jackfruit Pulled Chicken,BBQ Pulled Chicken
+285,Seitan Pulled Chicken,BBQ Pulled Chicken
+286,Tofu Pulled Chicken,BBQ Pulled Chicken
+287,Mushroom Pulled Chicken,BBQ Pulled Chicken
+288,Stuffed Bell Peppers with Lentils,Stuffed Bell Peppers with Ground Beef
+289,Stuffed Bell Peppers with Tofu,Stuffed Bell Peppers with Ground Beef
+290,Stuffed Bell Peppers with Quinoa,Stuffed Bell Peppers with Ground Beef
+291,Stuffed Bell Peppers with Mushrooms,Stuffed Bell Peppers with Ground Beef
+292,Tofu Tikka Masala,Chicken Tikka Masala
+293,Jackfruit Tikka Masala,Chicken Tikka Masala
+294,Seitan Tikka Masala,Chicken Tikka Masala
+295,Mushroom Tikka Masala,Chicken Tikka Masala
+296,Tofu and Broccoli,Beef and Broccoli
+297,Seitan and Broccoli,Beef and Broccoli
+298,Mushroom and Broccoli,Beef and Broccoli
+299,Jackfruit and Broccoli,Beef and Broccoli
+300,Jackfruit Ropa Vieja,Cuban Ropa Vieja
+301,Seitan Ropa Vieja,Cuban Ropa Vieja
+302,Tofu Ropa Vieja,Cuban Ropa Vieja
+303,Mushroom Ropa Vieja,Cuban Ropa Vieja
+304,Vegetable Jambalaya,Jambalaya
+305,Tofu Jambalaya,Jambalaya
+306,Seitan Jambalaya,Jambalaya
+307,Mushroom Jambalaya,Jambalaya
+308,Tofu Pad Krapow,Thai Basil Beef (Pad Krapow)
+309,Seitan Pad Krapow,Thai Basil Beef (Pad Krapow)
+310,Jackfruit Pad Krapow,Thai Basil Beef (Pad Krapow)
+311,Mushroom Pad Krapow,Thai Basil Beef (Pad Krapow)
+312,Tofu Shawarma Wrap,Chicken Shawarma Wrap
+313,Seitan Shawarma Wrap,Chicken Shawarma Wrap
+314,Jackfruit Shawarma Wrap,Chicken Shawarma Wrap
+315,Mushroom Shawarma Wrap,Chicken Shawarma Wrap
+316,Vegetarian Kofta Kebabs (made with lentils or chickpeas),Turkish Kofta Kebabs
+317,Tofu Kofta Kebabs,Turkish Kofta Kebabs
+318,Seitan Kofta Kebabs,Turkish Kofta Kebabs
+319,Mushroom Kofta Kebabs,Turkish Kofta Kebabs
+320,Cauliflower Buffalo Tenders,Buffalo Chicken Tenders
+321,Tofu Buffalo Tenders,Buffalo Chicken Tenders
+322,Seitan Buffalo Tenders,Buffalo Chicken Tenders
+323,Mushroom Buffalo Tenders,Buffalo Chicken Tenders
+324,Vegetarian Moussaka (with lentils or eggplant),Greek Moussaka
+325,Tofu Moussaka,Greek Moussaka
+326,Seitan Moussaka,Greek Moussaka
+327,Jackfruit Moussaka,Greek Moussaka
+328,Vegetarian Anticuchos (with veggies or tofu),Peruvian Anticuchos (Grilled Beef Heart Skewers)
+329,Tofu Anticuchos,Peruvian Anticuchos (Grilled Beef Heart Skewers
+330,Seitan Anticuchos,Peruvian Anticuchos (Grilled Beef Heart Skewers
+331,Mushroom Anticuchos,Peruvian Anticuchos (Grilled Beef Heart Skewers
+332,Jackfruit Carnitas Tacos,Pork Carnitas Tacos
+333,Seitan Carnitas Tacos,Pork Carnitas Tacos
+334,Tofu Carnitas Tacos,Pork Carnitas Tacos
+335,Mushroom Carnitas Tacos,Pork Carnitas Tacos
+336,Tofu Yakitori,Chicken Yakitori
+337,Jackfruit Yakitori,Chicken Yakitori
+338,Seitan Yakitori,Chicken Yakitori
+339,Mushroom Yakitori,Chicken Yakitori
+340,Tofu Sausage and Peppers,Italian Sausage and Peppers
+341,Seitan Sausage and Peppers,Italian Sausage and Peppers
+342,Jackfruit Sausage and Peppers,Italian Sausage and Peppers
+343,Mushroom Sausage and Peppers,Italian Sausage and Peppers
+344,Tofu Rendang,Beef Rendang
+345,Seitan Rendang,Beef Rendang
+346,Jackfruit Rendang,Beef Rendang
+347,Mushroom Rendang,Beef Rendang
+348,Tofu Tonkatsu,Pork Tonkatsu
+349,Seitan Tonkatsu,Pork Tonkatsu
+350,Jackfruit Tonkatsu,Pork Tonkatsu
+351,Mushroom Tonkatsu,Pork Tonkatsu
+352,Vegetable and Dumplings,Chicken and Dumplings
+353,Tofu and Dumplings,Chicken and Dumplings
+354,Jackfruit and Dumplings,Chicken and Dumplings
+355,Seitan and Dumplings,Chicken and Dumplings
+356,Tofu Marsala,Chicken Marsala
+357,Seitan Marsala,Chicken Marsala
+358,Jackfruit Marsala,Chicken Marsala
+359,Mushroom Marsala,Chicken Marsala
+360,Vegan Loco Moco (with plant-based protein),Hawaiian Loco Moco
+361,Tofu Loco Moco,Hawaiian Loco Moco
+362,Seitan Loco Moco,Hawaiian Loco Moco
+363,Mushroom Loco Moco,Hawaiian Loco Moco
+364,Vegetarian Enchiladas (with beans and veggies),Chicken Enchiladas
+365,Tofu Enchiladas,Chicken Enchiladas
+366,Jackfruit Enchiladas,Chicken Enchiladas
+367,Seitan Enchiladas,Chicken Enchiladas
+368,Tofu BBQ Short Ribs,Korean BBQ Short Ribs (Galbi)
+369,Seitan BBQ Short Ribs,Korean BBQ Short Ribs (Galbi)
+370,Mushroom BBQ Short Ribs,Korean BBQ Short Ribs (Galbi)
+371,Jackfruit BBQ Short Ribs,Korean BBQ Short Ribs (Galbi)
+372,Vegetarian Pasty (with lentils and veggies),Cornish Pasty
+373,Tofu Pasty,Cornish Pasty
+374,Seitan Pasty,Cornish Pasty
+375,Mushroom Pasty,Cornish Pasty
+376,Tofu Mongolian,Mongolian Beef
+377,Seitan Mongolian,Mongolian Beef
+378,Jackfruit Mongolian,Mongolian Beef
+379,Mushroom Mongolian,Mongolian Beef
+380,Vegetable Pot Pie,Chicken Pot Pie
+381,Tofu Pot Pie,Chicken Pot Pie
+382,Seitan Pot Pie,Chicken Pot Pie
+383,Mushroom Pot Pie,Chicken Pot Pie
+384,Tofu Souvlaki,Chicken Souvlaki
+385,Jackfruit Souvlaki,Chicken Souvlaki
+386,Seitan Souvlaki,Chicken Souvlaki
+387,Mushroom Souvlaki,Chicken Souvlaki
+388,Vegetarian Meatballs (made with lentils or mushrooms),Swedish Meatballs
+389,Tofu Meatballs,Swedish Meatballs
+390,Seitan Meatballs,Swedish Meatballs
+391,Jackfruit Meatballs,Swedish Meatballs
+392,Vegetable Tagine,Moroccan Lamb Tagine
+393,Tofu Tagine,Moroccan Lamb Tagine
+394,Seitan Tagine,Moroccan Lamb Tagine
+395,Jackfruit Tagine,Moroccan Lamb Tagine
+396,Jackfruit Pulled Chicken,BBQ Pulled Chicken
+397,Seitan Pulled Chicken,BBQ Pulled Chicken
+398,Tofu Pulled Chicken,BBQ Pulled Chicken
+399,Mushroom Pulled Chicken,BBQ Pulled Chicken
+400,Stuffed Bell Peppers with Lentils,Stuffed Bell Peppers with Ground Beef
+401,Stuffed Bell Peppers with Tofu,Stuffed Bell Peppers with Ground Beef
+402,Stuffed Bell Peppers with Quinoa,Stuffed Bell Peppers with Ground Beef
+403,Stuffed Bell Peppers with Mushrooms,Stuffed Bell Peppers with Ground Beef
+404,Tofu Tikka Masala,Chicken Tikka Masala
+405,Jackfruit Tikka Masala,Chicken Tikka Masala
+406,Seitan Tikka Masala,Chicken Tikka Masala
+407,Mushroom Tikka Masala,Chicken Tikka Masala
+408,Tofu and Broccoli,Beef and Broccoli
+409,Seitan and Broccoli,Beef and Broccoli
+410,Mushroom and Broccoli,Beef and Broccoli
+411,Jackfruit and Broccoli,Beef and Broccoli
+412,Jackfruit Ropa Vieja,Cuban Ropa Vieja
+413,Seitan Ropa Vieja,Cuban Ropa Vieja
+414,Tofu Ropa Vieja,Cuban Ropa Vieja
+415,Mushroom Ropa Vieja,Cuban Ropa Vieja
+416,Vegetable Jambalaya,Jambalaya
+417,Tofu Jambalaya,Jambalaya
+418,Seitan Jambalaya,Jambalaya
+419,Mushroom Jambalaya,Jambalaya
+420,Tofu Pad Krapow,Thai Basil Beef (Pad Krapow)
+421,Seitan Pad Krapow,Thai Basil Beef (Pad Krapow)
+422,Jackfruit Pad Krapow,Thai Basil Beef (Pad Krapow)
+423,Mushroom Pad Krapow,Thai Basil Beef (Pad Krapow)
+424,Tofu Shawarma Wrap,Chicken Shawarma Wrap
+425,Seitan Shawarma Wrap,Chicken Shawarma Wrap
+426,Jackfruit Shawarma Wrap,Chicken Shawarma Wrap
+427,Mushroom Shawarma Wrap,Chicken Shawarma Wrap
+428,Vegetarian Kofta Kebabs (made with lentils or chickpeas),Turkish Kofta Kebabs
+429,Tofu Kofta Kebabs,Turkish Kofta Kebabs
+430,Seitan Kofta Kebabs,Turkish Kofta Kebabs
+431,Mushroom Kofta Kebabs,Turkish Kofta Kebabs
+432,Cauliflower Buffalo Tenders,Buffalo Chicken Tenders
+433,Tofu Buffalo Tenders,Buffalo Chicken Tenders
+434,Seitan Buffalo Tenders,Buffalo Chicken Tenders
+435,Mushroom Buffalo Tenders,Buffalo Chicken Tenders
+436,Vegetarian Moussaka (with lentils or eggplant),Greek Moussaka
+437,Tofu Moussaka,Greek Moussaka
+438,Seitan Moussaka,Greek Moussaka
+439,Jackfruit Moussaka,Greek Moussaka
+440,Vegetarian Anticuchos (with veggies or tofu),Peruvian Anticuchos (Grilled Beef Heart Skewers)
+441,Tofu Anticuchos,Peruvian Anticuchos (Grilled Beef Heart Skewers
+442,Seitan Anticuchos,Peruvian Anticuchos (Grilled Beef Heart Skewers
+443,Mushroom Anticuchos,Peruvian Anticuchos (Grilled Beef Heart Skewers
+444,Jackfruit Carnitas Tacos,Pork Carnitas Tacos
+445,Seitan Carnitas Tacos,Pork Carnitas Tacos
+446,Tofu Carnitas Tacos,Pork Carnitas Tacos
+447,Mushroom Carnitas Tacos,Pork Carnitas Tacos
+448,Tofu Yakitori,Chicken Yakitori
+449,Jackfruit Yakitori,Chicken Yakitori
+450,Seitan Yakitori,Chicken Yakitori
+451,Mushroom Yakitori,Chicken Yakitori
+452,Tofu Sausage and Peppers,Italian Sausage and Peppers
+453,Seitan Sausage and Peppers,Italian Sausage and Peppers
+454,Jackfruit Sausage and Peppers,Italian Sausage and Peppers
+455,Mushroom Sausage and Peppers,Italian Sausage and Peppers
+456,Tofu Rendang,Beef Rendang
+457,Seitan Rendang,Beef Rendang
+458,Jackfruit Rendang,Beef Rendang
+459,Mushroom Rendang,Beef Rendang
+460,Tofu Tonkatsu,Pork Tonkatsu
+461,Seitan Tonkatsu,Pork Tonkatsu
+462,Jackfruit Tonkatsu,Pork Tonkatsu
+463,Mushroom Tonkatsu,Pork Tonkatsu
+464,Vegetable Tagine with Apricots,Chicken Tagine with Apricots
+465,Tofu Tagine with Apricots,Chicken Tagine with Apricots
+466,Seitan Tagine with Apricots,Chicken Tagine with Apricots
+467,Mushroom Tagine with Apricots,Chicken Tagine with Apricots
+468,Vegetarian Empanadas (with veggies or cheese),Argentinian Empanadas
+469,Tofu Empanadas,Argentinian Empanadas
+470,Seitan Empanadas,Argentinian Empanadas
+471,Mushroom Empanadas,Argentinian Empanadas
+472,Vegetable Fricassee,Chicken Fricassee
+473,Tofu Fricassee,Chicken Fricassee
+474,Seitan Fricassee,Chicken Fricassee
+475,Mushroom Fricassee,Chicken Fricassee
+476,Tofu Shaking Beef,Vietnamese Shaking Beef (Bo Luc Lac)
+477,Seitan Shaking Beef,Vietnamese Shaking Beef (Bo Luc Lac)
+478,Jackfruit Shaking Beef,Vietnamese Shaking Beef (Bo Luc Lac)
+479,Mushroom Shaking Beef,Vietnamese Shaking Beef (Bo Luc Lac)
+480,Smoked Jackfruit Brisket,Texas-style Brisket
+481,Seitan Brisket,Texas-style Brisket
+482,Portobello Mushroom Brisket,Texas-style Brisket
+483,Plant-based Brisket,Texas-style Brisket
+484,Braised Tofu Shanks,Braised Lamb Shanks
+485,Braised Seitan Shanks,Braised Lamb Shanks
+486,Braised Jackfruit Shanks,Braised Lamb Shanks
+487,Braised Mushroom Shanks,Braised Lamb Shanks
+488,Tofu Sisig,Chicken Sisig
+489,Jackfruit Sisig,Chicken Sisig
+490,Seitan Sisig,Chicken Sisig
+491,Mushroom Sisig,Chicken Sisig
+492,Tofu Schnitzel,Pork Schnitzel
+493,Seitan Schnitzel,Pork Schnitzel
+494,Jackfruit Schnitzel,Pork Schnitzel
+495,Mushroom Schnitzel,Pork Schnitzel
+496,Tofu Satay,Beef Satay
+497,Seitan Satay,Beef Satay
+498,Jackfruit Satay,Beef Satay
+499,Mushroom Satay,Beef Satay
+500,Vegetable Biryani,Lamb Biryani
+501,Tofu Biryani,Lamb Biryani
+502,Seitan Biryani,Lamb Biryani
+503,Mushroom Biryani,Lamb Biryani
+504,Tofu Scampi,Chicken Scampi
+505,Seitan Scampi,Chicken Scampi
+506,Jackfruit Scampi,Chicken Scampi
+507,Mushroom Scampi,Chicken Scampi
+508,Vegetarian Feijoada (with beans and veggies),Brazilian Feijoada
+509,Tofu Feijoada,Brazilian Feijoada
+510,Seitan Feijoada,Brazilian Feijoada
+511,Mushroom Feijoada,Brazilian Feijoada
+512,Jackfruit Belly Burnt Ends,Pork Belly Burnt Ends
+513,Seitan Belly Burnt Ends,Pork Belly Burnt Ends
+514,Tofu Belly Burnt Ends,Pork Belly Burnt Ends
+515,Mushroom Belly Burnt Ends,Pork Belly Burnt Ends
+516,Tofu Sukiyaki,Japanese Sukiyaki
+517,Seitan Sukiyaki,Japanese Sukiyaki
+518,Jackfruit Sukiyaki,Japanese Sukiyaki
+519,Mushroom Sukiyaki,Japanese Sukiyaki
+520,Vegetable and Guinness Stew,Beef and Guinness Stew
+521,Tofu and Guinness Stew,Beef and Guinness Stew
+522,Seitan and Guinness Stew,Beef and Guinness Stew
+523,Mushroom and Guinness Stew,Beef and Guinness Stew
+524,Tofu Red Curry,Thai Red Curry Chicken
+525,Seitan Red Curry,Thai Red Curry Chicken
+526,Jackfruit Red Curry,Thai Red Curry Chicken
+527,Mushroom Red Curry,Thai Red Curry Chicken
+528,Vegetable Biryani,Lamb Biryani
+529,Tofu Biryani,Lamb Biryani
+530,Seitan Biryani,Lamb Biryani
+531,Mushroom Biryani,Lamb Biryani
+532,Tofu Adobo,Chicken Adobo
+533,Jackfruit Adobo,Chicken Adobo
+534,Seitan Adobo,Chicken Adobo
+535,Mushroom Adobo,Chicken Adobo
+536,Tofu Bulgogi,Beef Bulgogi
+537,Seitan Bulgogi,Beef Bulgogi
+538,Jackfruit Bulgogi,Beef Bulgogi
+539,Mushroom Bulgogi,Beef Bulgogi
+540,Jackfruit Carnitas Tacos,Pork Carnitas Tacos
+541,Seitan Carnitas Tacos,Pork Carnitas Tacos
+542,Tofu Carnitas Tacos,Pork Carnitas Tacos
+543,Mushroom Carnitas Tacos,Pork Carnitas Tacos
+544,Grilled Tofu Caesar Salad,Grilled Chicken Caesar Salad
+545,Grilled Portobello Mushroom Caesar Salad,Grilled Chicken Caesar Salad
+546,Grilled Seitan Caesar Salad,Grilled Chicken Caesar Salad
+547,Grilled Jackfruit Caesar Salad,Grilled Chicken Caesar Salad
+548,Cauliflower Buffalo Wings,Buffalo Chicken Wings
+549,Tofu Buffalo Wings,Buffalo Chicken Wings
+550,Seitan Buffalo Wings,Buffalo Chicken Wings
+551,Mushroom Buffalo Wings,Buffalo Chicken Wings
+552,Tofu Sausage and Pepper Sandwich,Italian Sausage and Pepper Sandwich
+553,Seitan Sausage and Pepper Sandwich,Italian Sausage and Pepper Sandwich
+554,Jackfruit Sausage and Pepper Sandwich,Italian Sausage and Pepper Sandwich
+555,Mushroom Sausage and Pepper Sandwich,Italian Sausage and Pepper Sandwich
+556,Tofu Teriyaki,Chicken Teriyaki
+557,Jackfruit Teriyaki,Chicken Teriyaki
+558,Seitan Teriyaki,Chicken Teriyaki
+559,Mushroom Teriyaki,Chicken Teriyaki
+560,Jackfruit Ribs,Pork Ribs
+561,Seitan Ribs,Pork Ribs
+562,Tofu Ribs,Pork Ribs
+563,Mushroom Ribs,Pork Ribs
+564,Vegetable Kebab,Shish Kebab
+565,Tofu Kebab,Shish Kebab
+566,Seitan Kebab,Shish Kebab
+567,Mushroom Kebab,Shish Kebab
+568,Vegetable Fajitas,Chicken Fajitas
+569,Tofu Fajitas,Chicken Fajitas
+570,Seitan Fajitas,Chicken Fajitas
+571,Mushroom Fajitas,Chicken Fajitas
+572,Vegetable Tacos,Beef Tacos
+573,Tofu Tacos,Beef Tacos
+574,Seitan Tacos,Beef Tacos
+575,Mushroom Tacos,Beef Tacos
+576,Vegetable Chops,Lamb Chops
+577,Tofu Chops,Lamb Chops
+578,Seitan Chops,Lamb Chops
+579,Mushroom Chops,Lamb Chops
+580,Jackfruit Pulled Pork Sandwich,BBQ Pulled Pork Sandwich
+581,Seitan Pulled Pork Sandwich,BBQ Pulled Pork Sandwich
+582,Tofu Pulled Pork Sandwich,BBQ Pulled Pork Sandwich
+583,Mushroom Pulled Pork Sandwich,BBQ Pulled Pork Sandwich
+584,Vegetable Alfredo Pasta,Chicken Alfredo Pasta
+585,Tofu Alfredo Pasta,Chicken Alfredo Pasta
+586,Seitan Alfredo Pasta,Chicken Alfredo Pasta
+587,Mushroom Alfredo Pasta,Chicken Alfredo Pasta
+588,Vegan Sausage and Mushroom Pizza,Sausage and Mushroom Pizza
+589,Tofu Sausage and Mushroom Pizza,Sausage and Mushroom Pizza
+590,Seitan Sausage and Mushroom Pizza,Sausage and Mushroom Pizza
+591,Mushroom Sausage and Mushroom Pizza,Sausage and Mushroom Pizza
+592,Tofu and Broccoli Stir-Fry,Beef and Broccoli Stir-Fry
+593,Seitan and Broccoli Stir-Fry,Beef and Broccoli Stir-Fry
+594,Mushroom and Broccoli Stir-Fry,Beef and Broccoli Stir-Fry
+595,Jackfruit and Broccoli Stir-Fry,Beef and Broccoli Stir-Fry
+596,Roast Tofu,Roast Chicken
+597,Roast Seitan,Roast Chicken
+598,Roast Jackfruit,Roast Chicken
+599,Roast Portobello Mushroom,Roast Chicken
+600,Jackfruit Belly Burnt Ends,Pork Belly Burnt Ends
+601,Seitan Belly Burnt Ends,Pork Belly Burnt Ends
+602,Tofu Belly Burnt Ends,Pork Belly Burnt Ends
+603,Mushroom Belly Burnt Ends,Pork Belly Burnt Ends
+604,Vegetarian Moussaka (with lentils or eggplant),Greek Moussaka
+605,Tofu Moussaka,Greek Moussaka
+606,Seitan Moussaka,Greek Moussaka
+607,Jackfruit Moussaka,Greek Moussaka
+608,Eggplant Parmesan,Chicken Parmesan
+609,Tofu Parmesan,Chicken Parmesan
+610,Seitan Parmesan,Chicken Parmesan
+611,Mushroom Parmesan,Chicken Parmesan
+612,Cauliflower Buffalo Salad,Buffalo Chicken Salad
+613,Tofu Buffalo Salad,Buffalo Chicken Salad
+614,Seitan Buffalo Salad,Buffalo Chicken Salad
+615,Mushroom Buffalo Salad,Buffalo Chicken Salad
+616,Jackfruit Gyros,Lamb Gyros
+617,Seitan Gyros,Lamb Gyros
+618,Mushroom Gyros,Lamb Gyros
+619,Tofu Gyros,Lamb Gyros
+620,Tofu Shawarma Wrap,Chicken Shawarma Wrap
+621,Seitan Shawarma Wrap,Chicken Shawarma Wrap
+622,Jackfruit Shawarma Wrap,Chicken Shawarma Wrap
+623,Mushroom Shawarma Wrap,Chicken Shawarma Wrap
+624,Tofu Stroganoff,Beef Stroganoff
+625,Seitan Stroganoff,Beef Stroganoff
+626,Jackfruit Stroganoff,Beef Stroganoff
+627,Mushroom Stroganoff,Beef Stroganoff
+628,Tofu Szechuan,Szechuan Beef
+629,Seitan Szechuan,Szechuan Beef
+630,Jackfruit Szechuan,Szechuan Beef
+631,Mushroom Szechuan,Szechuan Beef
+632,Tofu Tonkatsu,Pork Tonkatsu
+633,Seitan Tonkatsu,Pork Tonkatsu
+634,Jackfruit Tonkatsu,Pork Tonkatsu
+635,Mushroom Tonkatsu,Pork Tonkatsu
+636,Tofu Piccata,Chicken Piccata
+637,Seitan Piccata,Chicken Piccata
+638,Jackfruit Piccata,Chicken Piccata
+639,Mushroom Piccata,Chicken Piccata
+640,Tofu Rendang,Beef Rendang
+641,Seitan Rendang,Beef Rendang
+642,Jackfruit Rendang,Beef Rendang
+643,Mushroom Rendang,Beef Rendang
+644,Tofu Korma,Chicken Korma
+645,Seitan Korma,Chicken Korma
+646,Jackfruit Korma,Chicken Korma
+647,Mushroom Korma,Chicken Korma
+648,Vegetable Fajitas,Steak Fajitas
+649,Tofu Fajitas,Steak Fajitas
+650,Seitan Fajitas,Steak Fajitas
+651,Mushroom Fajitas,Steak Fajitas
+652,Vegetable Kofta,Lamb Kofta
+653,Tofu Kofta,Lamb Kofta
+654,Seitan Kofta,Lamb Kofta
+655,Mushroom Kofta,Lamb Kofta
+656,Tofu Satay,Chicken Satay
+657,Seitan Satay,Chicken Satay
+658,Jackfruit Satay,Chicken Satay
+659,Mushroom Satay,Chicken Satay
+660,Tofu Schnitzel,Pork Schnitzel
+661,Seitan Schnitzel,Pork Schnitzel
+662,Jackfruit Schnitzel,Pork Schnitzel
+663,Mushroom Schnitzel,Pork Schnitzel
+664,Cauliflower Buffalo Pizza,Buffalo Chicken Pizza
+665,Tofu Buffalo Pizza,Buffalo Chicken Pizza
+666,Seitan Buffalo Pizza,Buffalo Chicken Pizza
+667,Mushroom Buffalo Pizza,Buffalo Chicken Pizza
+668,Tofu and Vegetable Stir-Fry,Beef and Vegetable Stir-Fry
+669,Seitan and Vegetable Stir-Fry,Beef and Vegetable Stir-Fry
+670,Mushroom and Vegetable Stir-Fry,Beef and Vegetable Stir-Fry
+671,Jackfruit and Vegetable Stir-Fry,Beef and Vegetable Stir-Fry
+672,Tofu Shawarma Bowl,Chicken Shawarma Bowl
+673,Seitan Shawarma Bowl,Chicken Shawarma Bowl
+674,Jackfruit Shawarma Bowl,Chicken Shawarma Bowl
+675,Mushroom Shawarma Bowl,Chicken Shawarma Bowl
+676,Vegetable Rogan Josh,Lamb Rogan Josh
+677,Tofu Rogan Josh,Lamb Rogan Josh
+678,Seitan Rogan Josh,Lamb Rogan Josh
+679,Mushroom Rogan Josh,Lamb Rogan Josh
+680,Jackfruit Pulled Chicken Tacos,Pulled Chicken Tacos
+681,Seitan Pulled Chicken Tacos,Pulled Chicken Tacos
+682,Tofu Pulled Chicken Tacos,Pulled Chicken Tacos
+683,Mushroom Pulled Chicken Tacos,Pulled Chicken Tacos
+684,Smoked Jackfruit Brisket,BBQ Beef Brisket
+685,Seitan Brisket,BBQ Beef Brisket
+686,Portobello Mushroom Brisket,BBQ Beef Brisket
+687,Plant-based Brisket,BBQ Beef Brisket
+688,Vegetarian Enchilada Casserole (with beans and veggies),Chicken Enchilada Casserole
+689,Tofu Enchilada Casserole,Chicken Enchilada Casserole
+690,Seitan Enchilada Casserole,Chicken Enchilada Casserole
+691,Mushroom Enchilada Casserole,Chicken Enchilada Casserole
+692,Jackfruit Belly Tacos,Pork Belly Tacos
+693,Seitan Belly Tacos,Pork Belly Tacos
+694,Tofu Belly Tacos,Pork Belly Tacos
+695,Mushroom Belly Tacos,Pork Belly Tacos
+696,Tofu Teriyaki Skewers,Teriyaki Beef Skewers
+697,Seitan Teriyaki Skewers,Teriyaki Beef Skewers
+698,Jackfruit Teriyaki Skewers,Teriyaki Beef Skewers
+699,Mushroom Teriyaki Skewers,Teriyaki Beef Skewers
+700,Tofu Tikka,Chicken Tikka
+701,Jackfruit Tikka,Chicken Tikka
+702,Seitan Tikka,Chicken Tikka
+703,Mushroom Tikka,Chicken Tikka
+704,Vegetable Jambalaya,Sausage Jambalaya
+705,Tofu Jambalaya,Sausage Jambalaya
+706,Seitan Jambalaya,Sausage Jambalaya
+707,Mushroom Jambalaya,Sausage Jambalaya
+708,Vegetable Souvlaki,Greek Souvlaki
+709,Tofu Souvlaki,Greek Souvlaki
+710,Seitan Souvlaki,Greek Souvlaki
+711,Mushroom Souvlaki,Greek Souvlaki
+712,Tofu Cacciatore,Chicken Cacciatore
+713,Seitan Cacciatore,Chicken Cacciatore
+714,Jackfruit Cacciatore,Chicken Cacciatore
+715,Mushroom Cacciatore,Chicken Cacciatore
+716,Vegetable Burrito Bowl,Beef Burrito Bowl
+717,Tofu Burrito Bowl,Beef Burrito Bowl
+718,Seitan Burrito Bowl,Beef Burrito Bowl
+719,Mushroom Burrito Bowl,Beef Burrito Bowl
+720,Vegetable and Chickpea Curry,Lamb and Chickpea Curry
+721,Tofu and Chickpea Curry,Lamb and Chickpea Curry
+722,Seitan and Chickpea Curry,Lamb and Chickpea Curry
+723,Mushroom and Chickpea Curry,Lamb and Chickpea Curry
+724,Vegetable Gumbo,Chicken Gumbo
+725,Tofu Gumbo,Chicken Gumbo
+726,Seitan Gumbo,Chicken Gumbo
+727,Mushroom Gumbo,Chicken Gumbo
+728,Tofu Tandoori Skewers,Beef Tandoori Skewers
+729,Seitan Tandoori Skewers,Beef Tandoori Skewers
+730,Jackfruit Tandoori Skewers,Beef Tandoori Skewers
+731,Mushroom Tandoori Skewers,Beef Tandoori Skewers
+732,Jackfruit Honey Garlic Ribs,Honey Garlic Glazed Ribs
+733,Seitan Honey Garlic Ribs,Honey Garlic Glazed Ribs
+734,Tofu Honey Garlic Ribs,Honey Garlic Glazed Ribs
+735,Mushroom Honey Garlic Ribs,Honey Garlic Glazed Ribs
+736,Jackfruit Birria Tacos,Lamb Birria Tacos
+737,Seitan Birria Tacos,Lamb Birria Tacos
+738,Tofu Birria Tacos,Lamb Birria Tacos
+739,Mushroom Birria Tacos,Lamb Birria Tacos
+740,Tofu Pad Thai,Chicken Pad Thai
+741,Seitan Pad Thai,Chicken Pad Thai
+742,Jackfruit Pad Thai,Chicken Pad Thai
+743,Mushroom Pad Thai,Chicken Pad Thai
