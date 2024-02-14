@@ -11,6 +11,16 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
+#get vegan alternatives
+@app.route("/vegan", methods=["GET"])
+def vegan():
+    dish = str(request.args.get("dish"))
+    vegan = pd.read_csv("vegan.csv")
+
+    alternatives = vegan[vegan["meat"]==dish]
+    alternatives = list(alternatives["alternative"])
+    return {"vegan":alternatives}
+
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
 def get_dishes():
