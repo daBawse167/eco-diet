@@ -17,7 +17,7 @@ def vegan():
     dish = str(request.args.get("dish"))
     df = pd.read_csv("vegan_final.csv")
     result = df[df["Meat"]==dish]
-    result = {"Vegan":result["Vegan"], "ingredients":result["ingredients"], "preparation":result["preparation"]}
+    result = {"Vegan":list(result["Vegan"]), "ingredients":list(result["ingredients"]), "preparation":list(result["preparation"])}
     return result
 
 #user enters in dish type
