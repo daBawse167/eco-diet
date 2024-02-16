@@ -15,11 +15,10 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 @app.route("/vegan", methods=["GET"])
 def vegan():
     dish = str(request.args.get("dish"))
-    meat_alt = pd.read_csv("meat_alt.csv")
-    
-    alts = meat_alt[meat_alt["Meat"]==dish]
-    titles = list(alts["Vegan"])
-    return {"vegan":titles}
+    df = pd.read_csv("vegan_final.csv")
+    result = df[df["Meat"]==dish]
+    result = {"Vegan":result["Vegan"], "ingredients":result["ingredients"], "preparation":result["preparation"]}
+    return result
 
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
