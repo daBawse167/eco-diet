@@ -11,6 +11,15 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
+#get most used vegan dishes
+@app.route("/most_counted", methods=["GET"])
+def most_counted():
+    count = [[i[0][0], len(list(i[1].iloc))] for i in data.groupby(["Meat"])]
+    count = np.array(count).T
+    count = pd.DataFrame({"name":count[0], "count":count[1]})
+    count = count.sort_values(by="count", ascending=False).iloc[:8]
+    return [count["name"], count["count"]]
+
 #get vegan alternatives
 @app.route("/vegan", methods=["GET"])
 def vegan():
