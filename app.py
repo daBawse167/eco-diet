@@ -14,6 +14,7 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 #get most used vegan dishes
 @app.route("/most_counted", methods=["GET"])
 def most_counted():
+    data = pd.read_csv("vegan_final.csv")
     count = [[i[0][0], len(list(i[1].iloc))] for i in data.groupby(["Meat"])]
     count = np.array(count).T
     count = pd.DataFrame({"name":count[0], "count":count[1]})
