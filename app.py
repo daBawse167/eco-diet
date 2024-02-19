@@ -18,7 +18,7 @@ def most_counted():
     count = np.array(count).T
     count = pd.DataFrame({"name":count[0], "count":count[1]})
     count = count.sort_values(by="count", ascending=False).iloc[:8]
-    return [count["name"], count["count"]]
+    return {"name":count["name"], "count":count["count"]}
 
 #get vegan alternatives
 @app.route("/vegan", methods=["GET"])
