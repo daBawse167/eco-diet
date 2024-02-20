@@ -22,13 +22,10 @@ def get_href():
 @app.route("/most_counted", methods=["GET"])
 def most_counted():
     data = pd.read_csv("vegan_final.csv")
-    j = int(request.args.get("suggestion_page"))
     count = [[i[0][0], len(list(i[1].iloc))] for i in data.groupby(["Meat"])]
     count = np.array(count).T
     count = pd.DataFrame({"name":count[0], "count":count[1]})
-    if j > len(count[0]):
-        j = 0
-    count = count.sort_values(by="count", ascending=False).iloc[j*8:(j+1)*8]
+    count = count.sort_values(by="count", ascending=False).iloc
     return [count["name"], count["count"]]
 
 #get vegan alternatives
