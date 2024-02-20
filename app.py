@@ -28,7 +28,7 @@ def most_counted():
     print(count)
     count = pd.DataFrame({"name":count[0], "count":count[1]})
     print(count)
-    count = count.sort_values(by="count", ascending=False).iloc
+    count = count.sort_values(by="count", ascending=False)
     print(count)
     return {"name":list(count["name"]), "count":list(count["count"])}
 
