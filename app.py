@@ -11,6 +11,13 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
+#get the link for vegan dish
+@app.route("/get_href", methods=["GET"])
+def get_href():
+    dish = str(request.args.get("dish"))
+    df = pd.read_csv("vegan_final.csv")
+    return list(df[df["Vegan"]==dish]["href"])[0]
+
 #get most used vegan dishes
 @app.route("/most_counted", methods=["GET"])
 def most_counted():
