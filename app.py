@@ -270,6 +270,9 @@ def create_recommendations(eaten, country_name, favourites):
                     dish_names.append(choice["dish"])
                     dish_grams.append(choice["grams"])
                     dish_images.append(choice["image"])
+
+                    print(choice)
+                    
                     dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
                     
                 if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
