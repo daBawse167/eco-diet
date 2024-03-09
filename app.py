@@ -11,6 +11,27 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
+#get the emissions of a single dish
+@app.route("/one_dish_emissions", methods=["GET"])
+def one_dish_emissions():
+    country = request.args.get("country")
+    grams = request.args.get("grams")
+    meat = request.args.get("meat")
+    
+    df = pd.read_csv("FAOSTAT.csv")
+    df = df[df["Area"]==country]
+    
+    df["Item"] = df["Item"].replace("Meat of cattle with the bone, fresh or chilled", "beef")
+    df["Item"] = df["Item"].replace("Meat of goat, fresh or chilled", "goat")
+    df["Item"] = df["Item"].replace("Meat of buffalo, fresh or chilled", "buffalo")
+    df["Item"] = df["Item"].replace("Meat of sheep, fresh or chilled", "lamb")
+    df["Item"] = df["Item"].replace("Meat of chickens, fresh or chilled", "chicken")
+    df["Item"] = df["Item"].replace("Meat of pig with the bone, fresh or chilled", "pork")
+    
+    value = df[df["Item"]==meat]["Value"]
+    value = float(value*(grams/1000))
+    return value
+
 #get the link for vegan dish
 @app.route("/get_href", methods=["GET"])
 def get_href():
