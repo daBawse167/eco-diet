@@ -289,6 +289,8 @@ def create_recommendations(eaten, country_name, favourites):
     recommend_list["target (kg)"] = sum(dish_emissions)
     recommend_list["image"] = dish_images
     recommend_list["emissions"] = dish_emissions
+
+    print(recommend_list)
     
     return recommend_list
 
