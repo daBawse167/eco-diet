@@ -30,7 +30,7 @@ def one_dish_emissions():
     
     value = df[df["Item"]==meat]["Value"]
     value = float(value*(grams/1000))
-    return value
+    return str(value)
 
 #get the link for vegan dish
 @app.route("/get_href", methods=["GET"])
