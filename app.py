@@ -285,7 +285,7 @@ def create_recommendations(eaten, country_name, favourites):
                 counter += 1
     
     #join dish name and its grams
-    recommend_list["recommend_dishes"] = [dish[0]+" ("+dish[1]+"g) "+dish[2] for dish in np.array([dish_names, dish_grams, meat_type]).T]
+    recommend_list["recommend_dishes"] = [dish[0]+" ("+dish[1]+"g "+dish[2]+")" for dish in np.array([dish_names, dish_grams, meat_type]).T]
     recommend_list["target (kg)"] = sum(dish_emissions)
     recommend_list["image"] = dish_images
     recommend_list["emissions"] = dish_emissions
