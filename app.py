@@ -235,6 +235,7 @@ def create_recommendations(eaten, country_name, favourites):
     dish_grams = []
     dish_images = []
     dish_emissions = []
+    meat_type = []
     
     for food in option_list:
         if recommend_list[food[0]]>=portion:
@@ -270,6 +271,7 @@ def create_recommendations(eaten, country_name, favourites):
                     dish_names.append(choice["dish"])
                     dish_grams.append(choice["grams"])
                     dish_images.append(choice["image"])
+                    meat_type.append(food[1])
 
                     print(choice)
                     
@@ -283,7 +285,7 @@ def create_recommendations(eaten, country_name, favourites):
                 counter += 1
     
     #join dish name and its grams
-    recommend_list["recommend_dishes"] = [dish[0]+" ("+dish[1]+"g)" for dish in np.array([dish_names, dish_grams]).T]
+    recommend_list["recommend_dishes"] = [dish[0]+" ("+dish[1]+"g) "+dish[2] for dish in np.array([dish_names, dish_grams, meat_type]).T]
     recommend_list["target (kg)"] = sum(dish_emissions)
     recommend_list["image"] = dish_images
     recommend_list["emissions"] = dish_emissions
