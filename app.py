@@ -29,7 +29,7 @@ def one_dish_emissions():
     df["Item"] = df["Item"].replace("Meat of pig with the bone, fresh or chilled", "pork")
     
     value = df[df["Item"]==meat]["Value"]
-    value = float(value*(grams/1000))
+    value = round(float(value*(grams/1000)), 3)
     return str(value)
 
 #get the link for vegan dish
