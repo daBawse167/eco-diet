@@ -15,7 +15,7 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 @app.route("/one_dish_emissions", methods=["GET"])
 def one_dish_emissions():
     country = request.args.get("country")
-    grams = request.args.get("grams")
+    grams = int(request.args.get("grams"))
     meat = request.args.get("meat")
     
     df = pd.read_csv("FAOSTAT.csv")
