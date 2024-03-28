@@ -276,6 +276,10 @@ def create_recommendations(eaten, country_name, favourites):
             counter = 0
             while goal < recommend_list[food[0]]:
                 selection = selection.reset_index(drop=True)
+
+                print([i for i in selection.iloc])
+                print(probabilities)
+                
                 choice = random.choices(list(selection.iloc), probabilities)[0]
                 
                 #get the index of selection so you can remove the weighting
