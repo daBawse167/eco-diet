@@ -44,13 +44,9 @@ def get_href():
 def most_counted():
     data = pd.read_csv("vegan_final.csv")
     count = [[i[0][0], len(list(i[1].iloc))] for i in data.groupby(["Meat"])]
-    print(count)
     count = np.array(count).T
-    print(count)
     count = pd.DataFrame({"name":count[0], "count":count[1]})
-    print(count)
     count = count.sort_values(by="count", ascending=False)
-    print(count)
     return {"name":list(count["name"]), "count":list(count["count"])}
 
 #get vegan alternatives
@@ -139,7 +135,7 @@ def create_recommendations(eaten, country_name, favourites):
         
     #in case no choice is made, get the min red and white meat animals
     white_meat = ['Chicken']
-    red_meat = ['Cow', 'Goat', 'Sheep', 'Pig', 'Buffalo']
+    red_meat = ['Cow', 'Sheep', 'Pig']
     
     
     
@@ -148,8 +144,8 @@ def create_recommendations(eaten, country_name, favourites):
     
     if len(white_meat_options_list)==0 and len(red_meat_options_list)==0:
         return {"emitted (kg)":0, "target (kg)":0,
-                'Chicken': 0, 'Buffalo': 0, 'Cow': 0, 'Goat': 0, 'Sheep': 0, 'Pig': 0,
-                "cattle_e":0, "chickens_e":0, "buffalo_e":0, "goats_e":0, "sheep_e":0, "swine_e":0}
+                'Chicken': 0, 'Cow': 0, 'Sheep': 0, 'Pig': 0,
+                "cattle_e":0, "chickens_e":0, "sheep_e":0, "swine_e":0}
     
     red_meat_options = {"animal":[], "emissions":[]}
     white_meat_options = {"animal":[], "emissions":[]}
@@ -165,9 +161,7 @@ def create_recommendations(eaten, country_name, favourites):
     recommend_list = {"emitted (kg)":round(total_emitted, 3),
                       "target (kg)":0,
                      'Chicken': 0,
-                     'Buffalo': 0,
                      'Cow': 0,
-                     'Goat': 0,
                      'Sheep': 0,
                      'Pig': 0}
     emissions_counter = 0
@@ -240,16 +234,13 @@ def create_recommendations(eaten, country_name, favourites):
     pork_options = []
     chicken_options = []
     lamb_options = []
-    buffalo_options = []
-    goat_options = []
     
     #show the emissions of ALL animals
     animals_eaten.index=animals_eaten["Item"]
     animals_eaten = animals_eaten["emissions (per kg)"]
     
-    option_list = [["Buffalo", "buffalo", buffalo_options], ["Cow", "beef", beef_options], 
-     ["Goat", "goat", goat_options], ["Sheep", "lamb", lamb_options], ["Pig", "pork", pork_options],
-                  ["Chicken", "chicken", chicken_options]]
+    option_list = [["Cow", "beef", beef_options], ["Sheep", "lamb", lamb_options], 
+                  ["Pig", "pork", pork_options], ["Chicken", "chicken", chicken_options]]
     
     
     dish_names = []
@@ -259,10 +250,9 @@ def create_recommendations(eaten, country_name, favourites):
     meat_type = []
     
     for food in option_list:
-        print(recommend_list, recommend_list[food[0]], food)
         if recommend_list[food[0]]>=portion:
-            print(recommend_list, recommend_list[food[0]], food)
             selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
+            print(recommend_list, recommend_list[food[0]], food)
             weighting = 4
             goal = 0
             
