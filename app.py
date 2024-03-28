@@ -259,7 +259,9 @@ def create_recommendations(eaten, country_name, favourites):
     meat_type = []
     
     for food in option_list:
+        print(recommend_list, recommend_list[food[0]], food)
         if recommend_list[food[0]]>=portion:
+            print(recommend_list, recommend_list[food[0]], food)
             selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
             weighting = 4
             goal = 0
