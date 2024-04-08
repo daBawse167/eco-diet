@@ -274,13 +274,15 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             counter = 0
             while goal < recommend_list[food[0]]:
                 selection = selection.reset_index(drop=True)
+
+                print(selection)
                 
                 choice = random.choices(list(selection.iloc), probabilities)[0]
                 
                 #get the index of selection so you can remove the weighting
                 idx = selection[selection["Unnamed: 0"]==choice["Unnamed: 0"]].index[0]
-                del probabilities[idx]
-                selection = selection[selection["Unnamed: 0"]!=choice["Unnamed: 0"]]
+                #del probabilities[idx]
+                #selection = selection[selection["Unnamed: 0"]!=choice["Unnamed: 0"]]
                 
                 #if we haven't reached the limit yet
                 if goal+choice["grams"] <= recommend_list[food[0]]:
