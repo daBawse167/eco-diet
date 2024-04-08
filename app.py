@@ -105,7 +105,6 @@ def get_grams():
     return create_recommendations(eaten, country_name)
 
 def create_recommendations(eaten, country_name, favourites, percent_reduction):
-    print(eaten, country_name, favourites)
     
     chickens = eaten["chickens"]
     cattle = eaten["cattle"]
@@ -253,7 +252,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     for food in option_list:
         if recommend_list[food[0]]>=portion:
             selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
-            print(recommend_list, recommend_list[food[0]], food)
             weighting = 4
             goal = 0
             
@@ -269,9 +267,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             counter = 0
             while goal < recommend_list[food[0]]:
                 selection = selection.reset_index(drop=True)
-
-                print([i for i in selection.iloc])
-                print(probabilities)
                 
                 choice = random.choices(list(selection.iloc), probabilities)[0]
                 
@@ -290,8 +285,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
                     dish_grams.append(choice["grams"])
                     dish_images.append(choice["image"])
                     meat_type.append(food[1])
-
-                    print(choice)
                     
                     dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
                     
@@ -331,8 +324,6 @@ def find_stock(country_name="", eaten={}):
     
     #loop over country
     country_df = faostat[faostat["Area"]==country_name]
-
-    print(country_df)
     
     emissions_per_gram_list = []
     weekly_emitted = []
@@ -341,7 +332,6 @@ def find_stock(country_name="", eaten={}):
         #get the emissions per gram and weekly emitted
         idx = list(country_df["Item"]).index(i)
         emissions_per_gram = country_df["emissions (per kg)"].iloc[idx] / 1000
-        print(emissions_per_gram)
         
         emissions_per_gram_list.append(emissions_per_gram)
         weekly_emitted.append(round(emissions_per_gram*eaten[i], 2))
