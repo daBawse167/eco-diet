@@ -247,8 +247,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     
     option_list = [["Cow", "beef", beef_options], ["Sheep", "lamb", lamb_options], 
                   ["Pig", "pork", pork_options], ["Chicken", "chicken", chicken_options]]
-
-    print(option_list)
     
     dish_names = []
     dish_grams = []
@@ -294,6 +292,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
                     meat_type.append(food[1])
                     
                     dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
+
+                    print(food[0], goal, choice, recommend_list[food[0]]
                     
                 if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                     break
