@@ -274,8 +274,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             counter = 0
             while goal < recommend_list[food[0]]:
                 selection = selection.reset_index(drop=True)
-
-                print(selection)
                 
                 choice = random.choices(list(selection.iloc), probabilities)[0]
                 
