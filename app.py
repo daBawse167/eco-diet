@@ -193,7 +193,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
                 break
 
         print(red_meat_options, white_meat_options)
-        
+
         #if white_meat_counter < white_meat_max and len(list(white_meat_options.iloc)) > 0:
         if len(list(white_meat_options.iloc)) > 0:
             #add 1 portion of white meat & its emissions
@@ -226,7 +226,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
                 
         else:
             red_limit = True
-        
+
+        print(emissions_counter)
         
         red_idx += 1
         white_idx += 1
