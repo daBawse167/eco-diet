@@ -170,7 +170,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     
     white_meat_max = 340
     red_meat_max = 500
-    portion = 150
+    portion = 100
     
     red_idx = 0
     white_idx = 0
