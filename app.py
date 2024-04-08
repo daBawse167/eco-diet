@@ -257,52 +257,54 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     print(recommend_list)
     
     for food in option_list:
-        if recommend_list[food[0]]>=portion:
-            selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
-            weighting = 4
-            goal = 0
-            
-            #make weighted probabilities for favourite foods
-            probabilities = []
-            for i in selection.iloc:
-                if i["dish"] in favourites:
-                    probabilities.append(weighting)
-                else:
-                    probabilities.append(1)
-               
-            #loop over all the dishes
-            counter = 0
-            while goal < recommend_list[food[0]]:
-                selection = selection.reset_index(drop=True)
-                
-                choice = random.choices(list(selection.iloc), probabilities)[0]
-                
-                #get the index of selection so you can remove the weighting
-                idx = selection[selection["Unnamed: 0"]==choice["Unnamed: 0"]].index[0]
-                #del probabilities[idx]
-                #selection = selection[selection["Unnamed: 0"]!=choice["Unnamed: 0"]]
-                
-                #if we haven't reached the limit yet
-                if goal+choice["grams"] <= recommend_list[food[0]]:
-                    #add the dish
-                    food[2].append(choice)
-                    goal += choice["grams"]
-                    
-                    dish_names.append(choice["dish"])
-                    dish_grams.append(choice["grams"])
-                    dish_images.append(choice["image"])
-                    meat_type.append(food[1])
-                    
-                    dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
+        #if recommend_list[food[0]]>=portion:
 
-                    print(food[0], goal, choice, recommend_list[food[0]])
-                    
-                if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
-                    break
+        print(food)
+        selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
+        weighting = 4
+        goal = 0
+        
+        #make weighted probabilities for favourite foods
+        probabilities = []
+        for i in selection.iloc:
+            if i["dish"] in favourites:
+                probabilities.append(weighting)
+            else:
+                probabilities.append(1)
+           
+        #loop over all the dishes
+        counter = 0
+        while goal < recommend_list[food[0]]:
+            selection = selection.reset_index(drop=True)
+            
+            choice = random.choices(list(selection.iloc), probabilities)[0]
+            
+            #get the index of selection so you can remove the weighting
+            idx = selection[selection["Unnamed: 0"]==choice["Unnamed: 0"]].index[0]
+            #del probabilities[idx]
+            #selection = selection[selection["Unnamed: 0"]!=choice["Unnamed: 0"]]
+            
+            #if we haven't reached the limit yet
+            if goal+choice["grams"] <= recommend_list[food[0]]:
+                #add the dish
+                food[2].append(choice)
+                goal += choice["grams"]
                 
-                #if counter>len(list(selection.iloc)):
-                 #   break
-                counter += 1
+                dish_names.append(choice["dish"])
+                dish_grams.append(choice["grams"])
+                dish_images.append(choice["image"])
+                meat_type.append(food[1])
+                
+                dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
+
+                print(food[0], goal, choice, recommend_list[food[0]])
+                
+            if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
+                break
+            
+            #if counter>len(list(selection.iloc)):
+             #   break
+            counter += 1
     
     #join dish name and its grams
     recommend_list["recommend_dishes"] = [dish[0]+" ("+dish[1]+"g "+dish[2]+")   " for dish in np.array([dish_names, dish_grams, meat_type]).T]
