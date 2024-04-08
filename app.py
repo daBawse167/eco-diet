@@ -298,8 +298,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
                 if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                     break
                 
-                if counter>len(list(selection.iloc)):
-                    break
+                #if counter>len(list(selection.iloc)):
+                 #   break
                 counter += 1
     
     #join dish name and its grams
