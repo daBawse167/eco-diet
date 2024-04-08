@@ -131,7 +131,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             low_carbon.append([animals_eaten["Item"].iloc[i], option])
         i += 1
     
-    print(percent_reduction, total_emitted, target, options)
+    print(percent_reduction, total_emitted, target, options, low_carbon)
     
     #in case no choice is made, get the min red and white meat animals
     white_meat = ['Chicken']
