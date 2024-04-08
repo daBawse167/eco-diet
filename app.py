@@ -69,6 +69,7 @@ def get_dishes():
         useable = useable.drop(i)
     
     country_name = str(request.args.get("country_name"))
+    percent_reduction = str(request.args.get("percent_reduction"))
     favourites = str(request.args.get("favourites")).split(", ")
     
     grams = str(request.args.get("grams")).split(", ")
@@ -86,7 +87,7 @@ def get_dishes():
         elif meal[1]=="chicken":
             eaten["chickens"] += float(meal[0])
 
-    return create_recommendations(eaten, country_name, favourites)
+    return create_recommendations(eaten, country_name, favourites, percent_reduction)
 
 #user enters in grams
 @app.route("/get_grams", methods=["GET"])
@@ -103,7 +104,7 @@ def get_grams():
     eaten = {"chickens":chickens, "cattle":cattle, "goats":goats, "sheep":sheep, "swine":swine, "buffalo":buffalo}
     return create_recommendations(eaten, country_name)
 
-def create_recommendations(eaten, country_name, favourites):
+def create_recommendations(eaten, country_name, favourites, percent_reduction):
     print(eaten, country_name, favourites)
     
     chickens = eaten["chickens"]
@@ -115,8 +116,6 @@ def create_recommendations(eaten, country_name, favourites):
 
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
-
-    percent_reduction = 0.5
     
     return_animals = find_stock(country_name=country_name, eaten=eaten)
     animals_eaten, options = return_animals[0], return_animals[1]
