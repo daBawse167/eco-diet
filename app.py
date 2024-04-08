@@ -200,7 +200,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
             animal = white_meat_options.iloc[white_idx]["animal"]
             print(emissions_counter, meat_emission)
-            if emissions_counter+(meat_emission*portion) < target: and white_meat_counter+portion <= white_meat_max:
+            if emissions_counter+(meat_emission*portion) < target and white_meat_counter+portion <= white_meat_max:
                 emissions_counter += meat_emission*portion
                 white_meat_counter += portion
                 recommend_list[animal] += portion
