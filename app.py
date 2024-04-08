@@ -191,6 +191,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             if red_limit:
                 break
 
+        print(total_emitted, target)
+        
         if white_meat_counter < white_meat_max and len(list(white_meat_options.iloc)) > 0:
             #add 1 portion of white meat & its emissions
             meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
