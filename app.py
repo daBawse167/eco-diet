@@ -69,7 +69,7 @@ def get_dishes():
         useable = useable.drop(i)
     
     country_name = str(request.args.get("country_name"))
-    percent_reduction = str(request.args.get("percent_reduction"))
+    percent_reduction = float(str(request.args.get("percent_reduction"))[:-1])
     favourites = str(request.args.get("favourites")).split(", ")
     
     grams = str(request.args.get("grams")).split(", ")
