@@ -253,6 +253,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     dish_images = []
     dish_emissions = []
     meat_type = []
+
+    print(recommend_list)
     
     for food in option_list:
         if recommend_list[food[0]]>=portion:
