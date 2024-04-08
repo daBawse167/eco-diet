@@ -247,7 +247,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     
     option_list = [["Cow", "beef", beef_options], ["Sheep", "lamb", lamb_options], 
                   ["Pig", "pork", pork_options], ["Chicken", "chicken", chicken_options]]
-    
+
+    print(option_list)
     
     dish_names = []
     dish_grams = []
