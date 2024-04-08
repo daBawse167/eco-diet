@@ -191,6 +191,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
         if white_limit:
             if red_limit:
                 break
+
+        print(red_meat_options, white_meat_options)
         
         #if white_meat_counter < white_meat_max and len(list(white_meat_options.iloc)) > 0:
         if len(list(white_meat_options.iloc)) > 0:
