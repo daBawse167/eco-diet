@@ -11,6 +11,17 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
+@app.route("/meat_footprint", methods=["GET"])
+def meat_footprint():
+    country = request.args.get("country")
+    df = pd.read_csv("FAOSTAT.csv")
+    df = df[df["Area"]==country]
+    
+    return {"beef":list(df[df["Item"]=="Meat of cattle with the bone, fresh or chilled"]["Value"])[0],
+        "pork":list(df[df["Item"]=="Meat of pig with the bone, fresh or chilled"]["Value"])[0],
+        "lamb":list(df[df["Item"]=="Meat of sheep, fresh or chilled"]["Value"])[0],
+        "chicken":list(df[df["Item"]=="Meat of chickens, fresh or chilled"]["Value"])[0]}    
+
 #get the emissions of a single dish
 @app.route("/one_dish_emissions", methods=["GET"])
 def one_dish_emissions():
