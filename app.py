@@ -111,7 +111,7 @@ def get_grams():
     sheep = int(request.args.get("sheep"))
     swine = int(request.args.get("swine"))
     buffalo = int(request.args.get("buffalo"))
-    
+
     eaten = {"chickens":chickens, "cattle":cattle, "goats":goats, "sheep":sheep, "swine":swine, "buffalo":buffalo}
     return create_recommendations(eaten, country_name)
 
@@ -124,6 +124,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     swine = eaten["swine"]
     buffalo = eaten["buffalo"]
 
+    user_chosen_dishes = request.args.get("user_chosen_dishes")
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
     
@@ -189,6 +190,28 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     #make sure we don't break white & red meat's limits
     white_limit = False
     red_limit = False
+
+    #add the user's pre-selected dishes (if any)
+    for i in user_chosen_dishes:
+        meat=i[0]
+        grams=i[1]
+        
+        #gets the emissions per 1g of each animal
+        meat_options = pd.concat([white_meat_options, red_meat_options])
+        
+        #calculates hypothetical emissions of each "chosen dish"
+        meat_emission = float(list(meat_options[meat_options["animal"]==meat]["emissions"])[0])
+        meat_emission = meat_emission*float(grams)
+        
+        #add the meat emissions to the emissions counters
+        emissions_counter += meat_emission
+        recommend_list[meat] += float(grams)
+        
+        if meat=="Chicken":
+            white_meat_counter += meat_emission
+        else:
+            red_meat_counter += meat_emission
+    
     
     while emissions_counter < target:
 
