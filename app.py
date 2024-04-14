@@ -98,7 +98,13 @@ def get_dishes():
         elif meal[1]=="chicken":
             eaten["chickens"] += float(meal[0])
 
-    return create_recommendations(eaten, country_name, favourites, percent_reduction)
+    #get the specified requested dishes
+    chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
+    chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
+    chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
+    
+    return create_recommendations(eaten, country_name, favourites, percent_reduction,
+                                 chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names)
 
 #user enters in grams
 @app.route("/get_grams", methods=["GET"])
@@ -115,7 +121,8 @@ def get_grams():
     eaten = {"chickens":chickens, "cattle":cattle, "goats":goats, "sheep":sheep, "swine":swine, "buffalo":buffalo}
     return create_recommendations(eaten, country_name)
 
-def create_recommendations(eaten, country_name, favourites, percent_reduction):
+def create_recommendations(eaten, country_name, favourites, percent_reduction,
+                           chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names):
     
     chickens = eaten["chickens"]
     cattle = eaten["cattle"]
@@ -123,11 +130,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     sheep = eaten["sheep"]
     swine = eaten["swine"]
     buffalo = eaten["buffalo"]
-
-    #get the specified requested dishes
-    chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
-    chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
-    chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
     
     chosen_dishes_meat = []
     #make the requested meat parseable for later on
@@ -142,6 +144,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             chosen_dishes_meat.append("Sheep")
     
     user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
+
+    print(user_chosen_dishes)
     
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
