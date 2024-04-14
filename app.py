@@ -224,13 +224,16 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         meat_emission = meat_emission*float(grams)
         
         #add the meat emissions to the emissions counters
-        emissions_counter += meat_emission
-        recommend_list[meat] += float(grams)
-        
-        if meat=="Chicken":
-            white_meat_counter += meat_emission
+        if emissions_counter+meat_emission <= target:
+            emissions_counter += meat_emission
+            recommend_list[meat] += float(grams)
+    
+            if meat=="Chicken":
+                white_meat_counter += meat_emission
+            else:
+                red_meat_counter += meat_emission
         else:
-            red_meat_counter += meat_emission
+            break
 
     print(recommend_list)
     
