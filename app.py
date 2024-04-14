@@ -233,7 +233,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             else:
                 red_meat_counter += meat_emission
         else:
-            del user_chosen_dishes[i]
+            idx = user_chosen_dishes.index(i)
+            del user_chosen_dishes[idx]
             break
 
     print(recommend_list)
