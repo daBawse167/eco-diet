@@ -124,7 +124,24 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     swine = eaten["swine"]
     buffalo = eaten["buffalo"]
 
-    user_chosen_dishes = request.args.get("user_chosen_dishes")
+    #get the specified requested dishes
+    chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
+    chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
+    chosen_dishes_meat = []
+
+    #make the requested meat parseable for later on
+    for i in chosen_dishes_meat_input:
+        if i=="beef":
+            chosen_dishes_meat.append("Cow")
+        elif i=="pork":
+            chosen_dishes_meat.append("Pig")
+        elif i=="chicken":
+            chosen_dishes_meat.append("Chicken")
+        elif i=="lamb":
+            chosen_dishes_meat.append("Sheep")
+    
+    user_chosen_dishes = [chosen_dishes_meat, chosen_dishes_grams]
+    
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
     
