@@ -140,7 +140,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
         elif i=="lamb":
             chosen_dishes_meat.append("Sheep")
     
-    user_chosen_dishes = [chosen_dishes_meat, chosen_dishes_grams]
+    user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams]).T
     
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
