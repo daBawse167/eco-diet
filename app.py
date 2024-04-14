@@ -127,8 +127,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     #get the specified requested dishes
     chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
     chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
+    chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
+    
     chosen_dishes_meat = []
-
     #make the requested meat parseable for later on
     for i in chosen_dishes_meat_input:
         if i=="beef":
@@ -140,7 +141,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
         elif i=="lamb":
             chosen_dishes_meat.append("Sheep")
     
-    user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams]).T
+    user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
     
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
@@ -302,15 +303,27 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
     dish_emissions = []
     meat_type = []
 
-    print(recommend_list)
-    
     for food in option_list:
         #if recommend_list[food[0]]>=portion:
 
-        print(food)
         selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
         weighting = 4
         goal = 0
+
+        #add the dish names of the requested dishes
+        for i in user_chosen_dishes:
+            if food[0]==i[0]:
+                choice = selection[selection["dish"]==i[2]]
+                
+                food[2].append(choice)
+                goal += list(choice["grams"])[0]
+    
+                dish_names.append(list(choice["dish"])[0])
+                dish_grams.append(list(choice["grams"])[0])
+                dish_images.append(list(choice["image"])[0])
+                meat_type.append(food[1])
+    
+                dish_emissions.append(round((animals_eaten[food[0]]*list(choice["grams"])[0])/1000, 3))
         
         #make weighted probabilities for favourite foods
         probabilities = []
