@@ -160,8 +160,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             low_carbon.append([animals_eaten["Item"].iloc[i], option])
         i += 1
     
-    print(percent_reduction, total_emitted, target, options, low_carbon)
-    
     #in case no choice is made, get the min red and white meat animals
     white_meat = ['Chicken']
     red_meat = ['Cow', 'Sheep', 'Pig']
@@ -228,7 +226,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
             white_meat_counter += meat_emission
         else:
             red_meat_counter += meat_emission
-    
+
+    print(recommend_list)
     
     while emissions_counter < target:
 
@@ -242,8 +241,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction):
         if white_limit:
             if red_limit:
                 break
-
-        print(red_meat_options, white_meat_options)
 
         #if white_meat_counter < white_meat_max and len(list(white_meat_options.iloc)) > 0:
         if len(list(white_meat_options.iloc)) > 0:
