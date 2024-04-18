@@ -198,8 +198,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     white_meat_counter = 0
     red_meat_counter = 0
     
-    #white_meat_max = 1000
-    #red_meat_max = 1000
     portion = 100
     
     red_idx = 0
@@ -208,8 +206,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     #make sure we don't break white & red meat's limits
     white_limit = False
     red_limit = False
-
-    print(target, percent_reduction)
     
     #add the user's pre-selected dishes (if any)
     for i in user_chosen_dishes:
@@ -235,8 +231,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         else:
             user_chosen_dishes = [j for j in user_chosen_dishes if j[2]!=i[2]]
             break
-
-        print(recommend_list)
     
     while emissions_counter < target:
 
@@ -250,18 +244,13 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         if white_limit:
             if red_limit:
                 break
-
-        print(red_meat_options, white_meat_options)
-        print(recommend_list, emissions_counter)
         
-        #if white_meat_counter < white_meat_max and len(list(white_meat_options.iloc)) > 0:
         if len(list(white_meat_options.iloc)) > 0:
             #add 1 portion of white meat & its emissions
             meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
             animal = white_meat_options.iloc[white_idx]["animal"]
 
-            print(emissions_counter+(meat_emission*portion), target)
-            if emissions_counter+(meat_emission*portion) < target:# and white_meat_counter+portion <= white_meat_max:
+            if emissions_counter+(meat_emission*portion) < target:
                 emissions_counter += meat_emission*portion
                 white_meat_counter += portion
                 recommend_list[animal] += portion
@@ -272,14 +261,13 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         else:
             white_limit = True
         
-        #if red_meat_counter < red_meat_max and len(list(red_meat_options.iloc)) > 0:
         if len(list(red_meat_options.iloc)) > 0:
             #add 1 portion of red meat & its emissions
             meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
             animal = red_meat_options.iloc[red_idx]["animal"]
 
             print(emissions_counter+(meat_emission*portion), target)
-            if emissions_counter+(meat_emission*portion) < target:# and red_meat_counter+portion <= red_meat_max:
+            if emissions_counter+(meat_emission*portion) < target:
                 emissions_counter += meat_emission*portion
                 red_meat_counter += portion
                 recommend_list[animal] += portion
@@ -292,8 +280,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         
         red_idx += 1
         white_idx += 1
-    
-    print(recommend_list, emissions_counter)
     
     #bring in the dishes here
     dishes = pd.read_csv("useable_dishes.csv")
