@@ -209,6 +209,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     white_limit = False
     red_limit = False
 
+    print(target, percent_reduction)
+    
     #add the user's pre-selected dishes (if any)
     for i in user_chosen_dishes:
         meat=i[0]
@@ -233,6 +235,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         else:
             user_chosen_dishes = [j for j in user_chosen_dishes if j[2]!=i[2]]
             break
+
+        print(recommend_list)
     
     while emissions_counter < target:
 
@@ -305,10 +309,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     dish_emissions = []
     meat_type = []
     
-    print(option_list)
-    
     for food in option_list:
-        #if recommend_list[food[0]]>=portion:
 
         selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
         weighting = 4
@@ -332,7 +333,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                     meat_type.append(food[1])
         
                     dish_emissions.append(meat_emission)
-            print(dish_emissions)
             
         #make weighted probabilities for favourite foods
         probabilities = []
@@ -366,8 +366,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 meat_type.append(food[1])
                 
                 dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
-
-                print(dish_emissions)
                 
             if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                 break
@@ -381,8 +379,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     recommend_list["target (kg)"] = sum(dish_emissions)
     recommend_list["image"] = dish_images
     recommend_list["emissions"] = dish_emissions
-
-    print(recommend_list)
     
     return recommend_list
 
