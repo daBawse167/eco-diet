@@ -144,8 +144,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             chosen_dishes_meat.append("Sheep")
     
     user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
-
-    print(user_chosen_dishes)
     
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
@@ -223,7 +221,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         meat_emission = float(list(meat_options[meat_options["animal"]==meat]["emissions"])[0])
         meat_emission = meat_emission*float(grams)
 
-        print(emissions_counter, meat_emission, target)
         #add the meat emissions to the emissions counters
         if emissions_counter+meat_emission <= target:
             emissions_counter += meat_emission
@@ -236,8 +233,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         else:
             user_chosen_dishes = [j for j in user_chosen_dishes if j[2]!=i[2]]
             break
-
-    print(recommend_list)
     
     while emissions_counter < target:
 
@@ -257,7 +252,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             #add 1 portion of white meat & its emissions
             meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
             animal = white_meat_options.iloc[white_idx]["animal"]
-            print(emissions_counter, meat_emission)
+            
             if emissions_counter+(meat_emission*portion) < target and white_meat_counter+portion <= white_meat_max:
                 emissions_counter += meat_emission*portion
                 white_meat_counter += portion
@@ -274,7 +269,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             #add 1 portion of red meat & its emissions
             meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
             animal = red_meat_options.iloc[red_idx]["animal"]
-            print(emissions_counter, meat_emission)
+            
             if emissions_counter+(meat_emission*portion) < target and red_meat_counter+portion <= red_meat_max:
                 emissions_counter += meat_emission*portion
                 red_meat_counter += portion
@@ -285,8 +280,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 
         else:
             red_limit = True
-
-        print(emissions_counter)
         
         red_idx += 1
         white_idx += 1
@@ -311,7 +304,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     dish_images = []
     dish_emissions = []
     meat_type = []
-
+    
+    print(option_list)
+    
     for food in option_list:
         #if recommend_list[food[0]]>=portion:
 
@@ -333,7 +328,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 meat_type.append(food[1])
     
                 dish_emissions.append(round((animals_eaten[food[0]]*list(choice["grams"])[0])/1000, 3))
-        
+            print(dish_emissions)
+            
         #make weighted probabilities for favourite foods
         probabilities = []
         for i in selection.iloc:
@@ -367,7 +363,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 
                 dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
 
-                print(food[0], goal, choice, recommend_list[food[0]])
+                print(dish_emissions)
                 
             if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                 break
