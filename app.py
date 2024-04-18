@@ -261,6 +261,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 emissions_counter += meat_emission*portion
                 white_meat_counter += portion
                 recommend_list[animal] += portion
+                print(recommend_list, emissions_counter)
             else:
                 #this animal cannot be served, so take it out of the options
                 white_meat_options = white_meat_options[white_meat_options["animal"]!=white_meat_options.iloc[white_idx]["animal"]]
@@ -278,6 +279,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 emissions_counter += meat_emission*portion
                 red_meat_counter += portion
                 recommend_list[animal] += portion
+                print(recommend_list, emissions_counter)
             else:
                 #this animal cannot be served, so take it out of the options
                 red_meat_options = red_meat_options[red_meat_options["animal"]!=red_meat_options.iloc[red_idx]["animal"]]
@@ -287,6 +289,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         
         red_idx += 1
         white_idx += 1
+    
+    print(recommend_list, emissions_counter)
     
     #bring in the dishes here
     dishes = pd.read_csv("useable_dishes.csv")
