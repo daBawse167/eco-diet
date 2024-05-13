@@ -246,7 +246,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         else:
             user_chosen_dishes = [j for j in user_chosen_dishes if j[2]!=i[2]]
             break
-    
+
+    print(recommend_list)
+                               
     while emissions_counter < target:
 
         #make sure white and red idx don't get out of range
@@ -295,7 +297,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         
         red_idx += 1
         white_idx += 1
-    
+
+    print(recommend_list)
+                               
     #bring in the dishes here
     dishes = pd.read_csv("useable_dishes.csv")
     
