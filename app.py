@@ -102,9 +102,10 @@ def get_dishes():
     chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
     chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
     chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
+    no_dishes = request.args.get("no_dishes")
     
     return create_recommendations(eaten, country_name, favourites, percent_reduction,
-                                 chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names)
+                                 chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
 
 #user enters in grams
 @app.route("/get_grams", methods=["GET"])
@@ -122,7 +123,7 @@ def get_grams():
     return create_recommendations(eaten, country_name)
 
 def create_recommendations(eaten, country_name, favourites, percent_reduction,
-                           chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names):
+                           chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes):
     
     chickens = eaten["chickens"]
     cattle = eaten["cattle"]
@@ -144,11 +145,14 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             chosen_dishes_meat.append("Sheep")
     
     user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
+    #sort the dishes by emissions
+    user_chosen_dishes = pd.DataFrame({"animal":chosen_dishes_meat, "grams":chosen_dishes_grams,
+                                      "dishes":chosen_dishes_names, "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
+    user_chosen_dishes = np.array([user_chosen_dishes["animal"], user_chosen_dishes["grams"], user_chosen_dishes["dishes"]]).T
     
     eaten = {'Chicken':chickens, 'Buffalo':buffalo,
              'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
 
-    no_dishes=6
     no_dishes_chosen=0
     
     return_animals = find_stock(country_name=country_name, eaten=eaten)
@@ -307,6 +311,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     dish_images = []
     dish_emissions = []
     meat_type = []
+
+    no_dishes_chosen = 0
     
     for food in option_list:
 
