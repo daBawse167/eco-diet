@@ -145,6 +145,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             chosen_dishes_meat.append("Sheep")
     
     user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
+
+    #get the emissions of the user chosen dishes animals
+    user_chosen_emissions = [list(animals_eaten["emissions (per gram)"])[list(animals_eaten["Item"]).index(i)] for i in list(user_chosen_dishes.T)[0]]
     #sort the dishes by emissions
     user_chosen_dishes = pd.DataFrame({"animal":chosen_dishes_meat, "grams":chosen_dishes_grams,
                                       "dishes":chosen_dishes_names, "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
