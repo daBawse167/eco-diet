@@ -246,8 +246,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         else:
             user_chosen_dishes = [j for j in user_chosen_dishes if j[2]!=i[2]]
             break
-
-    print(recommend_list)
                                
     while emissions_counter < target:
 
@@ -394,7 +392,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     recommend_list["target (kg)"] = sum(dish_emissions)
     recommend_list["image"] = dish_images
     recommend_list["emissions"] = dish_emissions
-    
+
+    print(recommend_list)
+                               
     return recommend_list
 
 
