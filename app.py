@@ -144,6 +144,15 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         elif i=="lamb":
             chosen_dishes_meat.append("Sheep")
     
+    eaten = {'Chicken':chickens, 'Buffalo':buffalo,
+             'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
+
+    no_dishes_chosen=0
+    
+    return_animals = find_stock(country_name=country_name, eaten=eaten)
+    animals_eaten, options = return_animals[0], return_animals[1]
+
+
     user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
 
     #get the emissions of the user chosen dishes animals
@@ -152,15 +161,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     user_chosen_dishes = pd.DataFrame({"animal":chosen_dishes_meat, "grams":chosen_dishes_grams,
                                       "dishes":chosen_dishes_names, "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
     user_chosen_dishes = np.array([user_chosen_dishes["animal"], user_chosen_dishes["grams"], user_chosen_dishes["dishes"]]).T
-    
-    eaten = {'Chicken':chickens, 'Buffalo':buffalo,
-             'Cow':cattle, 'Goat':goats, 'Sheep':sheep, 'Pig':swine}
 
-    no_dishes_chosen=0
-    
-    return_animals = find_stock(country_name=country_name, eaten=eaten)
-    animals_eaten, options = return_animals[0], return_animals[1]
-    
+                               
     #find the target emissions
     total_emitted = sum(animals_eaten["weekly_emitted (kg/animal)"])
     target = (1-percent_reduction)*total_emitted
