@@ -155,12 +155,13 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
 
     user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
 
-    #get the emissions of the user chosen dishes animals
-    user_chosen_emissions = [list(animals_eaten["emissions (per gram)"])[list(animals_eaten["Item"]).index(i)] for i in list(user_chosen_dishes.T)[0]]
-    #sort the dishes by emissions
-    user_chosen_dishes = pd.DataFrame({"animal":chosen_dishes_meat, "grams":chosen_dishes_grams,
-                                      "dishes":chosen_dishes_names, "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
-    user_chosen_dishes = np.array([user_chosen_dishes["animal"], user_chosen_dishes["grams"], user_chosen_dishes["dishes"]]).T
+    if len(user_chosen_dishes)>0:
+        #get the emissions of the user chosen dishes animals
+        user_chosen_emissions = [list(animals_eaten["emissions (per gram)"])[list(animals_eaten["Item"]).index(i)] for i in list(user_chosen_dishes.T)[0]]
+        #sort the dishes by emissions
+        user_chosen_dishes = pd.DataFrame({"animal":list(user_chosen_dishes.T)[0], "grams":list(user_chosen_dishes.T)[1],
+                                          "dishes":list(user_chosen_dishes.T)[2], "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
+        user_chosen_dishes = np.array([user_chosen_dishes["animal"], user_chosen_dishes["grams"], user_chosen_dishes["dishes"]]).T
 
                                
     #find the target emissions
@@ -254,26 +255,39 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             red_idx = 0
         if white_idx>=len(white_meat_options):
             white_idx = 0
-        
+    
         #break if no. grams is exceeded
         if white_limit:
             if red_limit:
                 break
-
+                
+        print(red_meat_options, recommend_list, no_dishes_chosen)
+                
         if len(list(red_meat_options.iloc)) > 0:
             #add 1 portion of red meat & its emissions
             meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
             animal = red_meat_options.iloc[red_idx]["animal"]
-
-            print(emissions_counter+(meat_emission*portion), target)
-            if emissions_counter+(meat_emission*portion) < target and no_dishes_chosen < no_dishes:
+            
+            #make sure we don't add too many dishes
+            if no_dishes_chosen >= no_dishes:
+                break
+            #check if the dish satisfies the portion requirement
+            elif emissions_counter+(meat_emission*portion) < target:
                 emissions_counter += meat_emission*portion
                 red_meat_counter += portion
                 recommend_list[animal] += portion
                 no_dishes_chosen += 1
+            #if not, check a smaller portion
+            elif emissions_counter+(meat_emission*(portion*(2/3))) < target:
+                new_portion = portion*(2/3)
+                emissions_counter += meat_emission*new_portion
+                red_meat_counter += new_portion
+                recommend_list[animal] += new_portion
+                no_dishes_chosen += 1
             else:
                 #this animal cannot be served, so take it out of the options
                 red_meat_options = red_meat_options[red_meat_options["animal"]!=red_meat_options.iloc[red_idx]["animal"]]
+    
         else:
             red_limit = True
         
@@ -281,7 +295,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             #add 1 portion of white meat & its emissions
             meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
             animal = white_meat_options.iloc[white_idx]["animal"]
-
+    
             if emissions_counter+(meat_emission*portion) < target and no_dishes_chosen < no_dishes:
                 emissions_counter += meat_emission*portion
                 white_meat_counter += portion
@@ -290,9 +304,10 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             else:
                 #this animal cannot be served, so take it out of the options
                 white_meat_options = white_meat_options[white_meat_options["animal"]!=white_meat_options.iloc[white_idx]["animal"]]
+    
         else:
             white_limit = True
-        
+    
         red_idx += 1
         white_idx += 1
 
