@@ -257,34 +257,38 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 break
                 
         print(red_meat_options, recommend_list, no_dishes_chosen)
+
+        break_ = False
+
+        #add two red meats before one white meat
+        for j in range(2):
+            if len(list(red_meat_options.iloc)) > 0:
+                #add 1 portion of red meat & its emissions
+                meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
+                animal = red_meat_options.iloc[red_idx]["animal"]
                 
-        if len(list(red_meat_options.iloc)) > 0:
-            #add 1 portion of red meat & its emissions
-            meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
-            animal = red_meat_options.iloc[red_idx]["animal"]
-            
-            #make sure we don't add too many dishes
-            if no_dishes_chosen >= no_dishes:
-                break
-            #check if the dish satisfies the portion requirement
-            elif emissions_counter+(meat_emission*portion) < target:
-                emissions_counter += meat_emission*portion
-                red_meat_counter += portion
-                recommend_list[animal] += portion
-                no_dishes_chosen += 1
-            #if not, check a smaller portion
-            elif emissions_counter+(meat_emission*(portion*(2/3))) < target:
-                new_portion = portion*(2/3)
-                emissions_counter += meat_emission*new_portion
-                red_meat_counter += new_portion
-                recommend_list[animal] += new_portion
-                no_dishes_chosen += 1
+                #make sure we don't add too many dishes
+                if no_dishes_chosen >= no_dishes:
+                    break_ = True
+                #check if the dish satisfies the portion requirement
+                elif emissions_counter+(meat_emission*portion) < target:
+                    emissions_counter += meat_emission*portion
+                    red_meat_counter += portion
+                    recommend_list[animal] += portion
+                    no_dishes_chosen += 1
+                #if not, check a smaller portion
+                elif emissions_counter+(meat_emission*(portion*(2/3))) < target:
+                    new_portion = portion*(2/3)
+                    emissions_counter += meat_emission*new_portion
+                    red_meat_counter += new_portion
+                    recommend_list[animal] += new_portion
+                    no_dishes_chosen += 1
+                else:
+                    #this animal cannot be served, so take it out of the options
+                    red_meat_options = red_meat_options[red_meat_options["animal"]!=red_meat_options.iloc[red_idx]["animal"]]
+                print(recommend_list, no_dishes_chosen, "red", round(emissions_counter+(meat_emission*portion), 2), round(target, 2))
             else:
-                #this animal cannot be served, so take it out of the options
-                red_meat_options = red_meat_options[red_meat_options["animal"]!=red_meat_options.iloc[red_idx]["animal"]]
-    
-        else:
-            red_limit = True
+                red_limit = True
         
         if len(list(white_meat_options.iloc)) > 0:
             #add 1 portion of white meat & its emissions
@@ -299,12 +303,17 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             else:
                 #this animal cannot be served, so take it out of the options
                 white_meat_options = white_meat_options[white_meat_options["animal"]!=white_meat_options.iloc[white_idx]["animal"]]
-    
+            print(recommend_list, no_dishes_chosen, "white", round(emissions_counter+(meat_emission*portion), 2), round(target, 2))
+            
         else:
             white_limit = True
     
         red_idx += 1
         white_idx += 1
+
+        #breaks if the number of dishes exceeds
+        if break_:
+            break
     
     #bring in the dishes here
     dishes = pd.read_csv("useable_dishes.csv")
