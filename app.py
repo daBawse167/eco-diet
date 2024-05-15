@@ -153,14 +153,17 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     animals_eaten, options = return_animals[0], return_animals[1]
     
     
-    if len(chosen_dishes_meat_input)>0:
+    user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
+
+    if len(user_chosen_dishes)>0:
         #get the emissions of the user chosen dishes animals
-        user_chosen_emissions = [list(animals_eaten["emissions (per gram)"])[list(animals_eaten["Item"]).index(i)] for i in chosen_dishes_meat_input]
+        user_chosen_emissions = [list(animals_eaten["emissions (per gram)"])[list(animals_eaten["Item"]).index(i)] for i in list(user_chosen_dishes.T)[0]]
         #sort the dishes by emissions
-        user_chosen_dishes = pd.DataFrame({"animal":chosen_dishes_meat_input, "grams":chosen_dishes_grams,
-                                           "dishes":chosen_dishes_names, "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
+        user_chosen_dishes = pd.DataFrame({"animal":list(user_chosen_dishes.T)[0], "grams":list(user_chosen_dishes.T)[1],
+                                          "dishes":list(user_chosen_dishes.T)[2], "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
         user_chosen_dishes = np.array([user_chosen_dishes["animal"], user_chosen_dishes["grams"], user_chosen_dishes["dishes"]]).T
-        
+
+    
     #find the target emissions
     total_emitted = sum(animals_eaten["weekly_emitted (kg/animal)"])
     target = (1-percent_reduction)*total_emitted
