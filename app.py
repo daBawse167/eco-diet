@@ -153,7 +153,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     animals_eaten, options = return_animals[0], return_animals[1]
     
     
-    if len(user_chosen_dishes)>0:
+    if len(chosen_dishes_meat_input)>0:
         #get the emissions of the user chosen dishes animals
         user_chosen_emissions = [list(animals_eaten["emissions (per gram)"])[list(animals_eaten["Item"]).index(i)] for i in chosen_dishes_meat_input]
         #sort the dishes by emissions
