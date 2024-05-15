@@ -163,11 +163,15 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                                           "dishes":list(user_chosen_dishes.T)[2], "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
         user_chosen_dishes = np.array([user_chosen_dishes["animal"], user_chosen_dishes["grams"], user_chosen_dishes["dishes"]]).T
 
-    
+
+    print(animals_eaten["weekly_emitted (kg/animal)"]
+                               
     #find the target emissions
     total_emitted = sum(animals_eaten["weekly_emitted (kg/animal)"])
     target = (1-percent_reduction)*total_emitted
-    
+
+    print(total_emitted)
+                               
     low_carbon = []
     i = 0
     #gets the animals with GHG lower than the target
