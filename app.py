@@ -240,9 +240,40 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         else:
             user_chosen_dishes = [j for j in user_chosen_dishes if j[2]!=i[2]]
             break
-    
-    red_meat_options = red_meat_options.sort_values(by="emissions", ascending=False)
 
+    #gets the emissions per 1g of each animal
+    meat_options = pd.concat([red_meat_options, white_meat_options]).sort_values(by="emissions", ascending=False)
+    idx = 0
+
+    #loop over the meat-types
+    for option in meat_options.iloc:
+        animal = option["animal"]
+        meat_emission = float(option["emissions"])
+        
+        while emissions_counter+(meat_emission*(portion*(2/3))) < target:
+            
+            if no_dishes_chosen >= no_dishes:
+                break
+            #check if the dish satisfies the portion requirement
+            elif emissions_counter+(meat_emission*portion) < target:
+                emissions_counter += meat_emission*portion
+                recommend_list[animal] += portion
+                no_dishes_chosen += 1
+                print(recommend_list, emissions_counter, target)
+            #if not, check a smaller portion
+            elif emissions_counter+(meat_emission*(portion*(2/3))) < target:
+                new_portion = portion*(2/3)
+                emissions_counter += meat_emission*new_portion
+                recommend_list[animal] += new_portion
+                no_dishes_chosen += 1
+                print(recommend_list, emissions_counter, target)
+            else:
+                #this animal cannot be served, so take it out of the options
+                meat_options = meat_options[meat_options["animal"]!=meat_options.iloc[idx]["animal"]]
+        
+        idx += 1
+    
+    """red_meat_options = red_meat_options.sort_values(by="emissions", ascending=False)
     while emissions_counter < target:
     
         #make sure white and red idx don't get out of range
@@ -313,7 +344,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
 
         #breaks if the number of dishes exceeds
         if break_:
-            break
+            break"""
     
     #bring in the dishes here
     dishes = pd.read_csv("useable_dishes.csv")
