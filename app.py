@@ -162,15 +162,10 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         user_chosen_dishes = pd.DataFrame({"animal":list(user_chosen_dishes.T)[0], "grams":list(user_chosen_dishes.T)[1],
                                           "dishes":list(user_chosen_dishes.T)[2], "emissions":user_chosen_emissions}).sort_values(by="emissions", ascending=False)
         user_chosen_dishes = np.array([user_chosen_dishes["animal"], user_chosen_dishes["grams"], user_chosen_dishes["dishes"]]).T
-
-
-    print(animals_eaten["weekly_emitted (kg/animal)"])
                                
     #find the target emissions
     total_emitted = sum(animals_eaten["weekly_emitted (kg/animal)"])
     target = (1-percent_reduction)*total_emitted
-
-    print(total_emitted)
                                
     low_carbon = []
     i = 0
@@ -386,6 +381,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     meat_type = []
     
     no_dishes_chosen = 0
+
+    print(recommend_list)
     
     for food in option_list:
     
@@ -400,8 +397,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 
                 choice = selection[selection["dish"]==i[2]]
                 meat_emission = round((animals_eaten[food[0]]*list(choice["grams"])[0])/1000, 3)
-                
-                print(no_dishes_chosen)
                 
                 if sum(dish_emissions)+meat_emission <= target and no_dishes_chosen < no_dishes:
     
@@ -448,6 +443,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 meat_type.append(food[1])
     
                 dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
+                print(dish_emissions)
     
             if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                 break
