@@ -288,6 +288,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                         recommend_list[animal] += grams
                         no_dishes_chosen += 1
                         print(recommend_list, emissions_counter, target, grams)
+                    portion -= 50
+                    if portion<min_grams:
+                        break
             else:
                 #this animal cannot be served, so take it out of the options
                 meat_options = meat_options[meat_options["animal"]!=meat_options.iloc[idx]["animal"]]
