@@ -488,6 +488,9 @@ def find_stock(country_name="", eaten={}):
     
     emissions_per_gram_list = []
     weekly_emitted = []
+
+    print(eaten)
+    print(country_df)
     
     for i in list(country_df["Item"]):
         #get the emissions per gram and weekly emitted
@@ -496,6 +499,8 @@ def find_stock(country_name="", eaten={}):
         
         emissions_per_gram_list.append(emissions_per_gram)
         weekly_emitted.append(round(emissions_per_gram*eaten[i], 2))
+        
+        print(emissions_per_gram, eaten[i])
     
     #add the columns to the dataset
     country_df["emissions (per gram)"] = emissions_per_gram_list
