@@ -164,7 +164,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         user_chosen_dishes = np.array([user_chosen_dishes["animal"], user_chosen_dishes["grams"], user_chosen_dishes["dishes"]]).T
 
 
-    print(animals_eaten["weekly_emitted (kg/animal)"]
+    print(animals_eaten["weekly_emitted (kg/animal)"])
                                
     #find the target emissions
     total_emitted = sum(animals_eaten["weekly_emitted (kg/animal)"])
