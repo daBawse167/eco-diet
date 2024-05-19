@@ -251,7 +251,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     #gets the emissions per 1g of each animal
     meat_options = pd.concat([red_meat_options, white_meat_options]).sort_values(by="emissions", ascending=False)
     idx = 0
-
+    
     #get grams and emissions of dishes
     dishes = pd.read_csv("useable_dishes.csv")
     
@@ -272,6 +272,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             meat_name = "pork"
         
         #find the min amount of 
+        dishes = pd.read_csv("useable_dishes.csv")
         unique_grams = np.unique(np.array(dishes[dishes["meat"]=="lamb"]["grams"]))
         
         while emissions_counter+(meat_emission*(100)) < target:
@@ -293,33 +294,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 break
         
         idx += 1
-                               
-    """for option in meat_options.iloc:
-        animal = option["animal"]
-        meat_emission = float(option["emissions"])
-        
-        while emissions_counter+(meat_emission*(portion*(2/3))) < target:
-            
-            if no_dishes_chosen >= no_dishes:
-                break
-            #check if the dish satisfies the portion requirement
-            elif emissions_counter+(meat_emission*portion) < target:
-                emissions_counter += meat_emission*portion
-                recommend_list[animal] += portion
-                no_dishes_chosen += 1
-                print(recommend_list, emissions_counter, target)
-            #if not, check a smaller portion
-            elif emissions_counter+(meat_emission*(portion*(2/3))) < target:
-                new_portion = portion*(2/3)
-                emissions_counter += meat_emission*new_portion
-                recommend_list[animal] += new_portion
-                no_dishes_chosen += 1
-                print(recommend_list, emissions_counter, target)
-            else:
-                #this animal cannot be served, so take it out of the options
-                meat_options = meat_options[meat_options["animal"]!=meat_options.iloc[idx]["animal"]]
-        
-        idx += 1"""
         
     """
     while emissions_counter < target:
@@ -472,7 +446,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             idx = selection[selection["Unnamed: 0"]==choice["Unnamed: 0"]].index[0]
             #del probabilities[idx]
             #selection = selection[selection["Unnamed: 0"]!=choice["Unnamed: 0"]]
-    
+
+            print(goal, choice, recommend_list[food[0]])
+            
             #if we haven't reached the limit yet
             if goal+choice["grams"] <= recommend_list[food[0]]:
                 #add the dish
