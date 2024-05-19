@@ -272,7 +272,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             meat_name = "pork"
         
         #find the min amount of 
-        dishes = pd.read_csv("useable_dishes.csv")
         unique_grams = np.unique(np.array(dishes[dishes["meat"]=="lamb"]["grams"]))
         
         while emissions_counter+(meat_emission*(100)) < target:
@@ -284,8 +283,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 #loop over available gram options: 100g, 150, 200g, 250g
                 for grams in unique_grams:
                     if emissions_counter+(meat_emission*grams) < target:
-                        emissions_counter += meat_emission*grams
-                        recommend_list[animal] += grams
+                        emissions_counter += float(meat_emission*grams)
+                        recommend_list[animal] += float(grams)
                         no_dishes_chosen += 1
                         print(recommend_list, emissions_counter, target, grams)
             else:
