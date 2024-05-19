@@ -476,7 +476,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     recommend_list["image"] = dish_images
     recommend_list["emissions"] = dish_emissions
 
-    print(recommend_list)
+    print("final print:", recommend_list)
                                
     return recommend_list
 
