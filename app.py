@@ -447,7 +447,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         for grams_option in grams_order[food[0]]:
             selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
             selection = selection[selection["grams"]==grams_option].reset_index(drop=True)
-            print(selection)
+            print(food, selection)
             weighting = 4
             goal = 0
         
