@@ -233,7 +233,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         meat_emission = float(list(meat_options[meat_options["animal"]==meat]["emissions"])[0])
         meat_emission = meat_emission*float(grams)
 
-        grams_order_list = grams_order[meat]
+        #grams_order_list = grams_order[meat]
         
         #add the meat emissions to the emissions counters
         if emissions_counter+meat_emission <= target and no_dishes_chosen < no_dishes:
@@ -241,8 +241,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             recommend_list[meat] += float(grams)
 
             #keep track of how many grams each meal should be
-            grams_order_list.append(grams)
-            grams_order[meat] = grams_order_list
+            #grams_order_list.append(grams)
+            #grams_order[meat] = grams_order_list
             
             no_dishes_chosen += 1
     
@@ -421,6 +421,28 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     
     for food in option_list:
 
+        #add the dish names of the requested dishes
+        for i in user_chosen_dishes:
+            selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
+            
+            if food[0]==i[0]:
+                
+                choice = selection[selection["dish"]==i[2]]
+                meat_emission = round((animals_eaten[food[0]]*list(choice["grams"])[0])/1000, 3)
+                
+                if sum(dish_emissions)+meat_emission <= target and no_dishes_chosen < no_dishes:
+    
+                    food[2].append(choice)
+                    goal += list(choice["grams"])[0]
+                    no_dishes_chosen += 1
+    
+                    dish_names.append(list(choice["dish"])[0])
+                    dish_grams.append(list(choice["grams"])[0])
+                    dish_images.append(list(choice["image"])[0])
+                    meat_type.append(food[1])
+    
+                    dish_emissions.append(meat_emission)
+        
         #make sure the grams for the meal is correct
         for grams_option in grams_order[food[0]]:
             selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
@@ -428,27 +450,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             print(selection)
             weighting = 4
             goal = 0
-        
-            #add the dish names of the requested dishes
-            for i in user_chosen_dishes:
-        
-                if food[0]==i[0]:
-                    
-                    choice = selection[selection["dish"]==i[2]]
-                    meat_emission = round((animals_eaten[food[0]]*list(choice["grams"])[0])/1000, 3)
-                    
-                    if sum(dish_emissions)+meat_emission <= target and no_dishes_chosen < no_dishes:
-        
-                        food[2].append(choice)
-                        goal += list(choice["grams"])[0]
-                        no_dishes_chosen += 1
-        
-                        dish_names.append(list(choice["dish"])[0])
-                        dish_grams.append(list(choice["grams"])[0])
-                        dish_images.append(list(choice["image"])[0])
-                        meat_type.append(food[1])
-        
-                        dish_emissions.append(meat_emission)
         
             #make weighted probabilities for favourite foods
             probabilities = []
