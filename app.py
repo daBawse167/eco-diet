@@ -287,7 +287,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         unique_grams = np.unique(np.array(dishes[dishes["meat"]=="lamb"]["grams"]))
 
         #to be added to grams_order
-        grams_order_list = grams_order["animal"]
+        grams_order_list = grams_order[animal]
         
         while emissions_counter+(meat_emission*(100)) < target:
             
