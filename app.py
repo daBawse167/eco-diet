@@ -233,7 +233,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         meat_emission = float(list(meat_options[meat_options["animal"]==meat]["emissions"])[0])
         meat_emission = meat_emission*float(grams)
 
-        grams_order_list = grams_order["meat"]
+        grams_order_list = grams_order[meat]
         
         #add the meat emissions to the emissions counters
         if emissions_counter+meat_emission <= target and no_dishes_chosen < no_dishes:
