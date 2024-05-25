@@ -462,7 +462,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             #loop over all the dishes
             counter = 0
             
-            selection = selection.reset_index(drop=True)
+            #selection = selection.reset_index(drop=True)
     
             choice = random.choices(list(selection.iloc), probabilities)[0]
 
