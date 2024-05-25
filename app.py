@@ -422,7 +422,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     for food in option_list:
 
         #make sure the grams for the meal is correct
-        for grams_option in grams_order[food]:
+        for grams_option in grams_order[food[1]]:
             selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
             selection = selection[selection["grams"]==grams_option].reset_index(drop=True)
             print(selection)
