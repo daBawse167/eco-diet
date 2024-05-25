@@ -242,7 +242,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
 
             #keep track of how many grams each meal should be
             grams_order_list.append(grams)
-            grams_order["meat"] = grams_order_list
+            grams_order[meat] = grams_order_list
             
             no_dishes_chosen += 1
     
