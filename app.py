@@ -250,6 +250,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     
     #gets the emissions per 1g of each animal
     meat_options = pd.concat([red_meat_options, white_meat_options]).sort_values(by="emissions", ascending=False)
+
+    #how many grams each dish needs to be
+    grams_order = {"Cow":[], "Sheep":[], "Chicken":[], "Pig":[]}
     idx = 0
     
     #get grams and emissions of dishes
@@ -274,6 +277,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         #find the min amount of 
         dishes = pd.read_csv("useable_dishes.csv")
         unique_grams = np.unique(np.array(dishes[dishes["meat"]=="lamb"]["grams"]))
+
+        #to be added to grams_order
+        grams_order_list = []
         
         while emissions_counter+(meat_emission*(100)) < target:
             
@@ -287,14 +293,19 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                         emissions_counter += float(meat_emission*grams)
                         recommend_list[animal] += float(grams)
                         no_dishes_chosen += 1
+                        grams_order_list.append(grams)
                         print(recommend_list, emissions_counter, target, grams)
             else:
                 #this animal cannot be served, so take it out of the options
                 meat_options = meat_options[meat_options["animal"]!=meat_options.iloc[idx]["animal"]]
                 break
+
+        grams_order[animal] = grams_order_list
         
         idx += 1
-        
+
+    print(grams_order)
+                               
     """
     while emissions_counter < target:
     
@@ -434,7 +445,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                 probabilities.append(weighting)
             else:
                 probabilities.append(1)
-    
+        
         #loop over all the dishes
         counter = 0
         while goal < recommend_list[food[0]]:
