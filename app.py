@@ -217,6 +217,9 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     #make sure we don't break white & red meat's limits
     white_limit = False
     red_limit = False
+
+    #how many grams each dish needs to be
+    grams_order = {"Cow":[], "Sheep":[], "Chicken":[], "Pig":[]}
     
     #add the user's pre-selected dishes (if any)
     for i in user_chosen_dishes:
@@ -229,11 +232,18 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         #calculates hypothetical emissions of each "chosen dish"
         meat_emission = float(list(meat_options[meat_options["animal"]==meat]["emissions"])[0])
         meat_emission = meat_emission*float(grams)
-    
+
+        grams_order_list = grams_order["meat"]
+        
         #add the meat emissions to the emissions counters
         if emissions_counter+meat_emission <= target and no_dishes_chosen < no_dishes:
             emissions_counter += meat_emission
             recommend_list[meat] += float(grams)
+
+            #keep track of how many grams each meal should be
+            grams_order_list.append(grams)
+            grams_order["meat"] = grams_order_list
+            
             no_dishes_chosen += 1
     
             if meat=="Chicken":
@@ -251,8 +261,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     #gets the emissions per 1g of each animal
     meat_options = pd.concat([red_meat_options, white_meat_options]).sort_values(by="emissions", ascending=False)
 
-    #how many grams each dish needs to be
-    grams_order = {"Cow":[], "Sheep":[], "Chicken":[], "Pig":[]}
     idx = 0
     
     #get grams and emissions of dishes
@@ -279,7 +287,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         unique_grams = np.unique(np.array(dishes[dishes["meat"]=="lamb"]["grams"]))
 
         #to be added to grams_order
-        grams_order_list = []
+        grams_order_list = grams_order["animal"]
         
         while emissions_counter+(meat_emission*(100)) < target:
             
