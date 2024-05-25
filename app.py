@@ -232,17 +232,11 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         #calculates hypothetical emissions of each "chosen dish"
         meat_emission = float(list(meat_options[meat_options["animal"]==meat]["emissions"])[0])
         meat_emission = meat_emission*float(grams)
-
-        #grams_order_list = grams_order[meat]
         
         #add the meat emissions to the emissions counters
         if emissions_counter+meat_emission <= target and no_dishes_chosen < no_dishes:
             emissions_counter += meat_emission
             recommend_list[meat] += float(grams)
-
-            #keep track of how many grams each meal should be
-            #grams_order_list.append(grams)
-            #grams_order[meat] = grams_order_list
             
             no_dishes_chosen += 1
     
@@ -284,7 +278,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         
         #find the min amount of 
         dishes = pd.read_csv("useable_dishes.csv")
-        unique_grams = np.unique(np.array(dishes[dishes["meat"]=="lamb"]["grams"]))
+        unique_grams = np.unique(np.array(dishes[dishes["meat"]==meat_name]["grams"]))
 
         #to be added to grams_order
         grams_order_list = grams_order[animal]
