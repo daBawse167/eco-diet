@@ -462,7 +462,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     
                 dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
                 print(dish_emissions)
-    
+                print(recommend_list[food[0]]-goal, min(list(selection["grams"])))
+            
             if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                 break
     
