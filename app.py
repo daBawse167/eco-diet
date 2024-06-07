@@ -103,6 +103,18 @@ def get_dishes():
     chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
     chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
     no_dishes = int(request.args.get("no_dishes"))
+
+    print(country_name)
+    print(grams)
+    print(meat)
+    
+    print(percent_reduction)
+    print(no_dishes)
+    
+    print(favourites)
+    print(chosen_dishes_meat_input)
+    print(chosen_dishes_grams)
+    print(chosen_dishes_names)
     
     return create_recommendations(eaten, country_name, favourites, percent_reduction,
                                  chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
