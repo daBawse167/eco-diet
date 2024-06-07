@@ -95,11 +95,11 @@ def get_dishes():
     #this route only requires the name of the dishes eaten to be entered
     dishes_eaten_names = request.args.get("dishes_eaten_names")
     
-    if len(dish_eaten_names)>0:
+    if len(dishes_eaten_names)>0:
         meat = []
         grams = []
         
-        for dish in dish_eaten_names:
+        for dish in dishes_eaten_names:
             meat.append(str(useable[useable["dish"]==dish]["meat"]))
             grams.append(float(useable[useable["dish"]==dish]["grams"]))
 
