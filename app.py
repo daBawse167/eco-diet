@@ -96,6 +96,7 @@ def get_dishes():
     dishes_eaten_names = request.args.get("dishes_eaten_names")
 
     if dishes_eaten_names is not None:
+        dishes_eaten_names = str(dishes_eaten_names).split(", ")
         meat = []
         grams = []
         
