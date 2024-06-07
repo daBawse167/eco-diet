@@ -95,8 +95,6 @@ def get_dishes():
     #this route only requires the name of the dishes eaten to be entered
     dishes_eaten_names = request.args.get("dishes_eaten_names")
 
-    print(dishes_eaten_names)
-    
     if dishes_eaten_names is not None:
         meat = []
         grams = []
@@ -316,7 +314,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                         recommend_list[animal] += float(grams)
                         no_dishes_chosen += 1
                         grams_order_list.append(grams)
-                        print(recommend_list, emissions_counter, target, grams)
+                        #print(recommend_list, emissions_counter, target, grams)
             else:
                 #this animal cannot be served, so take it out of the options
                 meat_options = meat_options[meat_options["animal"]!=meat_options.iloc[idx]["animal"]]
@@ -326,87 +324,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         
         idx += 1
 
-    print(grams_order)
-                               
-    """
-    while emissions_counter < target:
-    
-        #make sure white and red idx don't get out of range
-        if red_idx>=len(red_meat_options):
-            red_idx = 0
-        if white_idx>=len(white_meat_options):
-            white_idx = 0
-    
-        #break if no. grams is exceeded
-        if white_limit:
-            if red_limit:
-                break
-            
-        break_ = False
-        
-        print(no_white_dishes, no_red_dishes)
-            
-        if len(list(red_meat_options.iloc)) > 0:
-            #add 1 portion of red meat & its emissions
-            meat_emission = float(red_meat_options.iloc[red_idx]["emissions"])
-            animal = red_meat_options.iloc[red_idx]["animal"]
-    
-            #make sure we don't add too many dishes
-            if no_dishes_chosen >= no_dishes:
-                break_ = True
-            #check if the dish satisfies the portion requirement
-            elif emissions_counter+(meat_emission*portion) < target:
-                #add two red meats before one white meat
-                if (no_white_dishes+2)>no_red_dishes:
-                    emissions_counter += meat_emission*portion
-                    red_meat_counter += portion
-                    recommend_list[animal] += portion
-                    no_dishes_chosen += 1
-                    no_red_dishes += 1
-            #if not, check a smaller portion
-            elif emissions_counter+(meat_emission*(portion*(2/3))) < target:
-                #add two red meats before one white meat
-                if (no_white_dishes+2)>no_red_dishes:
-                    new_portion = portion*(2/3)
-                    emissions_counter += meat_emission*new_portion
-                    red_meat_counter += new_portion
-                    recommend_list[animal] += new_portion
-                    no_dishes_chosen += 1
-                    no_red_dishes += 1
-            else:
-                #this animal cannot be served, so take it out of the options
-                red_meat_options = red_meat_options[red_meat_options["animal"]!=red_meat_options.iloc[red_idx]["animal"]]
-    
-            print(recommend_list, no_dishes_chosen, "red", round(emissions_counter+(meat_emission*portion), 2), round(target, 2))
-    
-        else:
-            red_limit = True
-            
-        if len(list(white_meat_options.iloc)) > 0:
-            #add 1 portion of white meat & its emissions
-            meat_emission = float(white_meat_options.iloc[white_idx]["emissions"])
-            animal = white_meat_options.iloc[white_idx]["animal"]
-    
-            if emissions_counter+(meat_emission*portion) < target and no_dishes_chosen < no_dishes:
-                #add two red meats before one white meat
-                if (no_white_dishes+2)<=no_red_dishes:
-                    emissions_counter += meat_emission*portion
-                    white_meat_counter += portion
-                    recommend_list[animal] += portion
-                    no_dishes_chosen += 1
-                    no_white_dishes += 1
-            else:
-                #this animal cannot be served, so take it out of the options
-                white_meat_options = white_meat_options[white_meat_options["animal"]!=white_meat_options.iloc[white_idx]["animal"]]
-            print(recommend_list, no_dishes_chosen, "white", round(emissions_counter+(meat_emission*portion), 2), round(target, 2))
-        else:
-            white_limit = True
-            
-        if break_:
-            break
-    
-        red_idx += 1
-        white_idx += 1"""
+    #print(grams_order)
     
     #bring in the dishes here
     dishes = pd.read_csv("useable_dishes.csv")
@@ -431,7 +349,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     
     no_dishes_chosen = 0
 
-    print(recommend_list)
+    #print(recommend_list)
     
     for food in option_list:
 
@@ -462,7 +380,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
         for grams_option in grams_order[food[0]]:
             selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
             selection = selection[selection["grams"]==grams_option].reset_index(drop=True)
-            print(food, selection)
+            #print(food, selection)
             weighting = 4
             goal = 0
         
@@ -481,7 +399,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     
             choice = random.choices(list(selection.iloc), probabilities)[0]
 
-            print(goal, choice, recommend_list[food[0]])
+            #print(goal, choice, recommend_list[food[0]])
             
             #add the dish
             food[2].append(choice)
@@ -493,7 +411,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
             meat_type.append(food[1])
 
             dish_emissions.append(round((animals_eaten[food[0]]*choice["grams"])/1000, 3))
-            print(dish_emissions, recommend_list[food[0]]-goal, min(list(selection["grams"])))
+            #print(dish_emissions, recommend_list[food[0]]-goal, min(list(selection["grams"])))
             
             if (recommend_list[food[0]]-goal) < min(list(selection["grams"])):
                 break
@@ -508,7 +426,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     recommend_list["image"] = dish_images
     recommend_list["emissions"] = dish_emissions
 
-    print(recommend_list)
+    #print(recommend_list)
                                
     return recommend_list
 
@@ -535,8 +453,8 @@ def find_stock(country_name="", eaten={}):
     emissions_per_gram_list = []
     weekly_emitted = []
 
-    print(eaten)
-    print(country_df)
+    #print(eaten)
+    #print(country_df)
     
     for i in list(country_df["Item"]):
         #get the emissions per gram and weekly emitted
@@ -546,7 +464,7 @@ def find_stock(country_name="", eaten={}):
         emissions_per_gram_list.append(emissions_per_gram)
         weekly_emitted.append(round(emissions_per_gram*eaten[i], 2))
         
-        print(emissions_per_gram, eaten[i])
+        #print(emissions_per_gram, eaten[i])
     
     #add the columns to the dataset
     country_df["emissions (per gram)"] = emissions_per_gram_list
