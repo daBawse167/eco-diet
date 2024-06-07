@@ -72,20 +72,42 @@ def vegan():
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
 def get_dishes():
-    eaten = {"chickens":0, "cattle":0, "goats":0, "sheep":0, "swine":0, "buffalo":0}
+
+    #dataframe of dishes and their grams&meat
     useable = pd.read_csv("useable_dishes.csv")
+
+    eaten = {"chickens":0, "cattle":0, "goats":0, "sheep":0, "swine":0, "buffalo":0}
 
     duplicates = useable[useable["dish"].duplicated()]
     for i in duplicates.index:
         useable = useable.drop(i)
-    
+
     country_name = str(request.args.get("country_name"))
     percent_reduction = float(str(request.args.get("percent_reduction"))[:-1])/100
     favourites = str(request.args.get("favourites")).split(", ")
+
+    #get the specified requested dishes
+    chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
+    chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
+    chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
+    no_dishes = int(request.args.get("no_dishes"))
     
-    grams = str(request.args.get("grams")).split(", ")
-    meat = str(request.args.get("meat")).split(", ")
-    dishes = np.array([grams, meat]).T
+    #this route only requires the name of the dishes eaten to be entered
+    dishes_eaten_names = request.args.get("dishes_eaten_names")
+    
+    if len(dish_eaten_names)>0:
+        meat = []
+        grams = []
+        
+        for dish in dish_eaten_names:
+            meat.append(str(useable[useable["dish"]==dish]["meat"]))
+            grams.append(float(useable[useable["dish"]==dish]["grams"]))
+
+        dishes = np.array([grams, meat]).T
+    else:
+        grams = str(request.args.get("grams")).split(", ")
+        meat = str(request.args.get("meat")).split(", ")
+        dishes = np.array([grams, meat]).T
     
     #convert meat to animal
     for meal in dishes:
@@ -97,24 +119,6 @@ def get_dishes():
             eaten["sheep"] += float(meal[0])
         elif meal[1]=="chicken":
             eaten["chickens"] += float(meal[0])
-
-    #get the specified requested dishes
-    chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
-    chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
-    chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
-    no_dishes = int(request.args.get("no_dishes"))
-
-    print(country_name)
-    print(grams)
-    print(meat)
-    
-    print(percent_reduction)
-    print(no_dishes)
-    
-    print(favourites)
-    print(chosen_dishes_meat_input)
-    print(chosen_dishes_grams)
-    print(chosen_dishes_names)
     
     return create_recommendations(eaten, country_name, favourites, percent_reduction,
                                  chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
