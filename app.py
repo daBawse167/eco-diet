@@ -165,7 +165,7 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     animals_eaten, options = return_animals[0], return_animals[1]
     user_chosen_dishes = []
                                
-    if chosen_dishes_meat[0]!='None':
+    if len(chosen_dishes_meat)>0:
         user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
 
     if len(user_chosen_dishes)>0:
