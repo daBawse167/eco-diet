@@ -163,9 +163,10 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     
     return_animals = find_stock(country_name=country_name, eaten=eaten)
     animals_eaten, options = return_animals[0], return_animals[1]
-    
-    
-    user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
+    user_chosen_dishes = []
+                               
+    if chosen_dishes_meat[0]!='None':
+        user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
 
     if len(user_chosen_dishes)>0:
         #get the emissions of the user chosen dishes animals
@@ -234,33 +235,34 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     grams_order = {"Cow":[], "Sheep":[], "Chicken":[], "Pig":[]}
     
     #add the user's pre-selected dishes (if any)
-    for i in user_chosen_dishes:
-        meat=i[0]
-        grams=i[1]
-    
-        #gets the emissions per 1g of each animal
-        meat_options = pd.concat([white_meat_options, red_meat_options])
+    if len(user_chosen_dishes)>0:
+        for i in user_chosen_dishes:
+            meat=i[0]
+            grams=i[1]
         
-        #calculates hypothetical emissions of each "chosen dish"
-        meat_emission = float(list(meat_options[meat_options["animal"]==meat]["emissions"])[0])
-        meat_emission = meat_emission*float(grams)
-        
-        #add the meat emissions to the emissions counters
-        if emissions_counter+meat_emission <= target and no_dishes_chosen < no_dishes:
-            emissions_counter += meat_emission
-            recommend_list[meat] += float(grams)
+            #gets the emissions per 1g of each animal
+            meat_options = pd.concat([white_meat_options, red_meat_options])
             
-            no_dishes_chosen += 1
-    
-            if meat=="Chicken":
-                white_meat_counter += meat_emission
-                no_white_dishes += 1
+            #calculates hypothetical emissions of each "chosen dish"
+            meat_emission = float(list(meat_options[meat_options["animal"]==meat]["emissions"])[0])
+            meat_emission = meat_emission*float(grams)
+            
+            #add the meat emissions to the emissions counters
+            if emissions_counter+meat_emission <= target and no_dishes_chosen < no_dishes:
+                emissions_counter += meat_emission
+                recommend_list[meat] += float(grams)
+                
+                no_dishes_chosen += 1
+        
+                if meat=="Chicken":
+                    white_meat_counter += meat_emission
+                    no_white_dishes += 1
+                else:
+                    red_meat_counter += meat_emission
+                    no_red_dishes += 1
             else:
-                red_meat_counter += meat_emission
-                no_red_dishes += 1
-        else:
-            user_chosen_dishes = [j for j in user_chosen_dishes if j[2]!=i[2]]
-            break
+                user_chosen_dishes = [j for j in user_chosen_dishes if j[2]!=i[2]]
+                break
     
     red_meat_options = red_meat_options.sort_values(by="emissions", ascending=False)
     
@@ -427,27 +429,28 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     
     for food in option_list:
 
-        #add the dish names of the requested dishes
-        for i in user_chosen_dishes:
-            selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
-            
-            if food[0]==i[0]:
+        if len(user_chosen_dishes)>0:
+            #add the dish names of the requested dishes
+            for i in user_chosen_dishes:
+                selection = dishes[dishes["meat"]==food[1]].reset_index(drop=True)
                 
-                choice = selection[selection["dish"]==i[2]]
-                meat_emission = round((animals_eaten[food[0]]*list(choice["grams"])[0])/1000, 3)
-                
-                if sum(dish_emissions)+meat_emission <= target and no_dishes_chosen < no_dishes:
-    
-                    food[2].append(choice)
-                    goal += list(choice["grams"])[0]
-                    no_dishes_chosen += 1
-    
-                    dish_names.append(list(choice["dish"])[0])
-                    dish_grams.append(list(choice["grams"])[0])
-                    dish_images.append(list(choice["image"])[0])
-                    meat_type.append(food[1])
-    
-                    dish_emissions.append(meat_emission)
+                if food[0]==i[0]:
+                    
+                    choice = selection[selection["dish"]==i[2]]
+                    meat_emission = round((animals_eaten[food[0]]*list(choice["grams"])[0])/1000, 3)
+                    
+                    if sum(dish_emissions)+meat_emission <= target and no_dishes_chosen < no_dishes:
+        
+                        food[2].append(choice)
+                        goal += list(choice["grams"])[0]
+                        no_dishes_chosen += 1
+        
+                        dish_names.append(list(choice["dish"])[0])
+                        dish_grams.append(list(choice["grams"])[0])
+                        dish_images.append(list(choice["image"])[0])
+                        meat_type.append(food[1])
+        
+                        dish_emissions.append(meat_emission)
         
         #make sure the grams for the meal is correct
         for grams_option in grams_order[food[0]]:
