@@ -101,7 +101,7 @@ def get_dishes():
         
         for dish in dishes_eaten_names:
             meat.append(str(useable[useable["dish"]==dish]["meat"]))
-            grams.append(float(useable[useable["dish"]==dish]["grams"]))
+            grams.append(float(useable[useable["dish"]==dish]["grams"][0]))
 
         dishes = np.array([grams, meat]).T
     else:
