@@ -93,11 +93,11 @@ def get_dishes():
     no_dishes = int(request.args.get("no_dishes"))
     
     #this route only requires the name of the dishes eaten to be entered
-    dishes_eaten_names = str(request.args.get("dishes_eaten_names")).split(", ")
+    dishes_eaten_names = request.args.get("dishes_eaten_names")
 
     print(dishes_eaten_names)
     
-    if len(dishes_eaten_names)>0:
+    if dishes_eaten_names is not None:
         meat = []
         grams = []
         
