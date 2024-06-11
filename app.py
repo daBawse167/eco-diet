@@ -367,7 +367,6 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
                     if sum(dish_emissions)+meat_emission <= target and no_dishes_chosen < no_dishes:
         
                         food[2].append(choice)
-                        goal += list(choice["grams"])[0]
                         no_dishes_chosen += 1
         
                         dish_names.append(list(choice["dish"])[0])
