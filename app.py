@@ -77,7 +77,6 @@ def array_convert(dishes_eaten_names=[], use_names=True, grams_list=[], meat_lis
     dishes = []
     
     if use_names:
-        dishes_eaten_names = str(dishes_eaten_names).split(", ")
         meat = []
         grams = []
         
@@ -132,6 +131,7 @@ def api_endpoint():
     if len(dishes)==0:
         return {"result": "invalid input"}
 
+    print(dishes)
     eaten = array_convert(dishes_eaten_names=dishes, use_names=True)
     return create_recommendations(eaten, country_name, [], percent_reduction,
                                  chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
