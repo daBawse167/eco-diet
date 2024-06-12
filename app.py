@@ -1,5 +1,6 @@
 import os
 import random
+import difflib
 import numpy as np
 import pandas as pd
 import statistics as stats
@@ -69,6 +70,72 @@ def vegan():
     result = {"Vegan":list(result["Vegan"]), "ingredients":list(result["ingredients"]), "preparation":list(result["preparation"])}
     return result
 
+#convert an array into grams and meat
+def array_convert(dishes_eaten_names=[], use_names=True, grams_list=[], meat_list=[]):
+    useable = pd.read_csv("useable_dishes.csv")
+    eaten = {"chickens":0, "cattle":0, "goats":0, "sheep":0, "swine":0, "buffalo":0}
+    dishes = []
+    
+    if use_names:
+        dishes_eaten_names = str(dishes_eaten_names).split(", ")
+        meat = []
+        grams = []
+        
+        for dish in dishes_eaten_names:
+            meat.append(list(useable[useable["dish"]==dish]["meat"])[0])
+            grams.append(list(useable[useable["dish"]==dish]["grams"])[0])
+
+        dishes = np.array([grams, meat]).T
+    else:
+        dishes = np.array([grams_list, meat_list]).T
+    
+    #convert meat to animal
+    for meal in dishes:
+        if meal[1]=="beef":
+            eaten["cattle"] += float(meal[0])
+        elif meal[1]=="pork":
+            eaten["swine"] += float(meal[0])
+        elif meal[1]=="lamb":
+            eaten["sheep"] += float(meal[0])
+        elif meal[1]=="chicken":
+            eaten["chickens"] += float(meal[0])
+    
+    return eaten
+
+@app.route("/api_endpoint", methods=["GET"])
+def api_endpoint():
+    #input features
+    country_name = str(request.args.get("country_name"))
+    percent_reduction = float(str(request.args.get("percent_reduction"))[:-1])/100
+    no_dishes = int(request.args.get("no_dishes"))
+    
+    chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
+    chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
+    chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
+    
+    #user inputs their dishes
+    input_dishes = request.args.get("dishes_eaten")
+    #get the data of dishes
+    useable = pd.read_csv("useable_dishes.csv")
+    target_dishes = list(useable["dish"])
+    dishes = []
+    
+    #loop over the user's choices
+    for dish in input_dishes:
+        #get the closest match
+        match = difflib.get_close_matches(dish, target_dishes, n=1, cutoff=0.1)
+        if len(match)>0:
+            match=match[0]
+            dishes.append(match)
+    
+    #incase there is no match, make sure there is no error
+    if len(dishes)==0:
+        return {"result": "invalid input"}
+
+    eaten = array_convert(dishes_eaten_names=dishes, use_names=True)
+    return create_recommendations(eaten, country_name, [], percent_reduction,
+                                 chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
+
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
 def get_dishes():
@@ -95,31 +162,9 @@ def get_dishes():
     #this route only requires the name of the dishes eaten to be entered
     dishes_eaten_names = request.args.get("dishes_eaten_names")
 
-    if dishes_eaten_names is not None:
-        dishes_eaten_names = str(dishes_eaten_names).split(", ")
-        meat = []
-        grams = []
-        
-        for dish in dishes_eaten_names:
-            meat.append(list(useable[useable["dish"]==dish]["meat"])[0])
-            grams.append(list(useable[useable["dish"]==dish]["grams"])[0])
-
-        dishes = np.array([grams, meat]).T
-    else:
-        grams = str(request.args.get("grams")).split(", ")
-        meat = str(request.args.get("meat")).split(", ")
-        dishes = np.array([grams, meat]).T
-    
-    #convert meat to animal
-    for meal in dishes:
-        if meal[1]=="beef":
-            eaten["cattle"] += float(meal[0])
-        elif meal[1]=="pork":
-            eaten["swine"] += float(meal[0])
-        elif meal[1]=="lamb":
-            eaten["sheep"] += float(meal[0])
-        elif meal[1]=="chicken":
-            eaten["chickens"] += float(meal[0])
+    eaten = array_convert(dishes_eaten_names=dishes_eaten_names, use_names=dishes_eaten_names is not None, 
+                          grams_list=str(request.args.get("grams")).split(", "), 
+                          meat_list=str(request.args.get("meat")).split(", "))
     
     return create_recommendations(eaten, country_name, favourites, percent_reduction,
                                  chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
