@@ -152,7 +152,7 @@ def api_endpoint():
     percent_reduced = round((recommended["emitted (kg)"]-recommended["target (kg)"])/recommended["emitted (kg)"]*100, 2)
     
     result = {"recommended dishes":dish_emitted, "percent reduction":percent_reduced, "previously emitted":recommended["emitted (kg)"], 
-              "target emissions":recommend["target (kg)"]}
+              "target emissions":recommended["target (kg)"]}
     return result
 
 #user enters in dish type
