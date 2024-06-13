@@ -132,7 +132,6 @@ def api_endpoint():
     for dish in input_dishes:
         #get the closest match
         match = difflib.get_close_matches(dish, target_dishes, n=1, cutoff=0.1)
-        print(match)
         if len(match)>0:
             match=match[0]
             dishes.append(match)
@@ -141,10 +140,20 @@ def api_endpoint():
     if len(dishes)==0:
         return {"result": "invalid input"}
 
-    print(dishes)
     eaten = array_convert(dishes_eaten_names=dishes, use_names=True)
-    return create_recommendations(eaten, country_name, [], percent_reduction,
+    recommended = create_recommendations(eaten, country_name, [], percent_reduction,
                                  chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
+
+    print(recommended)
+    
+    #combines the recommended dishes with their CO2 production
+    dish_emitted = np.array([list(np.array(recommended["recommend_dishes"]).T), list(np.array(recommended["emissions"]).T)]).T
+    #calculates the percentage of CO2 reduced
+    percent_reduced = round((recommended["emitted (kg)"]-recommended["target (kg)"])/recommended["emitted (kg)"]*100, 2)
+    
+    result = {"recommended dishes":dish_emitted, "percent reduction":percent_reduced, "previously emitted":recommended["emitted (kg)"], 
+              "target emissions":recommend["target (kg)"]}
+    return result
 
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
