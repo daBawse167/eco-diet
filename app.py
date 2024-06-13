@@ -145,7 +145,7 @@ def api_endpoint():
                                  chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
 
     #combines the recommended dishes with their CO2 production
-    dish_emitted = np.array([list(np.array(recommended["recommend_dishes"]).T), list(np.array(recommended["emissions"]).T)]).T
+    dish_emitted = np.array([np.array(recommended["recommend_dishes"]).T.tolist(), np.array(recommended["emissions"]).T.tolist()]).T
     #calculates the percentage of CO2 reduced
     percent_reduced = round((recommended["emitted (kg)"]-recommended["target (kg)"])/recommended["emitted (kg)"]*100, 2)
     
