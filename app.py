@@ -118,11 +118,14 @@ def api_endpoint():
     useable = pd.read_csv("useable_dishes.csv")
     target_dishes = list(useable["dish"])
     dishes = []
+
+    print(input_dishes)
     
     #loop over the user's choices
     for dish in input_dishes:
         #get the closest match
         match = difflib.get_close_matches(dish, target_dishes, n=1, cutoff=0.1)
+        print(match)
         if len(match)>0:
             match=match[0]
             dishes.append(match)
