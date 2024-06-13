@@ -151,7 +151,7 @@ def api_endpoint():
     #calculates the percentage of CO2 reduced
     percent_reduced = round((recommended["emitted (kg)"]-recommended["target (kg)"])/recommended["emitted (kg)"]*100, 2)
     
-    result = {"recommended dishes":dish_emitted, "percent reduction":percent_reduced, "previously emitted":recommended["emitted (kg)"], 
+    result = {"recommended dishes":list(dish_emitted), "percent reduction":percent_reduced, "previously emitted":recommended["emitted (kg)"], 
               "target emissions":recommended["target (kg)"]}
     return result
 
