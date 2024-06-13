@@ -113,11 +113,18 @@ def api_endpoint():
     chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
     
     #user inputs their dishes
-    input_dishes = request.args.getlist("dishes_eaten")
+    input_dishes = request.args.get("dishes_eaten")
     #get the data of dishes
     useable = pd.read_csv("useable_dishes.csv")
     target_dishes = list(useable["dish"])
     dishes = []
+
+    #format the inputs to be suitable for the code
+    input_dishes = input_dishes.replace('"', "")
+    input_dishes = input_dishes.replace("'", "")
+    input_dishes = input_dishes.replace('[', "")
+    input_dishes = input_dishes.replace(']', "")
+    input_dishes = input_dishes.split(",")
 
     print(input_dishes)
     
