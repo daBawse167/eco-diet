@@ -144,8 +144,6 @@ def api_endpoint():
     recommended = create_recommendations(eaten, country_name, [], percent_reduction,
                                  chosen_dishes_meat_input, chosen_dishes_grams, chosen_dishes_names, no_dishes)
 
-    print(recommended)
-    
     #combines the recommended dishes with their CO2 production
     dish_emitted = np.array([list(np.array(recommended["recommend_dishes"]).T), list(np.array(recommended["emissions"]).T)]).T
     #calculates the percentage of CO2 reduced
@@ -153,6 +151,7 @@ def api_endpoint():
     
     result = {"recommended dishes":list(dish_emitted), "percent reduction":percent_reduced, "previously emitted":recommended["emitted (kg)"], 
               "target emissions":recommended["target (kg)"]}
+    print(result)
     return result
 
 #user enters in dish type
