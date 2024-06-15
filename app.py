@@ -206,8 +206,6 @@ def api_one_dish():
     c_and_d = country_and_dishes(country_name, input_dish)
     country_name, input_dish = c_and_d[0], c_and_d[1][0]
 
-    print(c_and_d)
-
     #incase there is no match, make sure there is no error
     if len(input_dish)==0:
         return {"result": "invalid dish input"}
@@ -231,7 +229,7 @@ def api_one_dish():
     
     value = df[df["Item"]==meat]["Value"]
     value = round(float(value*(grams/1000)), 3)
-    return {"emissions": str(value)+" kg CO2"}
+    return {"{input_dish} emissions": str(value)+" kg CO2"}
 
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
