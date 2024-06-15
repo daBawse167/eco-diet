@@ -111,6 +111,25 @@ def api_endpoint():
     chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
     chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
     chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
+
+    #converts input country to 
+    total_df = pd.read_csv("FAOSTAT.csv")
+    countries = np.unique(list(total_df["Area"]))
+
+    #check if the input is inside one of the data points
+    country_match = ""
+    for country in countries:
+        if country_name.lower() in country.lower():
+            country_match = country
+            break
+    #if not, find the closest match
+    else:
+        country_match = difflib.get_close_matches(country_name, countries, n=1, cutoff=0.1)[0]
+    
+    if country_match=="":
+        return {"result": "invalid country input"}
+
+    country_name=country_match
     
     #user inputs their dishes
     input_dishes = request.args.get("dishes_eaten")
@@ -138,7 +157,7 @@ def api_endpoint():
     
     #incase there is no match, make sure there is no error
     if len(dishes)==0:
-        return {"result": "invalid input"}
+        return {"result": "invalid dish input"}
 
     eaten = array_convert(dishes_eaten_names=dishes, use_names=True)
     recommended = create_recommendations(eaten, country_name, [], percent_reduction,
