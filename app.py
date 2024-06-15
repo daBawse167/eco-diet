@@ -174,10 +174,10 @@ def api_diet():
     #user inputs their dishes
     input_dishes = request.args.get("dishes_eaten")
 
-    c&d = country_and_dishes(country_name, input_dishes)
-    country_name, dishes = c&d[0], c&d[1]
+    c_and_d = country_and_dishes(country_name, input_dishes)
+    country_name, dishes = c_and_d[0], c_and_d[1]
 
-    print(c&d)
+    print(c_and_d)
     
     #incase there is no match, make sure there is no error
     if len(dishes)==0:
