@@ -124,10 +124,11 @@ def api_endpoint():
             break
     #if not, find the closest match
     else:
-        country_match = difflib.get_close_matches(country_name, countries, n=1, cutoff=0.1)[0]
-    
-    if country_match=="":
-        return {"result": "invalid country input"}
+        country_match = difflib.get_close_matches(country_name, countries, n=1, cutoff=0.1)
+        if len(country_match)==0:
+            return {"result": "invalid country input"}
+        else:
+            country_match = country_match[0]
 
     country_name=country_match
     
