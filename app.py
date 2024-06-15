@@ -101,8 +101,50 @@ def array_convert(dishes_eaten_names=[], use_names=True, grams_list=[], meat_lis
     
     return eaten
 
-@app.route("/api_endpoint", methods=["GET"])
-def api_endpoint():
+#find closest country and dishes
+def country_and_dishes(country_name, input_dishes):
+    #converts input country to 
+    total_df = pd.read_csv("FAOSTAT.csv")
+    countries = np.unique(list(total_df["Area"]))
+
+    #check if the input is inside one of the data points
+    country_match = ""
+    for country in countries:
+        if country_name.lower() in country.lower():
+            country_match = country
+            country_name = country_match
+            break
+    #if not, find the closest match
+    else:
+        country_match = difflib.get_close_matches(country_name, countries, n=1, cutoff=0.1)
+        if len(country_match)>0:
+            country_match = country_match[0]
+            country_name = country_match
+    
+    #get the data of dishes
+    useable = pd.read_csv("useable_dishes.csv")
+    target_dishes = list(useable["dish"])
+    dishes = []
+
+    #format the inputs to be suitable for the code
+    input_dishes = input_dishes.replace('"', "")
+    input_dishes = input_dishes.replace("'", "")
+    input_dishes = input_dishes.replace('[', "")
+    input_dishes = input_dishes.replace(']', "")
+    input_dishes = input_dishes.split(",")
+    
+    #loop over the user's choices
+    for dish in input_dishes:
+        #get the closest match
+        match = difflib.get_close_matches(dish, target_dishes, n=1, cutoff=0.1)
+        if len(match)>0:
+            match=match[0]
+            dishes.append(match)
+
+    return [country_name, input_dishes]
+
+@app.route("/api_diet", methods=["GET"])
+def api_diet():
     #input features
     percent_reduction = str(request.args.get("percent_reduction"))
 
@@ -128,48 +170,20 @@ def api_endpoint():
     total_df = pd.read_csv("FAOSTAT.csv")
     countries = np.unique(list(total_df["Area"]))
     country_name = str(request.args.get("country_name"))
-
-    #check if the input is inside one of the data points
-    country_match = ""
-    for country in countries:
-        if country_name.lower() in country.lower():
-            country_match = country
-            break
-    #if not, find the closest match
-    else:
-        country_match = difflib.get_close_matches(country_name, countries, n=1, cutoff=0.1)
-        if len(country_match)==0:
-            return {"result": "invalid country input"}
-        else:
-            country_match = country_match[0]
-
-    country_name=country_match
     
     #user inputs their dishes
     input_dishes = request.args.get("dishes_eaten")
-    #get the data of dishes
-    useable = pd.read_csv("useable_dishes.csv")
-    target_dishes = list(useable["dish"])
-    dishes = []
 
-    #format the inputs to be suitable for the code
-    input_dishes = input_dishes.replace('"', "")
-    input_dishes = input_dishes.replace("'", "")
-    input_dishes = input_dishes.replace('[', "")
-    input_dishes = input_dishes.replace(']', "")
-    input_dishes = input_dishes.split(",")
-    
-    #loop over the user's choices
-    for dish in input_dishes:
-        #get the closest match
-        match = difflib.get_close_matches(dish, target_dishes, n=1, cutoff=0.1)
-        if len(match)>0:
-            match=match[0]
-            dishes.append(match)
+    c&d = country_and_dishes(country_name, input_dishes)
+    country_name, dishes = c&d[0], c&d[1]
+
+    print(c&d)
     
     #incase there is no match, make sure there is no error
     if len(dishes)==0:
         return {"result": "invalid dish input"}
+    if country_name=="":
+        return {"result": "invalid country input"}
 
     eaten = array_convert(dishes_eaten_names=dishes, use_names=True)
     recommended = create_recommendations(eaten, country_name, [], percent_reduction,
