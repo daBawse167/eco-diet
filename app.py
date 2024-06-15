@@ -141,7 +141,7 @@ def country_and_dishes(country_name, input_dishes):
             match=match[0]
             dishes.append(match)
 
-    return [country_name, input_dishes]
+    return [country_name, dishes]
 
 @app.route("/api_endpoint", methods=["GET"])
 def api_diet():
