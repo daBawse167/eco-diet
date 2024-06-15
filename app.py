@@ -143,7 +143,7 @@ def country_and_dishes(country_name, input_dishes):
 
     return [country_name, input_dishes]
 
-@app.route("/api_diet", methods=["GET"])
+@app.route("/api_endpoint", methods=["GET"])
 def api_diet():
     #input features
     percent_reduction = str(request.args.get("percent_reduction"))
