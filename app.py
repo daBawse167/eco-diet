@@ -158,8 +158,6 @@ def api_endpoint():
     input_dishes = input_dishes.replace('[', "")
     input_dishes = input_dishes.replace(']', "")
     input_dishes = input_dishes.split(",")
-
-    print(input_dishes)
     
     #loop over the user's choices
     for dish in input_dishes:
@@ -182,9 +180,9 @@ def api_endpoint():
     #calculates the percentage of CO2 reduced
     percent_reduced = round((recommended["emitted (kg)"]-recommended["target (kg)"])/recommended["emitted (kg)"]*100, 2)
     
-    result = {"recommended dishes":list(dish_emitted), "percent reduction":percent_reduced, "previously emitted":recommended["emitted (kg)"], 
-              "target emissions":recommended["target (kg)"]}
-    print(result)
+    result = {"recommended dishes":list(dish_emitted), "percent reduction":percent_reduced+"%",
+              "previously emitted":recommended["emitted (kg)"] + " kg CO2",
+              "target emissions":recommended["target (kg)"] + " kg CO2"}
     return result
 
 #user enters in dish type
