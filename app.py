@@ -203,7 +203,7 @@ def api_one_dish():
     input_dish = request.args.get("dish")
 
     #convert country and dishes to be useable
-    c_and_d = country_and_dishes(country_name, [input_dish])
+    c_and_d = country_and_dishes(country_name, input_dish)
     country_name, input_dish = c_and_d[0], c_and_d[1]
 
     print(c_and_d)
