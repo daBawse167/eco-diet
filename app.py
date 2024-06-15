@@ -116,6 +116,10 @@ def api_endpoint():
     percent_reduction = float(percent_reduction)/100
     
     no_dishes = int(request.args.get("no_dishes"))
+
+    if no_dishes not in range(1, 7):
+        return {"result": "please enter a number between 1-6"}
+    
     chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
     chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
     chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
