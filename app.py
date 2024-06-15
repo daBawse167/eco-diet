@@ -168,7 +168,6 @@ def api_diet():
 
     #converts input country to 
     total_df = pd.read_csv("FAOSTAT.csv")
-    countries = np.unique(list(total_df["Area"]))
     country_name = str(request.args.get("country_name"))
     
     #user inputs their dishes
@@ -176,8 +175,6 @@ def api_diet():
 
     c_and_d = country_and_dishes(country_name, input_dishes)
     country_name, dishes = c_and_d[0], c_and_d[1]
-
-    print(c_and_d)
     
     #incase there is no match, make sure there is no error
     if len(dishes)==0:
@@ -198,6 +195,43 @@ def api_diet():
               "previously emitted":str(recommended["emitted (kg)"]) + " kg CO2",
               "target emissions":str(recommended["target (kg)"]) + " kg CO2"}
     return result
+
+@app.route("/api_one_dish", methods=["GET"])
+def api_one_dish():
+    #user inputs their dishes & country
+    country_name = str(request.args.get("country_name"))
+    input_dish = request.args.get("dish")
+
+    #convert country and dishes to be useable
+    c_and_d = country_and_dishes(country_name, [input_dish])
+    country_name, input_dish = c_and_d[0], c_and_d[1]
+
+    print(c_and_d)
+
+    #incase there is no match, make sure there is no error
+    if len(input_dish)==0:
+        return {"result": "invalid dish input"}
+    if country_name=="":
+        return {"result": "invalid country input"}
+    
+    #get the meat of the requested dish
+    dishes = pd.read_csv("useable_dishes.csv")
+    meat = list(dishes[dishes["dish"]==input_dish]["meat"])[0]
+    grams = list(dishes[dishes["dish"]==input_dish]["grams"])[0]
+    
+    df = pd.read_csv("FAOSTAT.csv")
+    df = df[df["Area"]==country_name]
+    
+    df["Item"] = df["Item"].replace("Meat of cattle with the bone, fresh or chilled", "beef")
+    df["Item"] = df["Item"].replace("Meat of goat, fresh or chilled", "goat")
+    df["Item"] = df["Item"].replace("Meat of buffalo, fresh or chilled", "buffalo")
+    df["Item"] = df["Item"].replace("Meat of sheep, fresh or chilled", "lamb")
+    df["Item"] = df["Item"].replace("Meat of chickens, fresh or chilled", "chicken")
+    df["Item"] = df["Item"].replace("Meat of pig with the bone, fresh or chilled", "pork")
+    
+    value = df[df["Item"]==meat]["Value"]
+    value = round(float(value*(grams/1000)), 3)
+    return str(value)
 
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
