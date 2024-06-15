@@ -104,10 +104,18 @@ def array_convert(dishes_eaten_names=[], use_names=True, grams_list=[], meat_lis
 @app.route("/api_endpoint", methods=["GET"])
 def api_endpoint():
     #input features
-    country_name = str(request.args.get("country_name"))
-    percent_reduction = float(str(request.args.get("percent_reduction"))[:-1])/100
-    no_dishes = int(request.args.get("no_dishes"))
+    percent_reduction = str(request.args.get("percent_reduction"))
+
+    #make sure no invalid characters are input in the percent_reduction
+    if len(percent_reduction) > 2:
+        return {"result": "please enter a number between 1-99"}
+    for i in percent_reduction:
+        if i not in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+            return {"result": "please enter a valid integer"}
+
+    percent_reduction = float(percent_reduction)/100
     
+    no_dishes = int(request.args.get("no_dishes"))
     chosen_dishes_meat_input = str(request.args.get("chosen_dishes_meat")).split(", ")
     chosen_dishes_grams = str(request.args.get("chosen_dishes_grams")).split(", ")
     chosen_dishes_names = str(request.args.get("chosen_dishes_names")).split(", ")
@@ -115,6 +123,7 @@ def api_endpoint():
     #converts input country to 
     total_df = pd.read_csv("FAOSTAT.csv")
     countries = np.unique(list(total_df["Area"]))
+    country_name = str(request.args.get("country_name"))
 
     #check if the input is inside one of the data points
     country_match = ""
