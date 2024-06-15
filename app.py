@@ -229,7 +229,7 @@ def api_one_dish():
     
     value = df[df["Item"]==meat]["Value"]
     value = round(float(value*(grams/1000)), 3)
-    return {"{input_dish} emissions": str(value)+" kg CO2"}
+    return {f"{input_dish} emissions": str(value)+" kg CO2"}
 
 #user enters in dish type
 @app.route("/get_dishes", methods=["GET"])
