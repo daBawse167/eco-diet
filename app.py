@@ -308,7 +308,8 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     
     return_animals = find_stock(country_name=country_name, eaten=eaten)
 
-    print(return_animals)
+    for i in return_animals.columns:
+        print(i, return_animals[i])
                                
     animals_eaten, options = return_animals[0], return_animals[1]
     user_chosen_dishes = []
