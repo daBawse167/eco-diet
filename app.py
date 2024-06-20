@@ -307,11 +307,11 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
     no_dishes_chosen=0
     
     return_animals = find_stock(country_name=country_name, eaten=eaten)
-
-    print(return_animals)
                                
     animals_eaten, options = return_animals[0], return_animals[1]
     user_chosen_dishes = []
+
+    print(return_animals)
                                
     if len(chosen_dishes_meat)>0:
         user_chosen_dishes = np.array([chosen_dishes_meat, chosen_dishes_grams, chosen_dishes_names]).T
@@ -576,44 +576,25 @@ def create_recommendations(eaten, country_name, favourites, percent_reduction,
 
 
 def find_stock(country_name="", eaten={}):
-    #get FAOSTAT data
-    faostat = pd.read_csv("FAOSTAT.csv")
-    faostat = faostat[['Area', 'Item', 'Value']]
-    faostat["emissions (per kg)"] = faostat["Value"]
-    faostat = faostat.drop("Value", axis=1)
-    
-    #change animals names
-    faostat["Item"] = faostat["Item"].replace("Meat of cattle with the bone, fresh or chilled", "Cow")
-    faostat["Item"] = faostat["Item"].replace("Meat of goat, fresh or chilled", "Goat")
-    faostat["Item"] = faostat["Item"].replace("Meat of buffalo, fresh or chilled", "Buffalo")
-    faostat["Item"] = faostat["Item"].replace("Meat of sheep, fresh or chilled", "Sheep")
-    faostat["Item"] = faostat["Item"].replace("Meat of chickens, fresh or chilled", "Chicken")
-    faostat["Item"] = faostat["Item"].replace("Meat of pig with the bone, fresh or chilled", "Pig")
-    
-    #loop over country
-    country_df = faostat[faostat["Area"]==country_name]
-    
+    df = pd.read_csv("meat_per_kg.csv")
     emissions_per_gram_list = []
     weekly_emitted = []
-
-    #print(eaten)
-    #print(country_df)
     
-    for i in list(country_df["Item"]):
+    for i in list(df["Entity"]):
         #get the emissions per gram and weekly emitted
-        idx = list(country_df["Item"]).index(i)
-        emissions_per_gram = country_df["emissions (per kg)"].iloc[idx] / 1000
+        idx = list(df["Entity"]).index(i)
+        emissions_per_gram = df["Emissions per kilogram"].iloc[idx] / 1000
         
         emissions_per_gram_list.append(emissions_per_gram)
         weekly_emitted.append(round(emissions_per_gram*eaten[i], 2))
-        
-        #print(emissions_per_gram, eaten[i])
     
-    #add the columns to the dataset
-    country_df["emissions (per gram)"] = emissions_per_gram_list
-    country_df["weekly_emitted (kg/animal)"] = weekly_emitted
+    df["emissions (per gram)"] = emissions_per_gram_list
+    df["weekly_emitted (kg/animal)"] = weekly_emitted
     
-    return [country_df, list(country_df["emissions (per gram)"])]
+    df.rename(columns = {'Entity':'Item'}, inplace = True)
+    df.rename(columns = {'Emissions per kilogram':'emissions (per kg)'}, inplace = True)
+    
+    return [df, list(df["emissions (per gram)"])]
 
 @app.route('/present', methods=["GET"])
 def present():
