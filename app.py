@@ -40,6 +40,149 @@ def calculate_footprint():
 
     return str(total_emissions)
 
+@app.route("/recommendations", methods=["GET"])
+def recommend():
+
+    #get inputs
+    footprint = float(request.args.get("footprint"))
+    percent_reduction = int(request.args.get("percent_reduction"))
+    user_selected_dishes = str(request.args.get("user_selected_dishes")).split(", ")
+    user_selected_grams = str(request.args.get("user_selected_grams")).split(", ")
+                 
+    df = pd.read_csv("food-footprints.csv")
+    target = footprint*(1-(percent_reduction/100))
+    print(target)
+    
+    recommendation = {"Monday":["", "", ""], "Tuesday":["", "", ""], "Wednesday":["", "", ""], "Thursday":["", "", ""], "Friday":["", "", ""], 
+                      "Saturday":["", "", ""], "Sunday":["", "", ""]}
+    recommended_emissions = {"Monday":[0, 0, 0], "Tuesday":[0, 0, 0], "Wednesday":[0, 0, 0], "Thursday":[0, 0, 0], "Friday":[0, 0, 0], 
+                      "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
+
+    #loop over all the user-selected meals
+    if len(user_selected_dishes) > 0:
+        for dish in user_selected_dishes:
+            meal_type = list(df[df["Entity"]==dish]["type"])[0]
+        
+            #randomly insert the meal into a breakfast, lunch or dinner slot
+            if meal_type == "breakfast":
+                while True:
+                    rand = random.randint(0,6)
+                    day = list(recommendation.items())[rand][0]
+                    day_dishes = recommendation[day]
+                    
+                    if day_dishes[0]=="":
+                        day_dishes[0] = dish
+                        recommendation[day] = day_dishes
+                        break
+            elif meal_type == "lunch":
+                while True:
+                    rand = random.randint(0,6)
+                    day = list(recommendation.items())[rand][0]
+                    day_dishes = recommendation[day]
+                    
+                    if day_dishes[1]=="":
+                        day_dishes[1] = dish
+                        recommendation[day] = day_dishes
+                        break
+            elif meal_type == "dinner":
+                while True:
+                    rand = random.randint(0,6)
+                    day = list(recommendation.items())[rand][0]
+                    day_dishes = recommendation[day]
+                    
+                    if day_dishes[2]=="":
+                        day_dishes[2] = dish
+                        recommendation[day] = day_dishes
+                        break
+    
+    #set the red meat, white meat and seafood limits
+    red_meat_limit = 2
+    white_meat_limit = 3
+    seafood_limit = 3
+    
+    meal_spaces = np.array(list(recommendation.values())).T.tolist()
+    meal_type_names = ["breakfast", "lunch", "dinner"]
+    final_dishes = []
+    final_emissions = []
+    final_meal_type = []
+    final_index = []
+    chosen_dishes_index = []
+    
+    i = 0
+    idx = 0
+    
+    #loop over every non-selected meal in the week
+    for meal_space in meal_spaces:
+        j = 0
+    
+        #find the highest emitting dishes
+        options = df[df["type"]==meal_type_names[i]].sort_values(ascending=False, by="Emissions per kilogram")
+        for space in meal_space:
+    
+            #fill the empty spaces with the highest emitters (with the same breakfast, lunch, dinner category)
+            if space=="":
+                dish_name = list(options["Entity"])[j]
+                dish_emissions = list(options["Emissions per kilogram"])[j]*(list(options["grams"])[j]/1000)
+            
+                final_dishes.append(dish_name)
+                final_emissions.append(dish_emissions)
+                final_meal_type.append(list(options["type"])[j])
+            else:
+                #add the user-selected spaces to the resultant array
+                item = df[df["Entity"]==space]
+                
+                final_dishes.append(space)
+                final_emissions.append(list(item["Emissions per kilogram"])[0]*(list(item["grams"])[0]/1000))
+                final_meal_type.append(list(item["type"])[0])
+                chosen_dishes_index.append(idx)
+                
+            final_index.append(idx)
+            j += 1
+            idx += 1
+        i += 1
+    
+    current_sum = sum(final_emissions)
+    dish_and_emissions = pd.DataFrame({"dish":final_dishes, "emissions":final_emissions, "type":final_meal_type, "index":final_index}).sort_values(ascending=False, by="emissions")
+    
+    #if the emissions exceed the target
+    if current_sum > target:
+        break_outer = False
+        
+        for i in range(100):
+            j = 0
+            #loop over the highest emitting dishes in order
+            for item in dish_and_emissions.iloc:
+                options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
+                options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
+                choice = options.iloc[0]
+    
+                #replace the dish with a slightly less emitting dish
+                if item["index"] not in chosen_dishes_index:
+                    dish_and_emissions.iloc[j] = pd.Series([choice["Entity"], choice["Emissions per kilogram"]*(choice["grams"]/1000), choice["type"], item["index"]])
+    
+                #if the target has been reached, break the loop
+                if sum(dish_and_emissions["emissions"])<target:
+                    break_outer = True
+                    break
+                j += 1
+                
+            if break_outer:
+                break
+    
+    #reshape the data to get into Monday-Sunday format
+    total_emitted = sum(dish_and_emissions["emissions"])
+    dish_and_emissions = dish_and_emissions.sort_values(ascending=True, by="index")
+    dish_and_emissions = dish_and_emissions.drop(["index"], axis=1)
+    
+    dish_and_emissions = [i["dish"]+", "+str(i["emissions"]) for i in dish_and_emissions.iloc]
+    dish_and_emissions = pd.DataFrame(dish_and_emissions)
+    dish_and_emissions = pd.DataFrame(dish_and_emissions.values.reshape(3, 7))
+    
+    dish_and_emissions = dish_and_emissions.set_axis(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], axis=1)
+    dish_and_emissions = dish_and_emissions.rename(index={0:'breakfast', 1:'lunch', 2:'dinner'})
+
+    return {"emitted":total_emitted, "result":dish_and_emissions}
+
 #*********************************************** OLD APP BELOW ***********************************************#
 
 @app.route("/meat_footprint", methods=["GET"])
