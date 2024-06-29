@@ -18,6 +18,8 @@ def calculate_footprint():
     
     input_meals = str(request.args.get("input_meals")).split(", ")
     input_grams = str(request.args.get("input_grams")).split(", ")
+
+    print(input_grams)
     
     emissions_list = []
     
