@@ -181,10 +181,10 @@ def recommend():
     dish_and_emissions = dish_and_emissions.set_axis(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], axis=1)
     dish_and_emissions = dish_and_emissions.rename(index={0:'breakfast', 1:'lunch', 2:'dinner'})
 
-    return {"emitted":total_emitted, "recommended": [list(dish_and_emissions["Monday"]), 
-            list(dish_and_emissions["Tuesday"]), list(dish_and_emissions["Wednesday"]), 
-            list(dish_and_emissions["Thursday"]), list(dish_and_emissions["Friday"]), 
-            list(dish_and_emissions["Saturday"]), list(dish_and_emissions["Sunday"])]}
+    return {"emitted":total_emitted, "recommended": [list(dish_and_emissions["Monday"])+["Monday"], 
+            list(dish_and_emissions["Tuesday"])+["Tuesday"], list(dish_and_emissions["Wednesday"])+["Wednesday"], 
+            list(dish_and_emissions["Thursday"])+["Thursday"], list(dish_and_emissions["Friday"])+["Friday"], 
+            list(dish_and_emissions["Saturday"])+["Saturday"], list(dish_and_emissions["Sunday"])+["Sunday"]]}
 
 #*********************************************** OLD APP BELOW ***********************************************#
 
