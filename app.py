@@ -45,7 +45,7 @@ def recommend():
 
     #get inputs
     footprint = float(request.args.get("footprint"))
-    percent_reduction = int(request.args.get("percent_reduction"))
+    percent_reduction = int(request.args.get("percent_reduction")[:-1])
     user_selected_dishes = str(request.args.get("user_selected_dishes")).split(", ")
     user_selected_grams = str(request.args.get("user_selected_grams")).split(", ")
                  
