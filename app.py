@@ -12,6 +12,36 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
+@app.route("/calculate_footprint", methods=["GET"])
+def calculate_footprint():
+    df = pd.read_csv("food-footprints.csv")
+    
+    input_meals = str(request.args.get("input_meals")).split(", ")
+    input_grams = str(request.args.get("input_grams")).split(", ")
+    
+    emissions_list = []
+    
+    #calculate the kg CO2 emitted per dish eaten
+    i = 0
+    for meal in input_meals:
+        kg_eaten = float(input_grams[i])/1000
+        kg_emissions = list(df[df["Entity"]==meal]["Emissions per kilogram"])[0]
+        emitted = kg_emissions*kg_eaten
+        emissions_list.append(emitted)
+        i += 1
+    
+    total_emissions = sum(emissions_list)
+    weekly_total_dishes = 14
+    
+    #adjust the total emissions is the user has not input the entire week
+    if len(input_meals) < weekly_total_dishes:
+        total_emissions = total_emissions * (weekly_total_dishes/len(input_meals))
+        print("total emissions is an estimate")
+
+    return total_emissions
+
+#*********************************************** OLD APP BELOW ***********************************************#
+
 @app.route("/meat_footprint", methods=["GET"])
 def meat_footprint():
     country = request.args.get("country")
