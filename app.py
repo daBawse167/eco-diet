@@ -18,8 +18,6 @@ def calculate_footprint():
     
     input_meals = str(request.args.get("input_meals")).split(", ")
     input_grams = str(request.args.get("input_grams")).split(", ")
-
-    print(input_grams)
     
     emissions_list = []
     
@@ -40,7 +38,7 @@ def calculate_footprint():
         total_emissions = total_emissions * (weekly_total_dishes/len(input_meals))
         print("total emissions is an estimate")
 
-    return total_emissions
+    return str(total_emissions)
 
 #*********************************************** OLD APP BELOW ***********************************************#
 
