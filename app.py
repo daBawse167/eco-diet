@@ -38,6 +38,10 @@ def calculate_footprint():
         total_emissions = total_emissions * (weekly_total_dishes/len(input_meals))
         print("total emissions is an estimate")
 
+    #wipe the user_selected dataframe
+    selected_dishes = pd.DataFrame({"user_selected_dishes":[], "selected_dishes_position":[]})
+    selected_dishes.to_csv("selected_dishes.csv")
+    
     return str(total_emissions)
 
 @app.route("/recommendations", methods=["GET"])
