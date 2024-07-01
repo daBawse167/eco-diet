@@ -56,10 +56,7 @@ def recommend():
     target = footprint*(1-(percent_reduction/100))
 
     #get the grams of the user_selected_dishes
-    user_selected_grams = [list(dish["grams"])[0] for dish in df.iloc if list(dish["Entity"])[0] in user_selected_dishes]
-    
-    for i in df.iloc:
-        print(list(i["Entity"])[0], list(i["grams"])[0], i)
+    user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
     
     print(user_selected_grams)
     
