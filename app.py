@@ -76,7 +76,7 @@ def recommend():
     print(selected_dishes)
     
     #loop over all the user-selected meals
-    if selected_dishes.iloc[0]["user_selected_dishes"]!=None:
+    if selected_dishes.iloc[-1]["user_selected_dishes"]!=None:
         #get the grams of the user_selected_dishes
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
