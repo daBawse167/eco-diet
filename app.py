@@ -72,12 +72,12 @@ def recommend():
                       "Saturday":["", "", ""], "Sunday":["", "", ""]}
     recommended_emissions = {"Monday":[0, 0, 0], "Tuesday":[0, 0, 0], "Wednesday":[0, 0, 0], "Thursday":[0, 0, 0], "Friday":[0, 0, 0], 
                       "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
-
-    print(len(list(selected_dishes.iloc)))
     
     #loop over all the user-selected meals
     if len(list(selected_dishes.iloc))>1:
         #get the grams of the user_selected_dishes
+        selected_dishes = selected_dishes.iloc[1:]
+        print(selected_dishes)
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
         user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
