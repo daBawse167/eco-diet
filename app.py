@@ -71,7 +71,7 @@ def recommend():
             #randomly insert the meal into a breakfast, lunch or dinner slot
             if meal_type == "breakfast":
                 #find the corresponding day of the week
-                day = list(recommendation.items())[int(selected_dishes_position[idx])-1]
+                day = list(recommendation.keys())[int(selected_dishes_position[idx])-1]
                 print(day)
 
                 #insert the dish into the result dictionary
@@ -85,7 +85,7 @@ def recommend():
                 recommended_emissions[day] = day_emissions
             elif meal_type == "lunch":
                 #find the corresponding day of the week
-                day = list(recommendation.items())[int(selected_dishes_position[idx])-1]
+                day = list(recommendation.keys())[int(selected_dishes_position[idx])-1]
 
                 #insert the dish into the result dictionary
                 day_dishes = recommendation[day]
@@ -98,7 +98,7 @@ def recommend():
                 recommended_emissions[day] = day_emissions
             elif meal_type == "dinner":
                 #find the corresponding day of the week
-                day = list(recommendation.items())[int(selected_dishes_position[idx])-1]
+                day = list(recommendation.keys())[int(selected_dishes_position[idx])-1]
 
                 #insert the dish into the result dictionary
                 day_dishes = recommendation[day]
