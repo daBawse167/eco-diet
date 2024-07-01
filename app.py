@@ -74,7 +74,7 @@ def recommend():
 
     
     #loop over all the user-selected meals
-    if not df.empty:
+    if not selected_dishes.empty:
         #get the grams of the user_selected_dishes
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
