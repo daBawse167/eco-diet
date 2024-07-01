@@ -50,8 +50,8 @@ def recommend():
     
 
     selected_dishes = pd.read_csv("selected_dishes.csv")
-    user_selected_dish = request.args.get("user_selected_dish")
-    selected_dish_position = request.args.get("selected_dish_position")
+    user_selected_dish = request.args.get("user_selected_dishes")
+    selected_dish_position = request.args.get("selected_dishes_position")
 
     if user_selected_dish != 'None':
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
