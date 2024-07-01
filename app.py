@@ -54,7 +54,7 @@ def recommend():
     selected_dish_position = request.args.get("selected_dish_position")
 
     if user_selected_dish != 'None':
-        selected_dishes = selected_dishes.append({"user_selected_dishes":user_selected_dish,
+        selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
                                                   "selected_dishes_position":selected_dish_position},
                                                  ignore_index=True)
     
