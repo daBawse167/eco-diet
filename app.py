@@ -40,7 +40,7 @@ def calculate_footprint():
 
     #wipe the user_selected dataframe
     selected_dishes = pd.DataFrame({"user_selected_dishes":[], "selected_dishes_position":[]})
-    selected_dishes.to_csv("selected_dishes.csv")
+    selected_dishes.to_csv("selected_dishes.csv", index=False)
     
     return str(total_emissions)
 
@@ -61,7 +61,7 @@ def recommend():
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
                                                   "selected_dishes_position":selected_dish_position},
                                                  ignore_index=True)
-        selected_dishes.to_csv("selected_dishes.csv")
+        selected_dishes.to_csv("selected_dishes.csv", index=False)
     
     user_selected_grams = []
     
