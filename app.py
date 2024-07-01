@@ -57,7 +57,7 @@ def recommend():
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
                                                   "selected_dishes_position":selected_dish_position},
                                                  ignore_index=True)
-
+        selected_dishes.to_csv("selected_dishes.csv")
     
     user_selected_grams = []
     
