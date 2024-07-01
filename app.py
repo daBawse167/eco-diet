@@ -72,6 +72,7 @@ def recommend():
             if meal_type == "breakfast":
                 #find the corresponding day of the week
                 day = list(recommendation.items())[int(selected_dishes_position[idx])-1]
+                print(day)
 
                 #insert the dish into the result dictionary
                 day_dishes = recommendation[day]
