@@ -47,15 +47,13 @@ def recommend():
     footprint = float(request.args.get("footprint"))
     percent_reduction = int(request.args.get("percent_reduction")[:-1])
     user_selected_dishes = str(request.args.get("user_selected_dishes")).split(", ")
+    user_selected_grams = []
     selected_dishes_position = str(request.args.get("selected_dishes_position")).split(", ")
 
     print(selected_dishes_position)
     
     df = pd.read_csv("food-footprints.csv")
     target = footprint*(1-(percent_reduction/100))
-
-    #get the grams of the user_selected_dishes
-    user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
     
     recommendation = {"Monday":["", "", ""], "Tuesday":["", "", ""], "Wednesday":["", "", ""], "Thursday":["", "", ""], "Friday":["", "", ""], 
                       "Saturday":["", "", ""], "Sunday":["", "", ""]}
@@ -64,6 +62,9 @@ def recommend():
 
     #loop over all the user-selected meals
     if selected_dishes_position[0] != 'None':
+        #get the grams of the user_selected_dishes
+        user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
+        
         idx = 0
         for dish in user_selected_dishes:
             meal_type = list(df[df["Entity"]==dish]["type"])[0]
