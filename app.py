@@ -72,10 +72,9 @@ def recommend():
     recommended_emissions = {"Monday":[0, 0, 0], "Tuesday":[0, 0, 0], "Wednesday":[0, 0, 0], "Thursday":[0, 0, 0], "Friday":[0, 0, 0], 
                       "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
 
-    print(list(selected_dishes.iloc[0]["user_selected_dishes"])[0])
     
     #loop over all the user-selected meals
-    if list(selected_dishes.iloc[0]["user_selected_dishes"])[0] != 'None':
+    if not df.empty:
         #get the grams of the user_selected_dishes
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
