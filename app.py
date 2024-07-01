@@ -59,7 +59,7 @@ def recommend():
     user_selected_grams = [list(dish["grams"])[0] for dish in df.iloc if list(dish["Entity"])[0] in user_selected_dishes]
     
     for i in df.iloc:
-        print(list(dish["Entity"])[0], list(dish["grams"])[0], i)
+        print(list(i["Entity"])[0], list(i["grams"])[0], i)
     
     print(user_selected_grams)
     
