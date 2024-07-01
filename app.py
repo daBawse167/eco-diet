@@ -72,6 +72,7 @@ def recommend():
     recommended_emissions = {"Monday":[0, 0, 0], "Tuesday":[0, 0, 0], "Wednesday":[0, 0, 0], "Thursday":[0, 0, 0], "Friday":[0, 0, 0], 
                       "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
 
+    print(not selected_dishes.empty)
     
     #loop over all the user-selected meals
     if not selected_dishes.empty:
