@@ -72,7 +72,7 @@ def recommend():
     recommended_emissions = {"Monday":[0, 0, 0], "Tuesday":[0, 0, 0], "Wednesday":[0, 0, 0], "Thursday":[0, 0, 0], "Friday":[0, 0, 0], 
                       "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
 
-    print(np.isnan(selected_dishes["user_selected_dishes"].values)[0])
+    print(selected_dishes.iloc, selected_dishes.iloc[0])
     
     #loop over all the user-selected meals
     if not np.isnan(selected_dishes["user_selected_dishes"].values)[0]:
