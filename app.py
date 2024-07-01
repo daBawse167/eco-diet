@@ -63,7 +63,7 @@ def recommend():
                       "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
 
     #loop over all the user-selected meals
-    if user_selected_dishes[0] != 'None':
+    if selected_dishes_position[0] != 'None':
         idx = 0
         for dish in user_selected_dishes:
             meal_type = list(df[df["Entity"]==dish]["type"])[0]
