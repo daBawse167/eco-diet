@@ -46,12 +46,21 @@ def recommend():
     #get inputs
     footprint = float(request.args.get("footprint"))
     percent_reduction = int(request.args.get("percent_reduction")[:-1])
+
+    print(request.args.get("user_selected_dishes"))
+    
     user_selected_dishes = str(request.args.get("user_selected_dishes")).split(", ")
-    user_selected_grams = str(request.args.get("user_selected_grams")).split(", ")
-                 
+    #user_selected_grams = str(request.args.get("user_selected_grams")).split(", ")
+
+    print(user_selected_dishes)
+    
     df = pd.read_csv("food-footprints.csv")
     target = footprint*(1-(percent_reduction/100))
-    print(target)
+
+    #get the grams of the user_selected_dishes
+    user_selected_grams = [list(dish["grams"])[0] for dish in df.iloc if list(dish["Entity"])[0] in user_selected_dishes]
+    
+    print(user_selected_grams)
     
     recommendation = {"Monday":["", "", ""], "Tuesday":["", "", ""], "Wednesday":["", "", ""], "Thursday":["", "", ""], "Friday":["", "", ""], 
                       "Saturday":["", "", ""], "Sunday":["", "", ""]}
