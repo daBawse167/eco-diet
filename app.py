@@ -57,9 +57,6 @@ def recommend():
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
                                                   "selected_dishes_position":selected_dish_position},
                                                  ignore_index=True)
-    
-    print(selected_dishes)
-    
 
     
     user_selected_grams = []
@@ -72,7 +69,7 @@ def recommend():
     recommended_emissions = {"Monday":[0, 0, 0], "Tuesday":[0, 0, 0], "Wednesday":[0, 0, 0], "Thursday":[0, 0, 0], "Friday":[0, 0, 0], 
                       "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
 
-    print(selected_dishes.iloc[0]["user_selected_dishes"], selected_dishes.iloc[0]["user_selected_dishes"]==None)
+    print(selected_dishes)
     
     #loop over all the user-selected meals
     if selected_dishes.iloc[0]["user_selected_dishes"]!=None:
@@ -80,6 +77,10 @@ def recommend():
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
         user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
+
+        print(user_selected_dishes)
+        print(selected_dishes_position)
+        print(user_selected_grams)
         
         idx = 0
         for dish in user_selected_dishes:
@@ -89,7 +90,6 @@ def recommend():
             if meal_type == "breakfast":
                 #find the corresponding day of the week
                 day = list(recommendation.keys())[int(selected_dishes_position[idx])-1]
-                print(day)
 
                 #insert the dish into the result dictionary
                 day_dishes = recommendation[day]
