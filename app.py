@@ -73,7 +73,7 @@ def recommend():
                       "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
 
     #loop over all the user-selected meals
-    if len(selected_dishes.iloc) > 0:
+    if len(list(selected_dishes["user_selected_dishes"])) > 0:
         #get the grams of the user_selected_dishes
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
