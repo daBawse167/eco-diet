@@ -46,19 +46,16 @@ def recommend():
     #get inputs
     footprint = float(request.args.get("footprint"))
     percent_reduction = int(request.args.get("percent_reduction")[:-1])
-    
     user_selected_dishes = str(request.args.get("user_selected_dishes")).split(", ")
-    #user_selected_grams = str(request.args.get("user_selected_grams")).split(", ")
+    selected_dishes_position = str(request.args.get("selected_dishes_position")).split(", ")
 
-    print(user_selected_dishes)
+    print(selected_dishes_position)
     
     df = pd.read_csv("food-footprints.csv")
     target = footprint*(1-(percent_reduction/100))
 
     #get the grams of the user_selected_dishes
     user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
-    
-    print(user_selected_grams)
     
     recommendation = {"Monday":["", "", ""], "Tuesday":["", "", ""], "Wednesday":["", "", ""], "Thursday":["", "", ""], "Friday":["", "", ""], 
                       "Saturday":["", "", ""], "Sunday":["", "", ""]}
@@ -67,41 +64,53 @@ def recommend():
 
     #loop over all the user-selected meals
     if user_selected_dishes[0] != 'None':
+        idx = 0
         for dish in user_selected_dishes:
             meal_type = list(df[df["Entity"]==dish]["type"])[0]
-        
+            
             #randomly insert the meal into a breakfast, lunch or dinner slot
             if meal_type == "breakfast":
-                while True:
-                    rand = random.randint(0,6)
-                    day = list(recommendation.items())[rand][0]
-                    day_dishes = recommendation[day]
-                    
-                    if day_dishes[0]=="":
-                        day_dishes[0] = dish
-                        recommendation[day] = day_dishes
-                        break
+                #find the corresponding day of the week
+                day = list(recommendation.items())[selected_dishes_position[idx]]
+
+                #insert the dish into the result dictionary
+                day_dishes = recommendation[day]
+                day_dishes[0] = dish
+                recommendation[day] = day_dishes
+
+                day_emissions = recommended_emissions[day]
+                #calculate the dish's emissions & insert it into the result dictionary
+                day_emissions[0] = list(df[df["Entity"]==dish]["Emissions per kilogram"]*(user_selected_grams[idx]/1000))[0]
+                recommended_emissions[day] = day_emissions
             elif meal_type == "lunch":
-                while True:
-                    rand = random.randint(0,6)
-                    day = list(recommendation.items())[rand][0]
-                    day_dishes = recommendation[day]
-                    
-                    if day_dishes[1]=="":
-                        day_dishes[1] = dish
-                        recommendation[day] = day_dishes
-                        break
+                #find the corresponding day of the week
+                day = list(recommendation.items())[selected_dishes_position[idx]]
+
+                #insert the dish into the result dictionary
+                day_dishes = recommendation[day]
+                day_dishes[1] = dish
+                recommendation[day] = day_dishes
+
+                day_emissions = recommended_emissions[day]
+                #calculate the dish's emissions & insert it into the result dictionary
+                day_emissions[1] = list(df[df["Entity"]==dish]["Emissions per kilogram"]*(user_selected_grams[idx]/1000))[0]
+                recommended_emissions[day] = day_emissions
             elif meal_type == "dinner":
-                while True:
-                    rand = random.randint(0,6)
-                    day = list(recommendation.items())[rand][0]
-                    day_dishes = recommendation[day]
-                    
-                    if day_dishes[2]=="":
-                        day_dishes[2] = dish
-                        recommendation[day] = day_dishes
-                        break
-    
+                #find the corresponding day of the week
+                day = list(recommendation.items())[selected_dishes_position[idx]]
+
+                #insert the dish into the result dictionary
+                day_dishes = recommendation[day]
+                day_dishes[2] = dish
+                recommendation[day] = day_dishes
+
+                day_emissions = recommended_emissions[day]
+                #calculate the dish's emissions & insert it into the result dictionary
+                day_emissions[2] = list(df[df["Entity"]==dish]["Emissions per kilogram"]*(user_selected_grams[idx]/1000))[0]
+                recommended_emissions[day] = day_emissions
+
+            idx += 1
+            
     #set the red meat, white meat and seafood limits
     red_meat_limit = 2
     white_meat_limit = 3
