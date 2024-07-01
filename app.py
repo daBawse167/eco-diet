@@ -46,8 +46,6 @@ def recommend():
     #get inputs
     footprint = float(request.args.get("footprint"))
     percent_reduction = int(request.args.get("percent_reduction")[:-1])
-
-    print(request.args.get("user_selected_dishes"))
     
     user_selected_dishes = str(request.args.get("user_selected_dishes")).split(", ")
     #user_selected_grams = str(request.args.get("user_selected_grams")).split(", ")
@@ -59,6 +57,9 @@ def recommend():
 
     #get the grams of the user_selected_dishes
     user_selected_grams = [list(dish["grams"])[0] for dish in df.iloc if list(dish["Entity"])[0] in user_selected_dishes]
+    
+    for i in df.iloc:
+        print(list(dish["Entity"])[0], list(dish["grams"])[0], i)
     
     print(user_selected_grams)
     
