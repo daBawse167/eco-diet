@@ -29,6 +29,7 @@ def reduction_options():
 
         num_suitable_types = 0
         
+        
         for type in ["breakfast", "lunch", "dinner"]:
             num_suitable_dishes = 0
             print(type)
@@ -220,6 +221,7 @@ def recommend():
     
     current_sum = sum(final_emissions)
     dish_and_emissions = pd.DataFrame({"dish":final_dishes, "emissions":final_emissions, "type":final_meal_type, "index":final_index}).sort_values(ascending=False, by="emissions")
+    print(dish_and_emissions)
     
     #if the emissions exceed the target
     if current_sum > target:
