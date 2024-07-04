@@ -26,7 +26,7 @@ def reduction_options():
     
     for reduction in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
         cumulative = 0
-        target = emission*(1-reduction)
+        target = emitted*(1-reduction)
         print(str(reduction*100)+"%")
         
         for type in ["breakfast", "lunch", "dinner"]:
