@@ -27,9 +27,12 @@ def reduction_options():
     for reduction in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
         print(str(reduction*100)+"%")
 
-        num_suitable = 0
+        num_suitable_types = 0
+        
         for type in ["breakfast", "lunch", "dinner"]:
+            num_suitable_dishes = 0
             print(type)
+            
             data = df[df["type"]==type]
             item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in data.iloc]
             item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=False, by="emissions")
@@ -38,10 +41,13 @@ def reduction_options():
             for emission in item_emissions:
                 target = emission*(1-reduction)
                 if target < emitted:
-                    num_suitable += 1
-            print(num_suitable)
+                    num_suitable_dishes += 1
                     
-        if num_suitable == 147:
+            if num_suitable_dishes >= 7:
+                num_suitable_types += 1
+            print(num_suitable_dishes, num_suitable_types)
+                    
+        if num_suitable_types == 3:
             suitable_list.append(str(reduction*100)+"%")
         else:
             break
