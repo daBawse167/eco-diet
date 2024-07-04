@@ -121,7 +121,6 @@ def recommend():
     if len(list(selected_dishes.iloc))>1:
         #get the grams of the user_selected_dishes
         selected_dishes = selected_dishes.iloc[1:]
-        print(selected_dishes)
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
         user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
@@ -222,7 +221,6 @@ def recommend():
     
     current_sum = sum(final_emissions)
     dish_and_emissions = pd.DataFrame({"dish":final_dishes, "emissions":final_emissions, "type":final_meal_type, "index":final_index}).sort_values(ascending=False, by="emissions")
-    print(dish_and_emissions)
     
     #if the emissions exceed the target
     if current_sum > target:
@@ -232,7 +230,6 @@ def recommend():
             j = 0
             #loop over the highest emitting dishes in order
             for item in dish_and_emissions.iloc:
-                print(item)
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
                 choice = options.iloc[0]
