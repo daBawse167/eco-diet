@@ -12,6 +12,33 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
+@app.route("/reduction_options", methods=["GET"])
+def reduction_options():
+    emitted = request.args.get("emitted")
+    df = pd.read_csv("food-footprints.csv")
+    item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in df.iloc]
+
+    suitable_list = []
+
+    print(item_emissions)
+    
+    for reduction in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
+        num_suitable = 0
+        for emission in item_emissions[:7]:
+            target = emission*(1-reduction)
+            if target < emitted:
+                num_suitable += 1
+            print(target)
+                
+        if num_suitable == 7:
+            suitable_list.append(str(reduction*100)+"%")
+        else:
+            break
+
+    return {"percent_reductions":suitable_list}
+    
+    print(suitable_list)
+
 @app.route("/calculate_footprint", methods=["GET"])
 def calculate_footprint():
     df = pd.read_csv("food-footprints.csv")
@@ -81,10 +108,6 @@ def recommend():
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
         user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
-
-        print(user_selected_dishes)
-        print(selected_dishes_position)
-        print(user_selected_grams)
         
         idx = 0
         for dish in user_selected_dishes:
