@@ -35,9 +35,8 @@ def reduction_options():
         else:
             break
 
-    return {"percent_reductions":suitable_list}
-    
     print(suitable_list)
+    return {"percent_reductions":suitable_list}
 
 @app.route("/calculate_footprint", methods=["GET"])
 def calculate_footprint():
