@@ -194,7 +194,6 @@ def recommend():
     
         #find the highest emitting dishes
         options = df[df["type"]==meal_type_names[i]].sort_values(ascending=False, by="Emissions per kilogram")
-        print(options)
         for space in meal_space:
     
             #fill the empty spaces with the highest emitters (with the same breakfast, lunch, dinner category)
@@ -221,6 +220,8 @@ def recommend():
     
     current_sum = sum(final_emissions)
     dish_and_emissions = pd.DataFrame({"dish":final_dishes, "emissions":final_emissions, "type":final_meal_type, "index":final_index}).sort_values(ascending=False, by="emissions")
+
+    print(dish_and_emissions)
     
     #if the emissions exceed the target
     if current_sum > target:
