@@ -17,7 +17,7 @@ def reduction_options():
     emitted = float(request.args.get("emitted"))
     df = pd.read_csv("food-footprints.csv")
     item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in df.iloc]
-    item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=False, by="emissions")
+    item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=True, by="emissions")
     item_emissions = list(item_emissions["emissions"])
     
     suitable_list = []
@@ -43,7 +43,7 @@ def reduction_options():
 
         print(cumulative, target)
                 
-        if cumulative < target:
+        if cumulative <= target:
             suitable_list.append(str(reduction*100)+"%")
         else:
             break
