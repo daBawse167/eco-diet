@@ -41,7 +41,7 @@ def reduction_options():
                     num_suitable += 1
                 print(target)
                     
-        if num_suitable == 21:
+        if num_suitable == 147:
             suitable_list.append(str(reduction*100)+"%")
         else:
             break
