@@ -18,7 +18,7 @@ def reduction_options():
     df = pd.read_csv("food-footprints.csv")
     item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in df.iloc]
     item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=False, by="emissions")
-    item_emissions = list(item_emissions["emissions"])[:7]
+    item_emissions = list(item_emissions["emissions"])
     
     suitable_list = []
 
@@ -26,17 +26,25 @@ def reduction_options():
     
     for reduction in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
         print(str(reduction*100)+"%")
-        num_suitable = 0
-        for emission in item_emissions:
-            target = emission*(1-reduction)
-            if target < emitted:
-                num_suitable += 1
-            print(target)
-                
-        if num_suitable == 7:
-            suitable_list.append(str(reduction*100)+"%")
-        else:
-            break
+
+        for type in ["breakfast", "lunch", "dinner"]:
+            print(type)
+            data = df[df["type"]==type]
+            item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in data.iloc]
+            item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=False, by="emissions")
+            item_emissions = list(item_emissions["emissions"])
+            num_suitable = 0
+            
+            for emission in item_emissions:
+                target = emission*(1-reduction)
+                if target < emitted:
+                    num_suitable += 1
+                print(target)
+                    
+            if num_suitable == 7:
+                suitable_list.append(str(reduction*100)+"%")
+            else:
+                break
 
     print(suitable_list)
     return {"percent_reductions":suitable_list}
