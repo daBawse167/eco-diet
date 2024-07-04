@@ -96,6 +96,8 @@ def recommend():
     user_selected_dish = request.args.get("user_selected_dishes")
     selected_dish_position = request.args.get("selected_dishes_position")
 
+    print(user_selected_dish)
+    
     if user_selected_dish != 'None':
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
                                                   "selected_dishes_position":selected_dish_position},
@@ -111,6 +113,8 @@ def recommend():
                       "Saturday":["", "", ""], "Sunday":["", "", ""]}
     recommended_emissions = {"Monday":[0, 0, 0], "Tuesday":[0, 0, 0], "Wednesday":[0, 0, 0], "Thursday":[0, 0, 0], "Friday":[0, 0, 0], 
                       "Saturday":[0, 0, 0], "Sunday":[0, 0, 0]}
+
+    print(selected_dishes.empty, selected_dishes.isnull().sum().sum(), selected_dishes.shape[0]*selected_dishes.shape[1])
     
     #loop over all the user-selected meals
     if len(list(selected_dishes.iloc))>1:
@@ -228,7 +232,6 @@ def recommend():
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
                 
-                print(len(list(options["Emissions per kilogram"])))
                 if len(list(options["Emissions per kilogram"]))==0:
                     break_outer=True
                     break
