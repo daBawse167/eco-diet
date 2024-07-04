@@ -116,6 +116,7 @@ def recommend():
     
     #loop over all the user-selected meals
     if selected_dishes.isnull().sum().sum() != selected_dishes.shape[0]*selected_dishes.shape[1]:
+        selected_dishes = selected_dishes.dropna(how='any',axis=0)
         print(selected_dishes)
         #get the grams of the user_selected_dishes
         selected_dishes = selected_dishes.iloc[1:]
