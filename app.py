@@ -226,7 +226,11 @@ def recommend():
             for item in dish_and_emissions.iloc:
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
-                print(options)
+                
+                print(len(list(options["Emissions per kilogram"])))
+                if len(list(options["Emissions per kilogram"]))==0:
+                    break_outer=True
+                    break
                 choice = options.iloc[0]
     
                 #replace the dish with a slightly less emitting dish
