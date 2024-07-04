@@ -16,7 +16,7 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 def reduction_options():
     emitted = float(request.args.get("emitted"))
     df = pd.read_csv("food-footprints.csv")
-    item_emissions = [list(item["Emissions per kilogram"]*(item["grams"]/1000))[0] for item in df.iloc]
+    item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in df.iloc]
 
     suitable_list = []
 
