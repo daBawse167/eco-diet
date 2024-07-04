@@ -39,7 +39,7 @@ def reduction_options():
                 target = emission*(1-reduction)
                 if target < emitted:
                     num_suitable += 1
-                print(target)
+            print(num_suitable)
                     
         if num_suitable == 147:
             suitable_list.append(str(reduction*100)+"%")
