@@ -25,6 +25,7 @@ def reduction_options():
     print(item_emissions)
     
     for reduction in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
+        print(str(reduction*100)+"%")
         num_suitable = 0
         for emission in item_emissions:
             target = emission*(1-reduction)
