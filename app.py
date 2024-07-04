@@ -34,7 +34,7 @@ def reduction_options():
             
             data = df[df["type"]==type]
             item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in data.iloc]
-            item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=False, by="emissions")
+            item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=True, by="emissions")
             item_emissions = list(item_emissions["emissions"])[:7]
 
             print(item_emissions)
