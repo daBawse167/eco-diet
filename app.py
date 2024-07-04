@@ -44,7 +44,7 @@ def reduction_options():
         print(cumulative, target)
                 
         if cumulative <= target:
-            suitable_list.append(str(reduction*100)+"%")
+            suitable_list.append(str(int(reduction*100))+"%")
         else:
             break
 
