@@ -17,14 +17,16 @@ def reduction_options():
     emitted = float(request.args.get("emitted"))
     df = pd.read_csv("food-footprints.csv")
     item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in df.iloc]
-
+    item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=False, by="emissions")
+    item_emissions = list(item_emissions["emissions"])[:7]
+    
     suitable_list = []
 
     print(item_emissions)
     
     for reduction in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
         num_suitable = 0
-        for emission in item_emissions[:7]:
+        for emission in item_emissions:
             target = emission*(1-reduction)
             if target < emitted:
                 num_suitable += 1
