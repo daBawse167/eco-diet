@@ -114,6 +114,7 @@ def recommend():
     
     #loop over all the user-selected meals
     if len(list(selected_dishes.iloc))>1:
+        print(selected_dishes)
         #get the grams of the user_selected_dishes
         selected_dishes = selected_dishes.iloc[1:]
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
