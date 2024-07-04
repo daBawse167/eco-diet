@@ -220,8 +220,6 @@ def recommend():
     
     current_sum = sum(final_emissions)
     dish_and_emissions = pd.DataFrame({"dish":final_dishes, "emissions":final_emissions, "type":final_meal_type, "index":final_index}).sort_values(ascending=False, by="emissions")
-
-    print(dish_and_emissions)
     
     #if the emissions exceed the target
     if current_sum > target:
@@ -233,6 +231,7 @@ def recommend():
             for item in dish_and_emissions.iloc:
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
+                print(options)
                 choice = options.iloc[0]
     
                 #replace the dish with a slightly less emitting dish
