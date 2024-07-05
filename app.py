@@ -251,6 +251,7 @@ def recommend():
     
     #reshape the data to get into Monday-Sunday format
     total_emitted = sum(dish_and_emissions["emissions"])
+    dishes_emissions = dish_and_emissions["emissions"]
     dish_and_emissions = dish_and_emissions.sort_values(ascending=True, by="index")
     dish_and_emissions = dish_and_emissions.drop(["index"], axis=1)
     
@@ -266,7 +267,7 @@ def recommend():
             list(dish_and_emissions["Tuesday"])+["Tuesday"], list(dish_and_emissions["Wednesday"])+["Wednesday"], 
             list(dish_and_emissions["Thursday"])+["Thursday"], list(dish_and_emissions["Friday"])+["Friday"], 
             list(dish_and_emissions["Saturday"])+["Saturday"], list(dish_and_emissions["Sunday"])+["Sunday"]],
-           "dishes_emissions": dish_and_emissions["emissions"]}
+           "dishes_emissions": dishes_emissions}
 
 #*********************************************** OLD APP BELOW ***********************************************#
 
