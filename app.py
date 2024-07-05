@@ -256,7 +256,7 @@ def recommend():
     dish_and_emissions = dish_and_emissions.drop(["index"], axis=1)
     
     #dish_and_emissions = [i["dish"]+", "+str(i["emissions"]) for i in dish_and_emissions.iloc]
-    dish_and_emissions = dish_and_emissions["dish"]
+    dish_and_emissions = [i for i in dish_and_emissions["dish"].iloc]
     dish_and_emissions = pd.DataFrame(dish_and_emissions)
     dish_and_emissions = pd.DataFrame(dish_and_emissions.values.reshape(3, 7))
     
