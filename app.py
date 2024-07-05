@@ -267,7 +267,7 @@ def recommend():
             list(dish_and_emissions["Tuesday"])+["Tuesday"], list(dish_and_emissions["Wednesday"])+["Wednesday"], 
             list(dish_and_emissions["Thursday"])+["Thursday"], list(dish_and_emissions["Friday"])+["Friday"], 
             list(dish_and_emissions["Saturday"])+["Saturday"], list(dish_and_emissions["Sunday"])+["Sunday"]],
-           "dishes_emissions": dishes_emissions}
+           "dishes_emissions": list(dishes_emissions)}
 
 #*********************************************** OLD APP BELOW ***********************************************#
 
