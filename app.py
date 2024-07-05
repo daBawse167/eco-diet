@@ -252,11 +252,13 @@ def recommend():
     #reshape the data to get into Monday-Sunday format
     total_emitted = sum(dish_and_emissions["emissions"])
     dishes_emissions = dish_and_emissions["emissions"]
+    dishes_emissions = [round(float(i), 2) for i in dishes_emissions.iloc]
+    
     dish_and_emissions = dish_and_emissions.sort_values(ascending=True, by="index")
     dish_and_emissions = dish_and_emissions.drop(["index"], axis=1)
     
     #dish_and_emissions = [i["dish"]+", "+str(i["emissions"]) for i in dish_and_emissions.iloc]
-    dish_and_emissions = [i for i in dish_and_emissions["dish"].iloc]
+    dish_and_emissions = [round(float(i), 2) for i in dish_and_emissions["dish"].iloc]
     dish_and_emissions = pd.DataFrame(dish_and_emissions)
     dish_and_emissions = pd.DataFrame(dish_and_emissions.values.reshape(3, 7))
     
