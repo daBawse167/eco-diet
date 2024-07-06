@@ -16,7 +16,7 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 def convert_saved_diet():
     #get inputs from user
     dish_names = str(request.args.get("dish_names")).split(", ")
-    dish_emissions = request.args.get("dish_emissions")
+    dish_emissions = str(request.args.get("dish_emissions")).split(", ")
 
     #break dish names into week
     dish_names_list = []
