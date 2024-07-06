@@ -18,6 +18,8 @@ def convert_saved_diet():
     dish_names = str(request.args.get("dish_names")).split(", ")
     dish_emissions = str(request.args.get("dish_emissions")).split(", ")
 
+    emitting = sum([float(i) for i in dish_emissions])
+    
     #break dish names into week
     dish_names_list = []
     
@@ -32,16 +34,7 @@ def convert_saved_diet():
     dish_emissions = [dish_emissions[:3], dish_emissions[3:6], dish_emissions[6:9], dish_emissions[9:12],
          dish_emissions[12:15], dish_emissions[15:18], dish_emissions[18:21]]
 
-    return {"dish_names":dish_names_list, "dish_emissions":dish_emissions, 
-            "days":["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]}
-
-    """result1 = pd.DataFrame({"Monday":dish_names_list[:3], "Tuesday":dish_names_list[3:6], "Wednesday":dish_names_list[6:9], 
-                            "Thursday":dish_names_list[9:12], "Friday":dish_names_list[12:15],
-                            "Saturday":dish_names_list[15:18], "Sunday":dish_names_list[18:21]})"""
-    
-    """return {"Monday":list(result1["Monday"]), "Tuesday":list(result1["Tuesday"]), "Wednesday":list(result1["Wednesday"]), 
-            "Thursday":list(result1["Thursday"]), "Friday":list(result1["Friday"]), "Saturday":list(result1["Saturday"]),
-            "Sunday":list(result1["Sunday"])}"""
+    return {"emitting":emitting, "dish_names":dish_names_list, "dish_emissions":dish_emissions}
 
 @app.route("/reduction_options", methods=["GET"])
 def reduction_options():
