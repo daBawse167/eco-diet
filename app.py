@@ -15,16 +15,19 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 @app.route("/convert_saved_diet", methods=["GET"])
 def convert_saved_diet():
     #get inputs from user
-    dish_names = str(request.get.args("dish_names")).split(", ")
-    dish_emissions = request.get.args("dish_emissions")
+    dish_names = str(request.args.get("dish_names")).split(", ")
+    dish_emissions = request.args.get("dish_emissions")
 
     #break dish names into week
     dish_names_list = []
     for dish in dish_names:
         if dish not in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
             dish_names_list.append(dish)
+            
     dish_names_list = list(np.array(dish_names_list).reshape(3, 7))
-    return {"dish_names":dish_names_list}
+    dish_emissions_list = list(np.array(dish_emissions).reshape(3, 7))
+    
+    return {"dish_names":dish_names_list, "dish_emissions":dish_emissions_list}
 
 @app.route("/reduction_options", methods=["GET"])
 def reduction_options():
