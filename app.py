@@ -20,21 +20,22 @@ def convert_saved_diet():
 
     #break dish names into week
     dish_names_list = []
+    
     for dish in dish_names:
         if dish not in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
             dish_names_list.append(dish)
-    
-    dish_names_list = list(dish_names_list)
-    dish_emissions_list = list(dish_emissions)
 
-    print(dish_names_list, dish_emissions)
     
-    dish_names_list = list(pd.DataFrame(dish_names_list).values.reshape(7, 3))
-    dish_emissions_list = list(pd.DataFrame(dish_emissions).values.reshape(7, 3))
+    result1 = pd.DataFrame({"Monday":dish_names_list[:3], "Tuesday":dish_names_list[3:6], "Wednesday":dish_names_list[6:9], 
+                            "Thursday":dish_names_list[9:12], "Friday":dish_names_list[12:15],
+                            "Saturday":dish_names_list[15:18], "Sunday":dish_names_list[18:21]})
 
-    print(dish_names_list, dish_emissions_list)
+    print(result1)
     
-    return {"dish_names":dish_names_list, "dish_emissions":dish_emissions_list}
+    print(dish_emissions[:3], dish_emissions[3:6], dish_emissions[6:9], dish_emissions[9:12],
+         dish_emissions[12:15], dish_emissions[15:18], dish_emissions[18:21])
+
+    return {"dish_names":result1}
 
 @app.route("/reduction_options", methods=["GET"])
 def reduction_options():
