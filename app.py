@@ -23,9 +23,11 @@ def convert_saved_diet():
     for dish in dish_names:
         if dish not in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
             dish_names_list.append(dish)
-            
-    dish_names_list = list(pd.Series(dish_names_list).values.reshape(3, 7))
-    dish_emissions_list = list(pd.Series(dish_emissions).values.reshape(3, 7))
+
+    print(dish_names_list, dish_emissions)
+    
+    dish_names_list = list(pd.DataFrame(dish_names_list).values.reshape(7, 3))
+    dish_emissions_list = list(pd.DataFrame(dish_emissions).values.reshape(7, 3))
 
     print(dish_names_list, dish_emissions_list)
     
