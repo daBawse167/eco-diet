@@ -23,6 +23,9 @@ def convert_saved_diet():
     for dish in dish_names:
         if dish not in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
             dish_names_list.append(dish)
+    
+    dish_names_list = list(dish_names_list)
+    dish_emissions_list = list(dish_emissions)
 
     print(dish_names_list, dish_emissions)
     
