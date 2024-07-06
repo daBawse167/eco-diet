@@ -26,6 +26,8 @@ def convert_saved_diet():
             
     dish_names_list = list(pd.Series(dish_names_list).values.reshape(3, 7))
     dish_emissions_list = list(pd.Series(dish_emissions).values.reshape(3, 7))
+
+    print(dish_names_list, dish_emissions_list)
     
     return {"dish_names":dish_names_list, "dish_emissions":dish_emissions_list}
 
