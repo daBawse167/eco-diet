@@ -35,7 +35,9 @@ def convert_saved_diet():
     print(dish_emissions[:3], dish_emissions[3:6], dish_emissions[6:9], dish_emissions[9:12],
          dish_emissions[12:15], dish_emissions[15:18], dish_emissions[18:21])
 
-    return {"dish_names":result1}
+    return {"Monday":result1["Monday"], "Tuesday":result1["Tuesday"], "Wednesday":result1["Wednesday"], 
+            "Thursday":result1["Thursday"], "Friday":result1["Friday"], "Saturday":result1["Saturday"],
+            "Sunday":result1["Sunday"]}
 
 @app.route("/reduction_options", methods=["GET"])
 def reduction_options():
