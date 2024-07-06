@@ -12,6 +12,20 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
+@app.route("/convert_saved_diet", methods=["GET"])
+def convert_saved_diet():
+    #get inputs from user
+    dish_names = str(request.get.args("dish_names")).split(", ")
+    dish_emissions = request.get.args("dish_emissions")
+
+    #break dish names into week
+    dish_names_list = []
+    for dish in dish_names:
+        if dish not in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
+            dish_names_list.append(dish)
+    dish_names_list = list(np.array(dish_names_list).reshape(3, 7))
+    return {"dish_names":dish_names_list}
+
 @app.route("/reduction_options", methods=["GET"])
 def reduction_options():
     emitted = float(request.args.get("emitted"))
@@ -22,33 +36,30 @@ def reduction_options():
     
     suitable_list = []
 
-    print(item_emissions)
-    
+    #loop over reduction options
     for reduction in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
         cumulative = 0
         target = emitted*(1-reduction)
-        print(str(reduction*100)+"%")
-        
+
+        #loop over meal type
         for type in ["breakfast", "lunch", "dinner"]:
-            print(type)
-            
+
+            #get the 7 most emitting dishes
             data = df[df["type"]==type]
             item_emissions = [item["Emissions per kilogram"]*(item["grams"]/1000) for item in data.iloc]
             item_emissions = pd.DataFrame({"emissions":item_emissions}).sort_values(ascending=True, by="emissions")
             item_emissions = list(item_emissions["emissions"])[:7]
 
-            print(item_emissions)
+            #add to the cumulative total
             for emission in item_emissions:
                 cumulative += emission
 
-        print(cumulative, target)
-                
+        #if the emissions have not exceeded the target, add the percentage
         if cumulative <= target:
             suitable_list.append(str(int(reduction*100))+"%")
         else:
             break
 
-    print(suitable_list)
     return {"percent_reductions":suitable_list}
 
 @app.route("/calculate_footprint", methods=["GET"])
