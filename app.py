@@ -128,6 +128,8 @@ def recommend():
     user_selected_grams = []
     
     df = pd.read_csv("food-footprints.csv")
+    print(df)
+    
     target = footprint*(1-(percent_reduction/100))
     
     recommendation = {"Monday":["", "", ""], "Tuesday":["", "", ""], "Wednesday":["", "", ""], "Thursday":["", "", ""], "Friday":["", "", ""], 
@@ -198,7 +200,7 @@ def recommend():
     seafood_limit = 3
     
     meal_spaces = np.array(list(recommendation.values())).T.tolist()
-    meal_type_names = ["breakfast", "meal"]
+    meal_type_names = ["breakfast", "meal", "meal"]
     final_dishes = []
     final_emissions = []
     final_meal_type = []
@@ -220,6 +222,8 @@ def recommend():
     
     #loop over every non-selected meal in the week
     for meal_space in meal_spaces:
+        print(meal_space)
+        print(meal_type_names[i]) 
         j = 0
     
         #find the highest emitting dishes
