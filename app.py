@@ -267,7 +267,7 @@ def recommend():
             for item in dish_and_emissions.iloc:
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
-                options = pd.DataFrame([i for i in options.iloc if i["Entity"] not in used_dishes)
+                options = pd.DataFrame([i for i in options.iloc if i["Entity"] not in used_dishes])
                 
                 if len(list(options["Emissions per kilogram"]))==0:
                     break_outer=True
