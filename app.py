@@ -228,13 +228,16 @@ def recommend():
     
         #find the highest emitting dishes
         options = df[df["type"]==meal_type_names[i]].sort_values(ascending=False, by="Emissions per kilogram")
+        print(options)
         for space in meal_space:
     
             #fill the empty spaces with the highest emitters (with the same breakfast, lunch, dinner category)
             if space=="":
                 dish_name = list(options["Entity"])[j]
                 dish_emissions = list(options["Emissions per kilogram"])[j]*(list(options["grams"])[j]/1000)
-            
+
+                print(dish_name)
+                
                 final_dishes.append(dish_name)
                 final_emissions.append(dish_emissions)
                 final_meal_type.append(list(options["type"])[j])
