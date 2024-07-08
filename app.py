@@ -198,9 +198,12 @@ def recommend():
     red_meat_limit = 2
     white_meat_limit = 3
     seafood_limit = 3
-    
-    meal_spaces = [["", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]] #np.array(list(recommendation.values())).T.tolist()
+
+    #set the available dish slots for recommendation
+    meal_spaces = np.array(list(recommendation.values())).T.tolist()
+    meal_spaces = [meal_spaces[0], meal_spaces[1]+meal_spaces[2]]
     meal_type_names = ["breakfast", "meal"]
+    
     final_dishes = []
     final_emissions = []
     final_meal_type = []
