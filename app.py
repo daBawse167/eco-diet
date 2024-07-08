@@ -268,10 +268,14 @@ def recommend():
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
                 options = pd.DataFrame([i for i in options.iloc if i["Entity"] not in used_dishes])
-                
-                if len(list(options["Emissions per kilogram"]))==0:
-                    break_outer=True
+
+                if options.empty:
+                    options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
+                    options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
+                    used_dishes = []
+                    break_outer = True
                     break
+                
                 choice = options.iloc[0]
                 
                 #replace the dish with a slightly less emitting dish
