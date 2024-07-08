@@ -269,7 +269,7 @@ def recommend():
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
 
-                print(options)
+                print(options["Entity"])
                 
                 if len(list(options["Emissions per kilogram"]))==0:
                     break_outer=True
