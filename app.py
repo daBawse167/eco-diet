@@ -116,6 +116,11 @@ def recommend():
     user_selected_dish = request.args.get("user_selected_dishes")
     selected_dish_position = request.args.get("selected_dishes_position")
     selected_meal_type = request.args.get("meal_type")
+
+    print(selected_dishes)
+    print(user_selected_dish)
+    print(selected_dish_position)
+    print(selected_meal_type)
     
     if user_selected_dish != 'None':
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
