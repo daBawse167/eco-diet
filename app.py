@@ -116,8 +116,6 @@ def recommend():
     user_selected_dish = request.args.get("user_selected_dishes")
     selected_dish_position = request.args.get("selected_dishes_position")
     selected_meal_type = request.args.get("meal_type")
-
-    print(user_selected_dish)
     
     if user_selected_dish != 'None':
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
@@ -145,8 +143,6 @@ def recommend():
         selected_dishes = selected_dishes.iloc[1:]
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
-        print(user_selected_dishes)
-        print(selected_dishes_position)
         user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
         
         idx = 0
@@ -214,16 +210,6 @@ def recommend():
     
     i = 0
     idx = 0
-
-
-
-
-
-
-
-
-
-
     
     #loop over every non-selected meal in the week
     for meal_space in meal_spaces:
