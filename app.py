@@ -130,6 +130,7 @@ def recommend():
     
     df = pd.read_csv("food-footprints.csv")
     target = footprint*(1-(percent_reduction/100))
+    print(target)
     
     recommendation = {"Monday":["", "", ""], "Tuesday":["", "", ""], "Wednesday":["", "", ""], "Thursday":["", "", ""], "Friday":["", "", ""], 
                       "Saturday":["", "", ""], "Sunday":["", "", ""]}
