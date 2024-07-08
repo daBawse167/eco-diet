@@ -253,7 +253,8 @@ def recommend():
     
     current_sum = sum(final_emissions)
     dish_and_emissions = pd.DataFrame({"dish":final_dishes, "emissions":final_emissions, "type":final_meal_type, "index":final_index}).sort_values(ascending=False, by="emissions")
-
+    used_dishes = []
+    
     print(dish_and_emissions)
     
     #if the emissions exceed the target
@@ -266,8 +267,7 @@ def recommend():
             for item in dish_and_emissions.iloc:
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
-                
-                #options = pd.DataFrame([i for i in options.iloc if i["Entity"] not in final_dishes)
+                options = pd.DataFrame([i for i in options.iloc if i["Entity"] not in used_dishes)
                 
                 if len(list(options["Emissions per kilogram"]))==0:
                     break_outer=True
@@ -277,6 +277,7 @@ def recommend():
                 #replace the dish with a slightly less emitting dish
                 if item["index"] not in chosen_dishes_index:
                     dish_and_emissions.iloc[j] = pd.Series([choice["Entity"], choice["Emissions per kilogram"]*(choice["grams"]/1000), choice["type"], item["index"]])
+                    used_dishes.append(choice["Entity"])
                 
                 #if the target has been reached, break the loop
                 if sum(dish_and_emissions["emissions"])<target:
