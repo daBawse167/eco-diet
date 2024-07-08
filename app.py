@@ -110,26 +110,24 @@ def recommend():
     #get inputs
     footprint = float(request.args.get("footprint"))
     percent_reduction = int(request.args.get("percent_reduction")[:-1])
-    selected_dishes = pd.read_csv("selected_dishes.csv")
+
     
+
+    selected_dishes = pd.read_csv("selected_dishes.csv")
     user_selected_dish = request.args.get("user_selected_dishes")
     selected_dish_position = request.args.get("selected_dishes_position")
-    selected_meal_type = request.args.get("meal_type")
 
     print(user_selected_dish)
     
     if user_selected_dish != 'None':
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
-                                                  "selected_dishes_position":selected_dish_position,
-                                                  "meal_type":selected_meal_type},
+                                                  "selected_dishes_position":selected_dish_position},
                                                  ignore_index=True)
         selected_dishes.to_csv("selected_dishes.csv", index=False)
     
     user_selected_grams = []
     
     df = pd.read_csv("food-footprints.csv")
-    print(df)
-    
     target = footprint*(1-(percent_reduction/100))
     
     recommendation = {"Monday":["", "", ""], "Tuesday":["", "", ""], "Wednesday":["", "", ""], "Thursday":["", "", ""], "Friday":["", "", ""], 
@@ -149,7 +147,7 @@ def recommend():
         
         idx = 0
         for dish in user_selected_dishes:
-            meal_type = list(selected_dishes[selected_dishes["user_selected_dishes"]==dish]["meal_type"])[0]
+            meal_type = list(df[df["Entity"]==dish]["type"])[0]
             
             #randomly insert the meal into a breakfast, lunch or dinner slot
             if meal_type == "breakfast":
@@ -200,7 +198,7 @@ def recommend():
     seafood_limit = 3
     
     meal_spaces = np.array(list(recommendation.values())).T.tolist()
-    meal_type_names = ["breakfast", "meal", "meal"]
+    meal_type_names = ["breakfast", "lunch", "dinner"]
     final_dishes = []
     final_emissions = []
     final_meal_type = []
@@ -209,16 +207,6 @@ def recommend():
     
     i = 0
     idx = 0
-
-
-
-
-
-
-
-
-
-
     
     #loop over every non-selected meal in the week
     for meal_space in meal_spaces:
@@ -226,16 +214,13 @@ def recommend():
     
         #find the highest emitting dishes
         options = df[df["type"]==meal_type_names[i]].sort_values(ascending=False, by="Emissions per kilogram")
-        
         for space in meal_space:
     
             #fill the empty spaces with the highest emitters (with the same breakfast, lunch, dinner category)
             if space=="":
                 dish_name = list(options["Entity"])[j]
                 dish_emissions = list(options["Emissions per kilogram"])[j]*(list(options["grams"])[j]/1000)
-
-                print(dish_name)
-                
+            
                 final_dishes.append(dish_name)
                 final_emissions.append(dish_emissions)
                 final_meal_type.append(list(options["type"])[j])
@@ -255,8 +240,6 @@ def recommend():
     
     current_sum = sum(final_emissions)
     dish_and_emissions = pd.DataFrame({"dish":final_dishes, "emissions":final_emissions, "type":final_meal_type, "index":final_index}).sort_values(ascending=False, by="emissions")
-
-    print(dish_and_emissions, current_sum, target)
     
     #if the emissions exceed the target
     if current_sum > target:
@@ -268,8 +251,6 @@ def recommend():
             for item in dish_and_emissions.iloc:
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
                 options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
-
-                print(options["Entity"])
                 
                 if len(list(options["Emissions per kilogram"]))==0:
                     break_outer=True
