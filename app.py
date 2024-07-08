@@ -110,18 +110,18 @@ def recommend():
     #get inputs
     footprint = float(request.args.get("footprint"))
     percent_reduction = int(request.args.get("percent_reduction")[:-1])
-
-    
-
     selected_dishes = pd.read_csv("selected_dishes.csv")
+    
     user_selected_dish = request.args.get("user_selected_dishes")
     selected_dish_position = request.args.get("selected_dishes_position")
+    selected_meal_type = request.args.get("meal_type")
 
     print(user_selected_dish)
     
     if user_selected_dish != 'None':
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
-                                                  "selected_dishes_position":selected_dish_position},
+                                                  "selected_dishes_position":selected_dish_position,
+                                                  "meal_type":selected_meal_type},
                                                  ignore_index=True)
         selected_dishes.to_csv("selected_dishes.csv", index=False)
     
@@ -147,7 +147,7 @@ def recommend():
         
         idx = 0
         for dish in user_selected_dishes:
-            meal_type = list(df[df["Entity"]==dish]["type"])[0]
+            meal_type = list(selected_dishes[selected_dishes["user_selected_dishes"]==dish]["meal_type"])[0]
             
             #randomly insert the meal into a breakfast, lunch or dinner slot
             if meal_type == "breakfast":
@@ -198,7 +198,7 @@ def recommend():
     seafood_limit = 3
     
     meal_spaces = np.array(list(recommendation.values())).T.tolist()
-    meal_type_names = ["breakfast", "lunch", "dinner"]
+    meal_type_names = ["breakfast", "meal"]
     final_dishes = []
     final_emissions = []
     final_meal_type = []
@@ -207,6 +207,16 @@ def recommend():
     
     i = 0
     idx = 0
+
+
+
+
+
+
+
+
+
+
     
     #loop over every non-selected meal in the week
     for meal_space in meal_spaces:
