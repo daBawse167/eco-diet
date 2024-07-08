@@ -145,6 +145,8 @@ def recommend():
         selected_dishes = selected_dishes.iloc[1:]
         user_selected_dishes = list(selected_dishes["user_selected_dishes"])
         selected_dishes_position = list(selected_dishes["selected_dishes_position"])
+        print(user_selected_dishes)
+        print(selected_dishes_position)
         user_selected_grams = [list(df[df["Entity"]==dish]["grams"])[0] for dish in user_selected_dishes]
         
         idx = 0
