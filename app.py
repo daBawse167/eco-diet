@@ -201,6 +201,8 @@ def recommend():
     meal_spaces = np.array(list(recommendation.values())).T.tolist()
     meal_spaces = [meal_spaces[0], meal_spaces[1]+meal_spaces[2]]
     meal_type_names = ["breakfast", "meal"]
+
+    print(meal_spaces)
     
     final_dishes = []
     final_emissions = []
@@ -246,8 +248,6 @@ def recommend():
     dish_and_emissions = pd.DataFrame({"dish":final_dishes, "emissions":final_emissions, "type":final_meal_type, "index":final_index}).sort_values(ascending=False, by="emissions")
     used_dishes = []
     
-    print(dish_and_emissions)
-    
     #if the emissions exceed the target
     if current_sum > target:
         break_outer = False
@@ -282,6 +282,8 @@ def recommend():
                 
             if break_outer:
                 break
+
+    print(dish_and_emissions)
     
     #reshape the data to get into Monday-Sunday format
     total_emitted = sum(dish_and_emissions["emissions"])
