@@ -118,7 +118,11 @@ def recommend():
     user_selected_dish = request.args.get("user_selected_dishes")
     selected_dish_position = request.args.get("selected_dishes_position")
 
+    print(footprint)
+    print(percent_reduction)
+    print(selected_dishes)
     print(user_selected_dish)
+    print(selected_dish_position)
     
     if user_selected_dish != 'None':
         selected_dishes = selected_dishes._append({"user_selected_dishes":user_selected_dish,
