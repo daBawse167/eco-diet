@@ -257,8 +257,11 @@ def recommend():
     if current_sum > target:
         break_outer = False
         
-        for i in range(100):
+        for loop in range(100):
             j = 0
+            #track the number of empty options per cycle to see if we need to break
+            no_empty = 0
+            
             #loop over the highest emitting dishes in order
             for item in dish_and_emissions.iloc:
                 options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
@@ -266,28 +269,28 @@ def recommend():
                 options = pd.DataFrame([i for i in options.iloc if i["Entity"] not in used_dishes])
 
                 if options.empty:
-                    options = df[(df["Emissions per kilogram"]*(df["grams"]/1000))<item["emissions"]]
-                    options = options[options["type"]==item["type"]].sort_values(ascending=False, by="Emissions per kilogram")
-                    used_dishes = []
-                    break_outer = True
-                    break
+                    no_empty += 1
                 
-                choice = options.iloc[0]
-                
-                #replace the dish with a slightly less emitting dish
-                if item["index"] not in chosen_dishes_index:
-                    dish_and_emissions.iloc[j] = pd.Series([choice["Entity"], choice["Emissions per kilogram"]*(choice["grams"]/1000), choice["type"], item["index"]])
-                    used_dishes.append(choice["Entity"])
+                if not options.empty:
+                    choice = options.iloc[0]
+                    
+                    #replace the dish with a slightly less emitting dish
+                    if item["index"] not in chosen_dishes_index:
+                        dish_and_emissions.iloc[j] = pd.Series([choice["Entity"], choice["Emissions per kilogram"]*(choice["grams"]/1000), choice["type"], item["index"]])
+                        used_dishes.append(choice["Entity"])
                 
                 #if the target has been reached, break the loop
                 if sum(dish_and_emissions["emissions"])<target:
                     break_outer = True
                     break
                 j += 1
-                
+
+            if no_empty==len(list(dish_and_emissions.iloc)):
+                break_outer = True
+            
             if break_outer:
                 break
-
+    
     print(dish_and_emissions)
     
     #reshape the data to get into Monday-Sunday format
