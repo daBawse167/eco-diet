@@ -1,0 +1,268 @@
+Emissions per kilogram,Emissions per 1000 kilocalories,Emissions per 100 grams of protein,Emissions per 100 grams of fat,Entity,type,diet,grams
+0.507353897,0.898188014,13.44271588,25.59441045,Apples,breakfast,"Vegan, Vegetarian, Gluten-free",182
+19.31420901,6.818607216,9.157924744,11.27388074,Bacon,breakfast,Meat,25
+0.8028126,0.329389277,0.959624407,3.741236267,Bagels,breakfast,Vegetarian,95
+1.868787356,0.556649653,4.659929606,3.817582213,Banana loaf,breakfast,Vegetarian,60
+3.989250537,1.127221384,7.426507902,5.531022471,Biscuits,breakfast,Vegetarian,14
+0.878760846,0.407062472,1.437228788,3.581392828,Bread,breakfast,Vegetarian,25
+1.493427276,0.420174126,1.762845684,8.781947927,Breakfast cereal,breakfast,Vegetarian,30
+2.853384164,0.729472049,4.124268334,2.124840123,Cereal bars,breakfast,Vegetarian,45
+2.877625559,0.936335986,3.623837568,5.371016773,Chocolate cereals,breakfast,Vegetarian,30
+5.372300394,1.052630375,11.48452823,2.337577366,Chocolate spread,breakfast,Vegetarian,15
+3.357277781,0.769862303,7.480966465,2.258581503,Cookies,breakfast,Vegetarian,16
+2.448466292,0.59148399,2.917729657,4.349617875,Cracker biscuits,breakfast,Vegetarian,10
+1.68222778,0.398428185,3.573768845,0.703665126,Croissants,breakfast,Vegetarian,57
+4.43660007,2.765086332,3.14394473,3.959905133,Eggs,breakfast,Vegetarian,50
+1.947682613,0.444216938,3.723422701,0.938199551,Flapjack,breakfast,Vegetarian,50
+1.648914744,3.102362731,44.7838574,31.11523074,Fruit smoothies,breakfast,"Vegan, Vegetarian, Gluten-free",250
+1.781192616,0.429799817,1.763902622,1.114546433,Granola,breakfast,Vegetarian,50
+1.613706661,2.795142279,13.80525203,32.54210664,Kiwis,breakfast,"Vegan, Vegetarian, Gluten-free",76
+0.463007857,1.420994369,5.020168519,18.86154859,Limes,breakfast,"Vegan, Vegetarian, Gluten-free",67
+1.056535974,2.572413228,14.7714069,31.12462426,Melon,breakfast,"Vegan, Vegetarian, Gluten-free",150
+2.271910571,0.71121109,2.352359499,3.32169241,Muesli,breakfast,Vegetarian,45
+2.583630956,1.22035625,7.732066243,10.0041688,Muffins,breakfast,Vegetarian,66
+1.01323422,0.369497209,1.288043718,1.635335451,Naan,breakfast,Vegetarian,100
+0.716130957,0.495529479,2.24664458,0.820028295,Nut loaf,breakfast,"Vegan, Vegetarian, Gluten-free",70
+0.46654954,1.076517295,4.971438554,21.6099503,Oranges,breakfast,"Vegan, Vegetarian, Gluten-free",131
+2.809512226,0.734478795,3.967570894,1.457603934,Pain au chocolat,breakfast,Vegetarian,70
+1.547808888,0.61483208,2.767286055,2.16884922,Pancakes,breakfast,Vegetarian,60
+3.434960202,0.578049856,1.556982253,0.703224684,Peanut butter,breakfast,"Vegan, Vegetarian, Gluten-free",16
+0.925555374,1.661147239,18.62010809,45.49180451,Pears,breakfast,"Vegan, Vegetarian, Gluten-free",178
+0.932008033,1.939460879,19.38198539,34.57932616,Pineapple,breakfast,"Vegan, Vegetarian, Gluten-free",165
+0.563560786,0.254204326,0.745269643,6.044425682,Pitta bread,breakfast,Vegetarian,60
+1.50061802,0.312651711,2.369058244,0.606630903,Poppadoms,breakfast,"Vegan, Vegetarian, Gluten-free",10
+1.555169024,0.442735637,1.360564465,2.416015723,Porridge (oatmeal),breakfast,"Vegan, Vegetarian, Gluten-free",40
+3.372850787,1.896759411,7.929393919,16.31506632,Protein bar,breakfast,Vegetarian,50
+1.743728919,2.946405535,8.048589609,21.87270207,Protein shake,breakfast,Vegetarian,330
+2.223782583,0.4295585,4.023549409,0.74248302,Shortbread biscuits,breakfast,Vegetarian,14
+0.851167274,0.344747345,1.242904547,4.523646813,Sourdough bread,breakfast,Vegetarian,25
+0.893107838,2.32007257,3.676490249,6.03048533,Soy milk,breakfast,"Vegan, Vegetarian, Gluten-free",240
+0.496019817,0.794417069,11.65939405,31.1668971,Soy yoghurt,breakfast,"Vegan, Vegetarian, Gluten-free",150
+3.241715,5.180194958,24.40202375,64.04604105,Strawberries,breakfast,"Vegan, Vegetarian, Gluten-free",18
+0.96940275,2.464087408,16.33579872,22.11001672,Watermelon,breakfast,"Vegan, Vegetarian, Gluten-free",150
+3.111810731,3.986662475,8.365670482,33.62035616,Yoghurt,breakfast,Vegetarian,150
+1.244973699,0.418181792,4.704171324,2.585492131,Apple pie,meal,Vegetarian,125
+2.010722007,0.643883766,4.554509085,1.421485178,Carrot cake,meal,Vegetarian,64
+2.369301844,0.699429479,5.227403366,1.173479848,Cheesecake,meal,Vegetarian,125
+5.083679002,1.217462751,10.34435341,4.413773875,Chocolate biscuits,breakfast,Vegetarian,15
+3.952117878,0.977520081,8.993387408,2.115364,Chocolate cake,meal,Vegetarian,100
+4.900423833,1.198627448,10.40950843,1.922301697,Chocolate cheesecake,meal,Vegetarian,125
+2.199664934,0.585188393,3.886347269,1.931705562,Doughnuts,breakfast,Vegetarian,70
+3.452116066,0.967689303,9.638522065,4.117100696,Fruit cake,meal,Vegetarian,70
+1.877448378,0.48579965,5.396654176,1.064139409,Sponge cake,meal,Vegetarian,64
+53.97637076,21.90513425,28.80628572,32.71998331,Beef burger,meal,Meat,200
+17.36872479,10.61886593,22.80787442,17.35937381,Beef curry,meal,Meat,250
+70.78747415,31.33869128,35.62042805,52.66181155,Beef meatballs,meal,Meat,90
+95.03457227,47.3365981,53.11102612,80.58170719,Beef mince,meal,Meat,100
+2.290114275,1.510110894,5.581412401,8.82962553,Beef noodles,meal,Meat,250
+129.7477148,68.09595354,64.190391,146.1078699,Beef steak,meal,Meat,200
+9.272323308,5.830486359,4.518433534,27.71628969,Chicken breast,meal,Meat,174
+5.434486846,2.329614782,3.661769617,4.582127948,Chicken burger,meal,Meat,200
+3.616545986,2.663485376,4.88686552,7.492870607,Chicken curry,meal,Meat,250
+2.383995705,1.950933525,5.473897768,11.4625122,Chicken noodles,meal,Meat,250
+2.946764557,1.900545719,4.192450587,6.753554523,Chicken pasta,meal,Meat,250
+8.164302486,4.020154659,5.400881151,6.917650303,Chicken sausages,meal,Meat,75
+9.981881302,5.095226685,5.344500902,7.672648371,Chicken thighs,meal,Meat,150
+9.58345622,4.65031069,5.105153328,6.969776841,Chicken wings,meal,Meat,100
+13.54080492,7.844402601,17.68843429,13.00545849,Chilli con carne,meal,Meat,250
+10.90410931,8.560718955,7.087446235,74.48578126,Cod,meal,Meat,150
+9.313181566,4.701090097,6.949602785,11.20545277,Cod fish fingers,meal,Meat,80
+7.815675108,5.021886332,6.54161222,12.26760546,Cod fishcakes,meal,Meat,100
+11.85127129,9.55054203,21.97775651,19.0205578,Cottage pie,meal,Meat,250
+1.381511528,0.885474539,2.901054023,11.83702424,Egg noodles,meal,Vegetarian,250
+0.753471847,0.531024299,3.822119332,3.244333341,Frozen chips (french fries),meal,"Vegan, Vegetarian, Gluten-free",100
+0.517519759,0.644653518,2.30399993,18.45343085,Frozen jacket potatoes,meal,"Vegan, Vegetarian, Gluten-free",200
+0.826642709,0.871356152,4.20459448,2.959888429,Frozen mashed potato,meal,"Vegan, Vegetarian, Gluten-free",150
+0.771174693,0.300217651,1.891946578,0.618078666,Frozen onion rings,meal,"Vegan, Vegetarian, Gluten-free",85
+0.66477544,0.480019771,3.096824045,4.353587408,Frozen potato wedges,meal,"Vegan, Vegetarian, Gluten-free",150
+1.203417144,0.945587258,5.078765939,3.75461067,Frozen roast potatoes,meal,"Vegan, Vegetarian, Gluten-free",150
+0.409884818,0.281672632,2.641978889,0.694194185,Frozen sweet potato fries,meal,"Vegan, Vegetarian, Gluten-free",100
+4.898891067,3.349294528,9.090842949,5.604170922,Haddock risotto,meal,Meat,300
+30.74094726,15.18248319,16.6285286,23.44281501,Lamb (leg),meal,Meat,200
+11.22625366,7.164108985,14.45710646,13.36726325,Lamb Hotpot,meal,Meat,300
+26.9282887,10.81535072,15.77341973,14.47875349,Lamb burgers,meal,Meat,200
+30.87731,11.95055183,18.29224526,14.30167207,Lamb casserole,meal,Meat,250
+30.90199294,11.82816768,17.18850101,14.53544545,Lamb chops,meal,Meat,110
+10.1925647,7.817066965,13.6442697,13.07589061,Lamb curry,meal,Meat,250
+7.25916164,5.772825612,14.27982813,9.28321774,Lamb moussaka,meal,Meat,300
+16.84931313,5.245218566,9.361865738,7.742616436,Macaroni cheese,meal,Vegetarian,250
+13.60638447,6.250301216,7.133691285,11.2903809,Mackerel,meal,Meat,150
+7.400659903,2.368093397,4.607044534,4.369108704,Meat pizza,meal,Meat,150
+1.018329472,0.54485943,1.550393421,1.226841337,Meat-free burger,meal,Vegetarian,113
+0.877037624,0.754543499,0.66674761,13.74811511,Meat-free mince,meal,Vegetarian,100
+0.86184673,0.543400973,0.787870052,2.003918835,Meat-free nuggets,meal,Vegetarian,50
+0.962557671,0.698614918,1.151290948,1.916706833,Meat-free sausages,meal,Vegetarian,75
+1.025582767,0.286939159,0.843945891,6.052061241,Pasta shells,meal,"Vegan, Vegetarian, Gluten-free",56
+1.62510675,0.611201074,2.206148591,10.17266052,Penne pasta,meal,"Vegan, Vegetarian, Gluten-free",56
+12.16389084,4.588104959,7.407893196,5.900806782,Pork chops,meal,Meat,200
+11.97651449,4.804565022,6.780833337,7.415404717,Pork loin,meal,Meat,200
+6.186894385,1.581802683,5.639145973,2.243602337,Pork sausage rolls,meal,Meat,75
+9.76787802,3.660899609,6.913241104,5.448152974,Pork sausages,meal,Meat,75
+0.774225122,0.362325631,2.233950037,0.722576847,Potato croquettes,meal,Vegetarian,120
+4.93285324,1.469756274,16.86797184,2.035469366,Prawn crackers,meal,Vegetarian,10
+20.91128278,26.32928969,13.12188461,348.4896518,Prawns,meal,Meat,85
+4.666832656,1.867128173,4.779239986,2.853582894,Quiche,meal,Vegetarian,125
+3.925909801,2.047880253,9.11748861,48.27632352,Rice,meal,"Vegan, Vegetarian, Gluten-free",200
+3.411126114,1.436020058,9.721274951,64.99689771,Rice noodles,meal,"Vegan, Vegetarian, Gluten-free",250
+10.41258147,5.953092734,4.832165445,13.16493867,Salmon,meal,Meat,154
+6.505734658,4.260376392,5.108375057,9.979379754,Salmon fishcakes,meal,Meat,100
+5.8495493,1.552119489,5.598532592,2.217681047,Sausage rolls,meal,Meat,75
+7.737124814,5.535570319,15.49815435,8.889205002,Shepherd's pie,meal,Meat,250
+1.646014947,0.766898995,1.987146265,11.58703435,Spaghetti,meal,"Vegan, Vegetarian, Gluten-free",56
+7.83470288,4.614566327,12.92742727,9.76058331,Spaghetti bolognese,meal,Meat,250
+7.10186367,3.380397945,10.84177219,5.998883698,Steak pie,meal,Meat,200
+1.948103649,1.176188201,3.801189088,3.197555603,Vegan pizza,meal,"Vegan, Vegetarian, Gluten-free",150
+3.37614065,2.679670932,7.518774746,4.711538665,Vegetable lasagne,meal,"Vegan, Vegetarian, Gluten-free",300
+1.429290817,1.055960549,2.650216667,4.426812726,Vegetarian chilli con carne,meal,Vegetarian,250
+1.309165034,1.333769651,4.657265943,3.362612832,Vegetarian curry,meal,Vegetarian,250
+5.23297572,1.891634806,3.773106005,3.919468307,Vegetarian pizza,meal,Vegetarian,150
+0.921227094,1.853708448,4.984961745,11.06742757,Avocados,meal,"Vegan, Vegetarian, Gluten-free",150
+0.995644422,0.380404247,2.443278591,3.937858488,Baguette,breakfast,Vegetarian,150
+2.079189343,1.4961306,6.448219923,1.890669604,Caesar salad,meal,Vegetarian,200
+0.935163376,2.333618071,11.9995337,22.4629378,Carrots,meal,"Vegan, Vegetarian, Gluten-free",61
+0.891726245,2.595492477,3.564387657,20.87490338,Cauliflower,meal,"Vegan, Vegetarian, Gluten-free",100
+1.344352867,0.594860302,0.963601032,5.13340978,Chickpeas,meal,"Vegan, Vegetarian, Gluten-free",150
+1.157978775,0.85287951,2.243638168,11.95085009,Couscous,meal,"Vegan, Vegetarian, Gluten-free",150
+1.098106175,0.512893851,1.379781423,1.045350597,Falafels,meal,"Vegan, Vegetarian, Gluten-free",17
+0.9209,3.526904263,5.493118449,29.39458694,Mixed salad,meal,"Vegan, Vegetarian, Gluten-free",100
+0.918662143,2.722288536,5.934465302,19.80768723,Peppers,meal,"Vegan, Vegetarian, Gluten-free",92
+0.207276162,0.232124128,1.157598357,7.65127337,Potatoes,meal,"Vegan, Vegetarian, Gluten-free",150
+1.138642233,0.409600621,1.281273077,2.854591715,Quinoa,meal,"Vegan, Vegetarian, Gluten-free",185
+1.020865457,0.542509765,0.614694183,0.846948018,Tofu,meal,"Vegan, Vegetarian, Gluten-free",85
+0.948583667,0.393647572,1.260450871,1.6583478,Tortilla wraps,meal,Vegetarian,50
+7.136,,,,Barbecue Ribs,meal,Meat,250
+48.403,,,,Hamburger,meal,Meat,150
+48.403,,,,Roast Beef,meal,Meat,200
+48.403,,,,Steak,meal,Meat,200
+1.408,,,,Chicken Parmesan,meal,Meat,200
+1.408,,,,Chicken Alfredo,meal,Meat,150
+1.408,,,,Grilled Chicken,meal,Meat,150
+48.403,,,,Beef Stroganoff,meal,Meat,200
+53.095,,,,Lamb Chops,meal,Meat,200
+7.136,,,,Pork Tenderloin,meal,Meat,200
+7.136,,,,Pulled Pork Sandwich,meal,Meat,200
+48.403,,,,Beef Tacos,meal,Meat,150
+1.408,,,,Chicken Satay,meal,Meat,150
+1.408,,,,Chicken Curry,meal,Meat,150
+48.403,,,,Corned Beef and Cabbage,meal,Meat,200
+53.095,,,,Lamb Gyros,meal,Meat,200
+48.403,,,,Beef Kebabs,meal,Meat,150
+7.136,,,,Pepperoni Pizza,meal,Meat,100
+48.403,,,,Beef Burritos,meal,Meat,150
+7.136,,,,Ham and Pineapple Pizza,meal,Meat,100
+1.408,,,,Buffalo Chicken Wings,meal,Meat,150
+48.403,,,,Beef Wellington,meal,Meat,200
+1.408,,,,Chicken Piccata,meal,Meat,150
+7.136,,,,Pork Chops,meal,Meat,200
+1.408,,,,Chicken Fajitas,meal,Meat,150
+48.403,,,,Goulash,meal,Meat,200
+1.408,,,,Tandoori Chicken,meal,Meat,150
+48.403,,,,Beef Stir-Fry,meal,Meat,150
+53.095,,,,Lamb Shank,meal,Meat,200
+1.408,,,,Chicken Teriyaki,meal,Meat,150
+48.403,,,,Lomo Saltado (Peruvian Stir-Fry),meal,Meat,150
+1.408,,,,Chicken Adobo,meal,Meat,150
+7.136,,,,Pork Belly,meal,Meat,200
+53.095,,,,Rack of Lamb,meal,Meat,200
+1.408,,,,Chicken Shawarma,meal,Meat,150
+48.403,,,,Pho (Vietnamese Beef Noodle Soup),meal,Meat,150
+48.403,,,,Beef Bulgogi,meal,Meat,150
+1.408,,,,Jerk Chicken,meal,Meat,150
+7.136,,,,Taco al Pastor,meal,Meat,150
+1.408,,,,Chicken Cordon Bleu,meal,Meat,150
+7.136,,,,Carnitas (Mexican Pulled Pork),meal,Meat,200
+48.403,,,,Beef Enchiladas,meal,Meat,150
+1.408,,,,Chicken Katsu,meal,Meat,150
+7.136,,,,Pork Adobo,meal,Meat,200
+1.408,,,,Chicken Paprikash,meal,Meat,150
+53.095,,,,Pulled Lamb Sandwich,meal,Meat,200
+1.408,,,,Chicken and Dumplings,meal,Meat,150
+48.403,,,,Szechuan Beef,meal,Meat,200
+7.136,,,,Pork Hawaiian Loco Moco,meal,Meat,200
+1.408,,,,Chicken Marsala,meal,Meat,150
+48.403,,,,Beef Hawaiian Loco Moco,meal,Meat,200
+1.408,,,,Chicken Enchiladas,meal,Meat,150
+48.403,,,,Mongolian Beef,meal,Meat,200
+48.403,,,,Korean BBQ Short Ribs (Galbi),meal,Meat,200
+1.408,,,,Chicken Souvlaki,meal,Meat,150
+53.095,,,,Moroccan Lamb Tagine,meal,Meat,200
+48.403,,,,Stuffed Bell Peppers with Ground Beef,meal,Meat,200
+1.408,,,,BBQ Pulled Chicken,meal,Meat,150
+1.408,,,,Chicken Pot Pie,meal,Meat,150
+1.408,,,,Chicken Tikka Masala,meal,Meat,150
+48.403,,,,Thai Basil Beef (Pad Krapow),meal,Meat,200
+48.403,,,,Beef and Broccoli,meal,Meat,200
+7.136,,,,Pork Carnitas Tacos,meal,Meat,200
+48.403,,,,Beef Rendang,meal,Meat,200
+7.136,,,,Pork Tonkatsu,meal,Meat,200
+48.403,,,,Peruvian Anticuchos (Grilled Beef Heart Skewers),meal,Meat,150
+1.408,,,,Buffalo Chicken Tenders,meal,Meat,150
+48.403,,,,Cuban Ropa Vieja,meal,Meat,200
+1.408,,,,Chicken Yakitori,meal,Meat,150
+1.408,,,,Chicken Shawarma Wrap,meal,Meat,150
+1.408,,,,Chicken Sisig,meal,Meat,150
+1.408,,,,Chicken Tagine with Apricots,meal,Meat,150
+48.403,,,,Vietnamese Shaking Beef (Bo Luc Lac),meal,Meat,200
+48.403,,,,Beef Satay,meal,Meat,200
+7.136,,,,Pork Schnitzel,meal,Meat,200
+1.408,,,,Chicken Scampi,meal,Meat,150
+53.095,,,,Lamb Biryani,meal,Meat,200
+1.408,,,,Chicken Fricassee,meal,Meat,150
+53.095,,,,Braised Lamb Shanks,meal,Meat,200
+48.403,,,,Texas-style Brisket,meal,Meat,200
+48.403,,,,Beef and Broccoli Stir-Fry,meal,Meat,200
+48.403,,,,Beef Bulgogi,meal,Meat,200
+1.408,,,,Grilled Chicken Caesar Salad,meal,Meat,150
+1.408,,,,Chicken Alfredo Pasta,meal,Meat,150
+7.136,,,,Pork Belly Burnt Ends,meal,Meat,200
+48.403,,,,Japanese Sukiyaki,meal,Meat,200
+1.408,,,,Thai Red Curry Chicken,meal,Meat,150
+48.403,,,,Beef and Guinness Stew,meal,Meat,200
+7.136,,,,Pork Ribs,meal,Meat,250
+7.136,,,,BBQ Pulled Pork Sandwich,meal,Meat,200
+1.408,,,,Buffalo Chicken Salad,meal,Meat,150
+1.408,,,,Chicken Korma,meal,Meat,150
+1.408,,,,Chicken Parmesan,meal,Meat,150
+53.095,,,,Lamb Rogan Josh,meal,Meat,200
+48.403,,,,Beef and Vegetable Stir-Fry,meal,Meat,200
+53.095,,,,Lamb Kofta,meal,Meat,200
+1.408,,,,Buffalo Chicken Pizza,meal,Meat,150
+1.408,,,,Chicken Shawarma Bowl,meal,Meat,150
+1.408,,,,Roast Chicken,meal,Meat,150
+48.403,,,,Steak Fajitas,meal,Meat,200
+48.403,,,,Beef Burrito Bowl,meal,Meat,200
+1.408,,,,Chicken Tikka,meal,Meat,150
+1.408,,,,Chicken Enchilada Casserole,meal,Meat,150
+1.408,,,,Chicken Cacciatore,meal,Meat,150
+1.408,,,,Pulled Chicken Tacos,meal,Meat,150
+48.403,,,,Teriyaki Beef Skewers,meal,Meat,200
+7.136,,,,Pork Belly Tacos,meal,Meat,200
+48.403,,,,BBQ Beef Brisket,meal,Meat,200
+53.095,,,,Lamb and Chickpea Curry,meal,Meat,200
+1.408,,,,Chicken Gumbo,meal,Meat,150
+48.403,,,,Beef Tandoori Skewers,meal,Meat,200
+53.095,,,,Lamb Birria Tacos,meal,Meat,200
+1.408,,,,Chicken Pad Thai,meal,Meat,150
+7.136,,,,Honey Garlic Glazed Ribs,meal,Meat,250
+48.403,,,,Classic Beef Stew,meal,Meat,200
+1.408,,,,Grilled Chicken Breast,meal,Meat,150
+7.136,,,,Honey Glazed Ham,meal,Meat,200
+48.403,,,,Beef Burger,meal,Meat,150
+48.403,,,,Spaghetti Bolognese,meal,Meat,150
+48.403,,,,Meatballs,meal,Meat,200
+53.095,,,,Lamb Curry,meal,Meat,200
+48.403,,,,Beef Chili,meal,Meat,150
+7.136,,,,Roast Pork Loin,meal,Meat,200
+48.403,,,,Beef Pot Roast,meal,Meat,200
+48.403,,,,Beef Fajitas,meal,Meat,150
+48.403,,,,Beef Shawarma,meal,Meat,150
+48.403,,,,Beef Lasagne,meal,Meat,150
+7.136,,,,Pork Stir-Fry,meal,Meat,150
+53.095,,,,Lamb Kebabs,meal,Meat,150
+1.408,,,,BBQ Chicken Wings,meal,Meat,200
+48.403,,,,Beef Tournedos,meal,Meat,150
+48.403,,,,Beef Tenders,meal,Meat,150
+7.136,,,,Pork Sausages,meal,Meat,200
+1.408,,,,Chicken Quesadillas,meal,Meat,150
+7.136,,,,Pork Dumplings,meal,Meat,150
+48.403,,,,Beef Carpaccio,meal,Meat,100
