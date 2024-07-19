@@ -86,7 +86,7 @@ def calculate_footprint():
     #calculate the kg CO2 emitted per dish eaten
     i = 0
     for meal in input_meals:
-        print(meal, no_dishes[i])
+        print(meal, input_grams[i], no_dishes[i])
         kg_eaten = float(input_grams[i]*no_dishes[i])/1000
         kg_emissions = list(df[df["Entity"]==meal]["Emissions per kilogram"])[0]
         print(kg_eaten, kg_emissions)
