@@ -4,13 +4,21 @@ import difflib
 import numpy as np
 import pandas as pd
 import statistics as stats
+from mixpanel import Mixpanel
 from flask import Flask, request, jsonify
+
+mp = Mixpanel("d4b693c5d364e3b373a9ba71b330bf1b")
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
+
+@app.route("/", methods=["GET"])
+def home():
+    mp.track("a", 'Home Page Loaded')
+    return {"result":"loaded"}
 
 @app.route("/convert_saved_diet", methods=["GET"])
 def convert_saved_diet():
