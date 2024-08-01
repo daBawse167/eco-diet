@@ -1,6 +1,7 @@
 Flask==3.0.3
 gunicorn==22.0.0
 heroku3==5.2.1
+mixpanel=4.10.1
 numpy==1.26.4
 pandas==2.2.2
 Werkzeug==3.0.3
