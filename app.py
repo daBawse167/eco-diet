@@ -15,11 +15,6 @@ app.config["SECRET_KEY"] = os.urandom(64)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 
-@app.route("/", methods=["GET"])
-def home():
-    mp.track("a", 'Home Page Loaded')
-    return {"result":"loaded"}
-
 @app.route("/convert_saved_diet", methods=["GET"])
 def convert_saved_diet():
     #get inputs from user
@@ -82,6 +77,7 @@ def reduction_options():
 
 @app.route("/calculate_footprint", methods=["GET"])
 def calculate_footprint():
+    mp.track("a", "Calculating Footprint")
     df = pd.read_csv("food-footprints.csv")
     
     input_meals = str(request.args.get("input_meals")).split(", ")
