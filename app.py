@@ -19,6 +19,7 @@ app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 def input_meal():
     user_id = request.args.get("user_id")
     mp.track(user_id, "Input meal")
+    print(user_id)
     return {"user_id":user_id}
 
 @app.route("/convert_saved_diet", methods=["GET"])
