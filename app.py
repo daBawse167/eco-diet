@@ -21,6 +21,12 @@ def input_meal():
     mp.track(user_id, "Input meal")
     return {"user_id":user_id}
 
+@app.route("/saved_diet", methods=["GET"])
+def saved_diet():
+    user_id = request.args.get("user_id")
+    mp.track(user_id, "Saved diet")
+    return {"user_id":user_id}
+
 @app.route("/convert_saved_diet", methods=["GET"])
 def convert_saved_diet():
     #get inputs from user
