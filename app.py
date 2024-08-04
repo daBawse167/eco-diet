@@ -53,11 +53,12 @@ def convert_saved_diet():
 
 #used for RapidAPI
 @app.route("/api_one_dish", methods=["GET"])
-def dishes_and_grams(input_dishes=[], endpoint=False):
+def dishes_and_grams(input_dishes="", endpoint=False):
 
-    dishes = str(request.args.get("dishes")).split(", ")
-    if dishes[0]!="None":
+    dishes = str(request.args.get("dishes"))
+    if dishes!="None":
         endpoint=True
+        input_dishes=dishes
     
     #get the data of dishes
     useable = pd.read_csv("food-footprints.csv")
@@ -65,7 +66,7 @@ def dishes_and_grams(input_dishes=[], endpoint=False):
     dishes = []
     grams = []
     emissions = []
-
+    
     #format the inputs to be suitable for the code
     input_dishes = input_dishes.replace('"', "")
     input_dishes = input_dishes.replace("'", "")
