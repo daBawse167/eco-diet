@@ -209,7 +209,7 @@ def recommend():
 
         print(total_food)
 
-        footprint = calculate_footprint(input=total_food)["percent_reductions"]
+        footprint = calculate_footprint(input=total_food)["emitted"]
         percent_reduction = int(percent_reduced)
         print(footprint)
     else:
