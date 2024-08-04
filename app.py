@@ -180,7 +180,7 @@ def recommend():
     footprint = request.args.get("footprint")
     
     #used for URL
-    percent_reduction = int(request.args.get("percent_reduction")[:-1])
+    percent_reduction = request.args.get("percent_reduction")
     #used for RapidAPI
     percent_reduced = request.args.get("percent_reduced")
     
@@ -212,6 +212,7 @@ def recommend():
         percent_reduction = int(percent_reduced)
         print(footprint)
     else:
+        percent_reduction = int(percent_reduction[:-1])
         footprint = float(footprint)
         
     selected_dishes = pd.read_csv("selected_dishes.csv")
