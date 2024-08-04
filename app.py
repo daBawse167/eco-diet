@@ -52,6 +52,7 @@ def convert_saved_diet():
     return {"emitting":emitting, "dish_names":dish_names_list, "dish_emissions":dish_emissions}
 
 #used for RapidAPI
+@app.route("/api_one_dish", methods=["GET"])
 def dishes_and_grams(input_dishes, endpoint=False):
     
     #get the data of dishes
