@@ -117,18 +117,20 @@ def reduction_options():
     return {"percent_reductions":suitable_list}
 
 @app.route("/calculate_footprint", methods=["GET"])
-def calculate_footprint():
+def calculate_footprint(input=""):
     df = pd.read_csv("food-footprints.csv")
     input_meals = []
     input_grams = []
     
     medium = "rapidapi"
 
-    input_meals = request.args.get("input_meals")
+    #if the endpoint is directly being called from RapidAPI
+    if input==""
+        input_meals = request.args.get("input_meals")
+    else:
+        input_meals = input
     input_grams = []
     no_dishes = str(request.args.get("no_dishes")).split(", ")
-    
-    print(no_dishes)
 
     #checking to see if the program is run on RapidAPI or through the URL
     if no_dishes[0]!="None":
@@ -145,8 +147,6 @@ def calculate_footprint():
         input_grams = dishes_and_grams(input_meals)[1]
         input_meals = dishes_and_grams(input_meals)[0]
         no_dishes = [1]*len(input_meals)
-
-    print(input_grams, input_meals, no_dishes)
     
     emissions_list = []
     
@@ -177,10 +177,41 @@ def calculate_footprint():
 
 @app.route("/recommendations", methods=["GET"])
 def recommend():
-
-    #get inputs
     footprint = float(request.args.get("footprint"))
+    
+    #used for URL
     percent_reduction = int(request.args.get("percent_reduction")[:-1])
+    #used for RapidAPI
+    percent_reduced = request.args.get("percent_reduced")
+    
+    #check if RapidAPI is used or the URL
+    if percent_reduced != "None":
+        monday = request.args.get("Monday")
+        tuesday = request.args.get("Tuesday")
+        wednesday = request.args.get("Wednesday")
+        thursday = request.args.get("Thursday")
+        friday = request.args.get("Friday")
+        saturday = request.args.get("Saturday")
+        sunday = request.args.get("Sunday")
+
+        #loop over all the input dishes and store them in a combined array
+        total_food = []
+        for dishes in [monday, tuesday, wednesday, thursday, friday, saturday, sunday]:
+            dishes = dishes.split(", ")
+            for dish in dishes:
+                if dish != "None":
+                    total_food.append(dish)
+                    
+        #check if there aren't any inputs
+        if len(total_food)==0:
+            return {"result":"please enter at least one dish in the inputs"}
+
+        print(total_food)
+
+        footprint = calculate_footprint(input=total_food)["percent_reductions"]
+        percent_reduction = int(percent_reduced)
+        print(footprint)
+        
     selected_dishes = pd.read_csv("selected_dishes.csv")
     
     user_selected_dish = request.args.get("user_selected_dishes")
