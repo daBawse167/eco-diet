@@ -186,13 +186,13 @@ def recommend():
     
     #check if RapidAPI is used or the URL
     if percent_reduced != "None":
-        monday = request.args.get("Monday")
-        tuesday = request.args.get("Tuesday")
-        wednesday = request.args.get("Wednesday")
-        thursday = request.args.get("Thursday")
-        friday = request.args.get("Friday")
-        saturday = request.args.get("Saturday")
-        sunday = request.args.get("Sunday")
+        monday = str(request.args.get("Monday"))
+        tuesday = str(request.args.get("Tuesday"))
+        wednesday = str(request.args.get("Wednesday"))
+        thursday = str(request.args.get("Thursday"))
+        friday = str(request.args.get("Friday"))
+        saturday = str(request.args.get("Saturday"))
+        sunday = str(request.args.get("Sunday"))
 
         #loop over all the input dishes and store them in a combined array
         total_food = []
