@@ -51,6 +51,35 @@ def convert_saved_diet():
 
     return {"emitting":emitting, "dish_names":dish_names_list, "dish_emissions":dish_emissions}
 
+#used for RapidAPI
+def dishes_and_grams(input_dishes):
+    
+    #get the data of dishes
+    useable = pd.read_csv("food-footprints.csv")
+    target_dishes = list(useable["Entity"])
+    dishes = []
+    grams = []
+
+    #format the inputs to be suitable for the code
+    input_dishes = input_dishes.replace('"', "")
+    input_dishes = input_dishes.replace("'", "")
+    input_dishes = input_dishes.replace('[', "")
+    input_dishes = input_dishes.replace(']', "")
+    input_dishes = input_dishes.split(",")
+    
+    #loop over the user's choices
+    for dish in input_dishes:
+        #get the closest match
+        match = difflib.get_close_matches(dish, target_dishes, n=1, cutoff=0.1)
+        if len(match)>0:
+            match=match[0]
+            idx = target_dishes.index(match)
+            
+            grams.append(useable.iloc[idx]["grams"])
+            dishes.append(match)
+
+    return [dishes, grams]
+
 @app.route("/reduction_options", methods=["GET"])
 def reduction_options():
     emitted = float(request.args.get("emitted"))
@@ -89,17 +118,37 @@ def reduction_options():
 
 @app.route("/calculate_footprint", methods=["GET"])
 def calculate_footprint():
-    user_id = request.args.get("user_id")
-    mp.track(user_id, "Calculating Footprint")
-    
     df = pd.read_csv("food-footprints.csv")
+    input_meals = []
+    input_grams = []
     
-    input_meals = str(request.args.get("input_meals")).split(", ")
-    input_grams = str(request.args.get("input_grams")).split(", ")
+    medium = "rapidapi"
+
+    input_meals = request.args.get("input_meals")
+    input_grams = []
     no_dishes = str(request.args.get("no_dishes")).split(", ")
     
+    print(no_dishes)
+
+    #checking to see if the program is run on RapidAPI or through the URL
+    if len(no_dishes)>0:
+        medium = "web"
+        
+        user_id = request.args.get("user_id")
+        mp.track(user_id, "Calculating Footprint")
+        no_dishes = [int(i) for i in no_dishes]
+
+        input_meals = input_meals.split(", ")
+        input_grams = str(request.args.get("input_grams")).split(", ")
+    else:
+        #using RapidAPI, therefore do one meal per input
+        input_grams = dishes_and_grams(input_meals)[1]
+        input_meals = dishes_and_grams(input_meals)[0]
+        no_dishes = [1]*len(input_meals)
+
+    print(input_grams, input_meals, no_dishes)
+    
     emissions_list = []
-    no_dishes = [int(i) for i in no_dishes]
     
     #calculate the kg CO2 emitted per dish eaten
     i = 0
