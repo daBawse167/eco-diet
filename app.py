@@ -52,13 +52,14 @@ def convert_saved_diet():
     return {"emitting":emitting, "dish_names":dish_names_list, "dish_emissions":dish_emissions}
 
 #used for RapidAPI
-def dishes_and_grams(input_dishes):
+def dishes_and_grams(input_dishes, endpoint=False):
     
     #get the data of dishes
     useable = pd.read_csv("food-footprints.csv")
     target_dishes = list(useable["Entity"])
     dishes = []
     grams = []
+    emissions = []
 
     #format the inputs to be suitable for the code
     input_dishes = input_dishes.replace('"', "")
@@ -74,10 +75,23 @@ def dishes_and_grams(input_dishes):
         if len(match)>0:
             match=match[0]
             idx = target_dishes.index(match)
+            dish_grams = useable.iloc[idx]["grams"]
             
-            grams.append(useable.iloc[idx]["grams"])
+            grams.append(dish_grams)
             dishes.append(match)
 
+            if endpoint:
+                emissions_per_kg = useable.iloc[idx]["Emissions per kilogram"]
+                emissions.append((dish_grams/1000)*emissions_per_kg)
+                
+    #if used directly at RapidAPI, reorder the dishes to emissions
+    if endpoint:
+        results = {}
+        for i in dishes:
+            idx = dishes.index(i)
+            results[i] = emissions[idx]
+        return results
+    
     return [dishes, grams]
 
 @app.route("/reduction_options", methods=["GET"])
