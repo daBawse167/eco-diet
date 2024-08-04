@@ -178,6 +178,7 @@ def calculate_footprint(input=""):
 @app.route("/recommendations", methods=["GET"])
 def recommend():
     footprint = request.args.get("footprint")
+    medium = "url"
     
     #used for URL
     percent_reduction = request.args.get("percent_reduction")
@@ -186,6 +187,8 @@ def recommend():
     
     #check if RapidAPI is used or the URL
     if percent_reduced != "None":
+        medium="rapidapi"
+        
         monday = str(request.args.get("Monday"))
         tuesday = str(request.args.get("Tuesday"))
         wednesday = str(request.args.get("Wednesday"))
@@ -212,6 +215,7 @@ def recommend():
         footprint = float(calculate_footprint(input=total_food)["emitted"])
         percent_reduction = int(percent_reduced)
         print(footprint)
+    #URL is used
     else:
         percent_reduction = int(percent_reduction[:-1])
         footprint = float(footprint)
@@ -414,6 +418,16 @@ def recommend():
     dish_and_emissions = dish_and_emissions.set_axis(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], axis=1)
     dish_and_emissions = dish_and_emissions.rename(index={0:'breakfast', 1:'lunch', 2:'dinner'})
 
+    if medium=="rapidapi":
+            return {"Monday": list(dish_and_emissions["Monday"]),
+                    "Tuesday": list(dish_and_emissions["Tuesday"]),
+                    "Wednesday": list(dish_and_emissions["Wednesday"]),
+                    "Thursday": list(dish_and_emissions["Thursday"]),
+                    "Friday": list(dish_and_emissions["Friday"]),
+                    "Saturday": list(dish_and_emissions["Saturday"]),
+                    "Sunday": list(dish_and_emissions["Sunday"])],
+           "dishes_emissions": list(dishes_emissions)}
+    
     return {"emitted":footprint, "target":total_emitted,
             "recommended": [list(dish_and_emissions["Monday"])+["Monday"], 
             list(dish_and_emissions["Tuesday"])+["Tuesday"], list(dish_and_emissions["Wednesday"])+["Wednesday"], 
