@@ -131,7 +131,7 @@ def calculate_footprint():
     print(no_dishes)
 
     #checking to see if the program is run on RapidAPI or through the URL
-    if len(no_dishes)>0:
+    if no_dishes[0]!="None":
         medium = "web"
         
         user_id = request.args.get("user_id")
