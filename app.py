@@ -53,7 +53,7 @@ def convert_saved_diet():
 
 #used for RapidAPI
 @app.route("/api_one_dish", methods=["GET"])
-def dishes_and_grams(input_dishes, endpoint=False):
+def dishes_and_grams(input_dishes=[], endpoint=False):
 
     dishes = str(request.args.get("dishes")).split(", ")
     if dishes[0]!="None":
