@@ -125,7 +125,7 @@ def calculate_footprint(input=""):
     medium = "rapidapi"
 
     #if the endpoint is directly being called from RapidAPI
-    if input==""
+    if input=="":
         input_meals = request.args.get("input_meals")
     else:
         input_meals = input
