@@ -425,7 +425,7 @@ def recommend():
                     "Thursday": list(dish_and_emissions["Thursday"]),
                     "Friday": list(dish_and_emissions["Friday"]),
                     "Saturday": list(dish_and_emissions["Saturday"]),
-                    "Sunday": list(dish_and_emissions["Sunday"])],
+                    "Sunday": list(dish_and_emissions["Sunday"]),
            "dishes_emissions": list(dishes_emissions)}
     
     return {"emitted":footprint, "target":total_emitted,
