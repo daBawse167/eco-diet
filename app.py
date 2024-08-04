@@ -177,7 +177,7 @@ def calculate_footprint(input=""):
 
 @app.route("/recommendations", methods=["GET"])
 def recommend():
-    footprint = float(request.args.get("footprint"))
+    footprint = request.args.get("footprint")
     
     #used for URL
     percent_reduction = int(request.args.get("percent_reduction")[:-1])
@@ -211,6 +211,8 @@ def recommend():
         footprint = calculate_footprint(input=total_food)["percent_reductions"]
         percent_reduction = int(percent_reduced)
         print(footprint)
+    else:
+        footprint = float(footprint)
         
     selected_dishes = pd.read_csv("selected_dishes.csv")
     
