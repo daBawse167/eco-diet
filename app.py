@@ -54,6 +54,10 @@ def convert_saved_diet():
 #used for RapidAPI
 @app.route("/api_one_dish", methods=["GET"])
 def dishes_and_grams(input_dishes, endpoint=False):
+
+    dishes = str(request.args.get("dishes")).split(", ")
+    if dishes[0]!="None":
+        endpoint=True
     
     #get the data of dishes
     useable = pd.read_csv("food-footprints.csv")
@@ -84,7 +88,11 @@ def dishes_and_grams(input_dishes, endpoint=False):
             if endpoint:
                 emissions_per_kg = useable.iloc[idx]["Emissions per kilogram"]
                 emissions.append((dish_grams/1000)*emissions_per_kg)
-                
+
+    #send a warning message saying that the user has not input suitable data
+    if len(dishes)==0:
+        return {"result":"dishes not recognised; please input suitable data"}
+    
     #if used directly at RapidAPI, reorder the dishes to emissions
     if endpoint:
         results = {}
