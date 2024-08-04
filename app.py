@@ -201,6 +201,7 @@ def recommend():
             for dish in dishes:
                 if dish != "None":
                     total_food.append(dish)
+        total_food = ", ".join(total_food)
                     
         #check if there aren't any inputs
         if len(total_food)==0:
