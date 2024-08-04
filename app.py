@@ -173,7 +173,7 @@ def calculate_footprint():
     selected_dishes = pd.DataFrame({"user_selected_dishes":[], "selected_dishes_position":[]})
     selected_dishes.to_csv("selected_dishes.csv", index=False)
     
-    return str(total_emissions)
+    return {"emitted":str(total_emissions)}
 
 @app.route("/recommendations", methods=["GET"])
 def recommend():
