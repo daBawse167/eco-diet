@@ -207,11 +207,14 @@ def recommend():
     #used for URL
     percent_reduction = request.args.get("percent_reduction")
     #used for RapidAPI
-    percent_reduced = request.args.get("percent_reduced")
+    percent_reduced = str(request.args.get("percent_reduced"))
+
+    print(percent_reduced)
     
     #check if RapidAPI is used or the URL
     if percent_reduced != "None":
         medium="rapidapi"
+        print("RapidAPI")
         
         monday = str(request.args.get("Monday"))
         tuesday = str(request.args.get("Tuesday"))
@@ -241,6 +244,7 @@ def recommend():
         print(footprint)
     #URL is used
     else:
+        print("URL")
         percent_reduction = int(percent_reduction[:-1])
         footprint = float(footprint)
         
